@@ -1,5 +1,11 @@
 <?php
 $hostname = "mysql.gkline.com";
+$primary_password = "REDACTED";
+$poll_password = "REDACTED";
+
+// Local dev: the devcontainer generates this file at startup with random passwords
+if ( file_exists("/etc/topfive/db.php") )
+	include("/etc/topfive/db.php");
 
 function getArticleFile($type)
 {
@@ -17,9 +23,9 @@ function getArticleFile($type)
 
 function getPrimaryDB()
 {
-	global $hostname;
+	global $hostname, $primary_password;
 	
-	$db = mysql_connect($hostname, "gklinec_top5prim", "REDACTED");
+	$db = mysql_connect($hostname, "gklinec_top5prim", $primary_password);
 	mysql_select_db("gklinec_top5primary", $db);
 	
 	if ( $db === false )
@@ -30,9 +36,9 @@ function getPrimaryDB()
 
 function getPollDB()
 {
-	global $hostname;
+	global $hostname, $poll_password;
 	
-	$db = mysql_connect($hostname, "gklinec_poll", "REDACTED");
+	$db = mysql_connect($hostname, "gklinec_poll", $poll_password);
 	mysql_select_db("gklinec_poll", $db);
 	
 	if ( $db === false )

@@ -9,9 +9,9 @@ RewriteRule other_(.*)\.html$ /other\.html?id=$1
 RewriteRule about_(.*)\.html$ /about\.html?id=$1
 RewriteRule chickflick_(.*)\.html$ /chickflick\.html?id=$1
 
-ErrorDocument 401 http://topfivemovies.gkline.com/
-ErrorDocument 404 http://topfivemovies.gkline.com/
-ErrorDocument 500 http://topfivemovies.gkline.com/
+#ErrorDocument 401 http://topfivemovies.gkline.com/
+#ErrorDocument 404 http://topfivemovies.gkline.com/
+#ErrorDocument 500 http://topfivemovies.gkline.com/
 
 
 

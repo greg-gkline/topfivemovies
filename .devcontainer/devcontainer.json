@@ -1,0 +1,15 @@
+{
+	"name": "Top Five Movies (PHP 5.6 + MySQL 5.5)",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "dev",
+	"workspaceFolder": "/workspaces/topfivemovies",
+	"forwardPorts": [80],
+	"portsAttributes": {
+		"80": { "label": "Top Five Movies" }
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": ["bmewburn.vscode-intelephense-client"]
+		}
+	}
+}
