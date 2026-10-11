@@ -60,6 +60,7 @@ assets/           # theme only: CSS (elegant_inner port, elegant port), decorati
 static/
 infra/            # Terraform
 scripts/          # exporter, parity and screenshot tooling
+legacy/sql/       # original SQL dumps, loaded by the devcontainer; archived at cutover
 .github/workflows/
 ```
 
@@ -67,10 +68,10 @@ scripts/          # exporter, parity and screenshot tooling
 
 ## Phase 0: Baseline and preparation
 
-- [ ] Crawl the devcontainer site and save the rendered HTML and extracted text of every page as the parity baseline.
-- [ ] Take full-page screenshots of every page type for the later visual comparison.
-- [ ] Check git history for leaked credentials. Rotate anything that was real.
-- [ ] Create the repo skeleton above.
+- [x] Crawl the devcontainer site and save the rendered HTML and extracted text of every page as the parity baseline. Output is in `baseline/` (see `baseline/README.md`), and the tooling is in `scripts/baseline/`.
+- [x] Take full-page screenshots of every page type for the later visual comparison.
+- [x] Check git history for leaked credentials. Rotate anything that was real. All DB passwords were already `REDACTED` in the initial commit. The intranet `.htaccess` only references an htpasswd path on the old host, and the dumps contain no emails, IPs or password hashes. Nothing in the repo needs rotating.
+- [x] Create the repo skeleton above. The SQL dumps moved from `data/` to `legacy/sql/`, so `data/` is free for Hugo's YAML.
 
 ## Phase 1: Content migration (DB to YAML)
 

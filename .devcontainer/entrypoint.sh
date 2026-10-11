@@ -1,12 +1,12 @@
 #!/bin/bash
 # Runs on every container start, then hands off to the stock PHP/Apache entrypoint.
 #  1. waits for MySQL
-#  2. creates the databases and loads data/*.sql if they are empty
+#  2. creates the databases and loads legacy/sql/*.sql if they are empty
 #  3. generates fresh random passwords for the read-only users and applies them
 #  4. writes them to /etc/topfive/db.php, which web/includes/common.php3 includes
 set -euo pipefail
 
-DATA_DIR=/workspaces/topfivemovies/data
+DATA_DIR=/workspaces/topfivemovies/legacy/sql
 CONFIG_DIR=/etc/topfive
 CONFIG_FILE=$CONFIG_DIR/db.php
 

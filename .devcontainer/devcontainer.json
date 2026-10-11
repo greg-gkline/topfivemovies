@@ -4,6 +4,9 @@
 	"service": "dev",
 	"workspaceFolder": "/workspaces/topfivemovies",
 	"forwardPorts": [80],
+	// Baseline tooling (scripts/baseline): crawler, headless Chromium for screenshots,
+	// the DB client for seeding the crawl, and the site's first-choice font
+	"postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-bs4 python3-lxml python3-selenium chromium chromium-driver default-mysql-client fonts-dejavu fonts-liberation ttf-bitstream-vera",
 	"portsAttributes": {
 		"80": { "label": "Top Five Movies" }
 	},

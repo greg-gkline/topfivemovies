@@ -1,0 +1,421 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type"	content="text/html;charset=iso-8859-1" />
+	<meta name="keywords" 			content="top 5, top five, top 5 movies, top five movies" />
+	<meta name="description"		content="" />	
+
+	<title>Top Five Movies -- Top Five Lists</title>
+	
+	<!-- begin style -->
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="index.xml" />	
+	
+	<style type="text/css">
+		@import url(styles/elegant_inner.css);
+	</style>
+<!-- end style --></head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="index.html">Top Five Movies</a></h1>
+		<a href="index.html"><span id="bannerimg"></span></a>
+	</div>
+
+	<!-- begin navbar -->
+	<div id="navbar">
+		<div class="access"><a href="#skipnav">skip navigation</a></div>
+		<ul>
+			<li><a href="/topfives.html">Top 5 Lists</a></li>
+			<li><a href="/reviews.html">Reviews</a></li>
+			<li><a href="/chickflicks.html">Chick Flicks</a></li>
+			<li><a href="/others.html">Other</a></li>
+			<li><a href="/about.html">About Us</a></li>
+		</ul>
+	</div>
+	<a name="skipnav" class="access">&nbsp;</a>
+<!-- end navbar -->
+		
+	
+	<h2 class="pageheader">Top Five Lists</h2>
+	
+	<p>This is it, Sonny Jim. The best of the best. The cream of the crop. Here is where we separate the wheat from the chaff. Are your favorite movies tough enough to survive our grueling tests? Take a look at how they fared below:</p>
+
+	<table cellspacing='0' cellpadding='0' border='0'>
+		<tr class="heading">
+			<th class="topfive_title"><a href="/topfives.html?order=title">Title</a></th>
+			<th class="topfive_author"><a href="/topfives.html?order=author">Author</a></th>
+			<th class="topfive_date"><a href="/topfives.html?order=date">Date</a></th>
+		</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_64.html'>Top 5 Movies Starring Bruce Willis</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2004-07-06</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_65.html'>Top 5 Movies Starring Brad Pitt</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2004-07-06</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_66.html'>Top 5 Movies Starring Kevin Spacey</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2004-07-06</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_63.html'>Top 5 Movies with Ben Stiller</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2004-06-20</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_61.html'>Top 5 John Goodman Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-12-27</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_62.html'>Top 5 Greatest Bill Murray Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-12-27</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_59.html'>Top 5 Greatest George Clooney Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-12-19</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_60.html'>Top 5 Hitchcock Movies</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-12-19</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_58.html'>Top 5 Greatest Christopher Lloyd Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-11-28</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_55.html'>Top 5 Greatest Christmas Movies of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-11-15</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_56.html'>Top 5 Worst Christmas Movies of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-11-15</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_57.html'>Top 5 Greatest Stanley Kubrick Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-11-15</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_54.html'>Top 5 Finest Samuel L. Jackson Performances</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-25</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_52.html'>Top 5 Best John Cusack Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-12</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_53.html'>Top 5 Films Where Jeff Goldblum Says A Lot of Stuff</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-12</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_48.html'>Top 5 Funniest Sports Comedies</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-04</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_49.html'>Top 5 Comedic Duos of the Motion Pictures</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-04</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_50.html'>Top 5 Comedic Troupes of Motion Pictures</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-04</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_51.html'>Top 5 Perennial Psychos</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-10-04</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_47.html'>Top 5 Greatest Star Trek Motion Pictures</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-10-02</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_46.html'>Top 5 Worst SNL Movies of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-17</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_44.html'>Top 5 Finest Mike Myers Films</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-16</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_45.html'>Top 5 Good Tom Hanks Films That Were Not Nominated for a Major Award</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-16</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_43.html'>Top 5 Greatest Actors Who Had Mustaches</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-03</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_40.html'>Top 5 Historically Accurate Movies of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-02</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_41.html'>Top 5 Greatest Westerns of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-02</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_42.html'>Top 5 Definitive Corey Feldman Movies</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-09-02</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_39.html'>Top 5 Worst Sequels of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-08-26</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_38.html'>Top 5 Kevin Costner Movies To Watch When You're Debating His Worth As An Actor</a></td>
+<td class='topfive_author'>Jesse</td>
+<td class='topfive_date'>2001-08-09</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_37.html'>Top 5 Actors to Avoid Like the Plague</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-07-27</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_35.html'>Top 5 Most Shocking Movie Endings</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-07-24</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_33.html'>Top 5 Most Powerful Movie Endings</a></td>
+<td class='topfive_author'>Nick</td>
+<td class='topfive_date'>2001-07-23</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_32.html'>Top 5 Trailers</a></td>
+<td class='topfive_author'>Matt</td>
+<td class='topfive_date'>2001-07-20</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_30.html'>Top 5 Movies You Like But Don't Want to Admit</a></td>
+<td class='topfive_author'>Ryan</td>
+<td class='topfive_date'>2001-07-19</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_31.html'>Top 5 Baseball Movies</a></td>
+<td class='topfive_author'>Jesse</td>
+<td class='topfive_date'>2001-07-19</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_29.html'>Top 5 Cameos by a Musician</a></td>
+<td class='topfive_author'>Matt</td>
+<td class='topfive_date'>2001-07-17</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_28.html'>Top 5 Old-School Killas</a></td>
+<td class='topfive_author'>Brian</td>
+<td class='topfive_date'>2001-07-13</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_27.html'>Top 5 Time Concepts</a></td>
+<td class='topfive_author'>Brian</td>
+<td class='topfive_date'>2001-07-12</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_26.html'>Top 5 Movie Tear-Jerkers</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-07-07</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_25.html'>Top 5 Directors</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-07-05</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_23.html'>Top 5 Best Al Pacino Movies</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-07-04</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_24.html'>Top 5 Worst Al Pacino Movies</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-07-04</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_18.html'>Top 5 Hitchcock Movies</a></td>
+<td class='topfive_author'>Brian</td>
+<td class='topfive_date'>2001-07-03</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_19.html'>Top 5 War Movies</a></td>
+<td class='topfive_author'>Brian</td>
+<td class='topfive_date'>2001-07-03</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_20.html'>Top 5 Movie Tear-Jerkers</a></td>
+<td class='topfive_author'>Brian</td>
+<td class='topfive_date'>2001-07-03</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_17.html'>Top 5 Sports Movies</a></td>
+<td class='topfive_author'>Ryan</td>
+<td class='topfive_date'>2001-07-02</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_14.html'>Top 5 Historically Based Films</a></td>
+<td class='topfive_author'>Matt</td>
+<td class='topfive_date'>2001-06-29</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_15.html'>Top 5 Foreign Films</a></td>
+<td class='topfive_author'>Matt</td>
+<td class='topfive_date'>2001-06-29</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_16.html'>Top 5 Worst Films</a></td>
+<td class='topfive_author'>Matt</td>
+<td class='topfive_date'>2001-06-29</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_12.html'>Top 5 Rocky Movies</a></td>
+<td class='topfive_author'>Ryan</td>
+<td class='topfive_date'>2001-06-27</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_13.html'>Top 5 TopFive All-Hype Films</a></td>
+<td class='topfive_author'>Brian</td>
+<td class='topfive_date'>2001-06-27</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_10.html'>Top 5 Mafia Movies of All Time</a></td>
+<td class='topfive_author'>Nick</td>
+<td class='topfive_date'>2001-06-25</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_11.html'>Top 5 Sports Movies</a></td>
+<td class='topfive_author'>Nick</td>
+<td class='topfive_date'>2001-06-25</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_6.html'>Top 5 Mafia Movies of All Time</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-06-24</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_7.html'>Top 5 Scenes of Movies to which Chris Larson has said, "No way. Cool!"</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-06-24</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_8.html'>Top 5 Independent Films with a Budget Under $30,000</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-06-24</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_9.html'>Top 5 Movies with Pro Wrestlers Playing Non-Wrestling Roles</a></td>
+<td class='topfive_author'>Bruce</td>
+<td class='topfive_date'>2001-06-24</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_4.html'>Top 5 Movies with the Word "Poo" in the Title</a></td>
+<td class='topfive_author'>Jesse</td>
+<td class='topfive_date'>2001-06-22</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_5.html'>Top 5 Movie Soundtracks</a></td>
+<td class='topfive_author'>Jesse</td>
+<td class='topfive_date'>2001-06-22</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_3.html'>Top 5 Ralph Macchio Films</a></td>
+<td class='topfive_author'>Nick</td>
+<td class='topfive_date'>2001-06-21</td>
+</tr>
+<tr class='even'>
+<td class='topfive_title'><a href='topfive_2.html'>Top 5 Best Uses of Narration</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-06-20</td>
+</tr>
+<tr class='odd'>
+<td class='topfive_title'><a href='topfive_1.html'>Top 5 Movies That Keep On Giving</a></td>
+<td class='topfive_author'>Greg</td>
+<td class='topfive_date'>2001-06-19</td>
+</tr>
+	</table>	
+	
+	<!-- begin footer -->
+<div id="footer">
+	<div id="footernav">
+		<a href="/index.html">Home</a> | 
+		<a href="/topfives.html">Top 5 Lists</a> | 
+		<a href="/reviews.html">Reviews</a> | 
+		<a href="/chickflicks.html">Chick Flicks</a> | 
+		<a href="/others.html">Other Features</a> | 
+		<a href="/about.html">About Us</a>
+	</div>
+	
+	<div id="copyright">
+		<div id="cclogo">
+			<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/" title="learn more about Creative Commons licensing"><img src="/images/somerights20.png" alt="Creative Commons" /></a>
+		</div>
+		<div id="cctext">
+			This site design and all articles by Greg are free for non-commercial use with attribution.<br />
+			All other articles contained herein are the copyright of their respective authors, unless otherwise noted. 
+		</div>
+	</div>
+
+	<div id="intra">
+		<a href="/intra/"><img src="/images/lockgray.gif" alt="" /></a>
+	</div>
+	
+	<div id="tech">
+		<a href="http://validator.w3.org/check?outline=1&amp;verbose=1&amp;uri=http%3A//localhost/topfives.html" 
+			title="this page validates against the W3C XHTML 1.0 Transitional Specification" target="validate">xhtml 1.0</a> | 
+		<a type="application/rss+xml" href="/index.xml" title="Syndicate TopFiveMovies with an RSS feed">rss 2.0</a>
+	</div>
+</div>
+
+	<!-- 
+	<rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+		<Work rdf:about="http://topfivemovies.gkline.com/">
+			<dc:title>Top Five Movies</dc:title>
+			<dc:description>Movie reviews by guys from a boring college.</dc:description>
+			<license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/2.5/" />
+			<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+		</Work>
+		<License rdf:about="http://creativecommons.org/licenses/by-nc-sa/2.5/">
+			<permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+			<permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+			<requires rdf:resource="http://web.resource.org/cc/Notice"/>
+			<requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+			<prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/>
+			<permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+			<requires rdf:resource="http://web.resource.org/cc/ShareAlike"/>
+		</License>
+	</rdf:RDF> 
+	-->
+
+<!-- end footer -->	
+</div>
+</body>
+</html>

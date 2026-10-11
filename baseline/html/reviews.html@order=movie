@@ -1,0 +1,383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type"	content="text/html;charset=iso-8859-1" />
+	<meta name="keywords" 			content="top 5, top five, top 5 movies, top five movies, Almost Famous, Billy Crudup, Kate Hudson, Jason Lee, American Pie 2, Many Actors/Actresses, American Pie 2, Jason Biggs, Shannon Elizabeth, Anchorman, Will Ferrell, Christina Applegate, Arlington Road, Jeff Bridges, Tim Robbins, Joan Cusack" />
+	<meta name="description"		content="" />	
+
+	<title>Top Five Movies -- Reviews</title>
+	
+	<!-- begin style -->
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="index.xml" />	
+	
+	<style type="text/css">
+		@import url(styles/elegant_inner.css);
+	</style>
+<!-- end style --></head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="index.html">Top Five Movies</a></h1>
+		<a href="index.html"><span id="bannerimg"></span></a>
+	</div>
+
+	<!-- begin navbar -->
+	<div id="navbar">
+		<div class="access"><a href="#skipnav">skip navigation</a></div>
+		<ul>
+			<li><a href="/topfives.html">Top 5 Lists</a></li>
+			<li><a href="/reviews.html">Reviews</a></li>
+			<li><a href="/chickflicks.html">Chick Flicks</a></li>
+			<li><a href="/others.html">Other</a></li>
+			<li><a href="/about.html">About Us</a></li>
+		</ul>
+	</div>
+	<a name="skipnav" class="access">&nbsp;</a>
+<!-- end navbar -->
+		
+	
+	<h2 class="pageheader">Reviews</h2>
+	
+	<p>Our staff works tirelessly day and night, watching movie after movie, determined to provide you with the best information possible.  Here are the latest fruits of their efforts.</p>
+	<p>Also check out our special coverage of <a href='chickflicks.html'>Chick Flicks</a>.</p>
+
+	<table cellspacing='0' cellpadding='0' border='0'>
+		<tr class="heading">
+			<th class="review_name"><a href="/reviews.html?order=movie">Movie</a></th>
+			<th class="review_rating"><a href="/reviews.html?order=rating">Rating</a></th>
+			<th class="review_reviewer"><a href="/reviews.html?order=author">Reviewer</a></th>
+			<th class="review_date"><a href="/reviews.html?order=date">Date</a></th>
+		</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_27.html'>Almost Famous</a></td>
+<td class='review_rating'>9.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-09-14</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_24.html'>American Pie 2</a></td>
+<td class='review_rating'>7.0</td>
+<td class='review_reviewer'>Brian</td>
+<td class='review_date'>2001-08-23</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_25.html'>American Pie 2</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2001-08-25</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_66.html'>Anchorman</a></td>
+<td class='review_rating'>9.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-07-12</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_21.html'>Arlington Road</a></td>
+<td class='review_rating'>5.5</td>
+<td class='review_reviewer'>Ryan</td>
+<td class='review_date'>2001-08-08</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_62.html'>Austin Powers in Goldmember</a></td>
+<td class='review_rating'>5.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-08-16</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_18.html'>Barbarella</a></td>
+<td class='review_rating'>2.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-08-02</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_73.html'>Batman Begins</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2005-06-27</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_9.html'>Before Night Falls</a></td>
+<td class='review_rating'>1.0</td>
+<td class='review_reviewer'>Nick</td>
+<td class='review_date'>2001-07-05</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_70.html'>Bubba Ho-tep</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-08-11</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_42.html'>Clay Pigeons</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-02-02</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_52.html'>Deliverance</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2002-04-25</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_63.html'>Dodgeball</a></td>
+<td class='review_rating'>7.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-06-19</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_53.html'>Donnie Darko</a></td>
+<td class='review_rating'>9.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2002-04-28</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_8.html'>Finding Forrester</a></td>
+<td class='review_rating'>7.0</td>
+<td class='review_reviewer'>Jesse</td>
+<td class='review_date'>2001-07-06</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_32.html'>From Hell</a></td>
+<td class='review_rating'>5.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-11-05</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_45.html'>Ghost World</a></td>
+<td class='review_rating'>6.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-03-07</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_68.html'>Harold &amp; Kumar Go To White Castle</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-08-09</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_26.html'>Jay And Silent Bob Strike Back</a></td>
+<td class='review_rating'>9.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2001-08-25</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_22.html'>Jurassic Park III</a></td>
+<td class='review_rating'>4.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-08-10</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_37.html'>Lord of the Rings: The Fellowship of the Ring</a></td>
+<td class='review_rating'>7.5</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-01-02</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_64.html'>Master and Commander</a></td>
+<td class='review_rating'>5.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-06-30</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_23.html'>Memento</a></td>
+<td class='review_rating'>9.5</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2001-08-13</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_31.html'>Mulholland Drive</a></td>
+<td class='review_rating'>9.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-10-30</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_58.html'>Orange County</a></td>
+<td class='review_rating'>9.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-07-03</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_40.html'>Pi</a></td>
+<td class='review_rating'>9.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2002-01-01</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_19.html'>Planet of the Apes</a></td>
+<td class='review_rating'>7.5</td>
+<td class='review_reviewer'>The TopFiveMovies Staff</td>
+<td class='review_date'>2001-08-03</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_28.html'>Rock Star</a></td>
+<td class='review_rating'>7.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-09-22</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_71.html'>Secret Window</a></td>
+<td class='review_rating'>6.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-08-24</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_20.html'>Snatch</a></td>
+<td class='review_rating'>6.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-08-05</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_49.html'>Sorority Boys</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-04-08</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_65.html'>Spider-Man 2</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-07-07</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_55.html'>Star Wars: Attack of the Clones</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2002-06-01</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_6.html'>Swordfish</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-06-30</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_1.html'>The Hurricane</a></td>
+<td class='review_rating'>5.0</td>
+<td class='review_reviewer'>Jesse</td>
+<td class='review_date'>2000-10-01</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_57.html'>The Mothman Prophecies</a></td>
+<td class='review_rating'>6.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-07-03</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_60.html'>The Road to Perdition</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2002-07-15</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_59.html'>The Royal Tenenbaums</a></td>
+<td class='review_rating'>9.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-07-13</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_11.html'>The Score</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-07-14</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_54.html'>The Scorpion King</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-04-29</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_67.html'>The Village</a></td>
+<td class='review_rating'>7.5</td>
+<td class='review_reviewer'>Jesse</td>
+<td class='review_date'>2004-07-31</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_17.html'>Unbreakable</a></td>
+<td class='review_rating'>8.0</td>
+<td class='review_reviewer'>Brian</td>
+<td class='review_date'>2001-07-31</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_36.html'>Vanilla Sky</a></td>
+<td class='review_rating'>7.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2001-12-18</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='review_2.html'>What Women Want</a></td>
+<td class='review_rating'>1.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2001-02-20</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='review_56.html'>Windtalkers</a></td>
+<td class='review_rating'>6.5</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2002-06-18</td>
+</tr>
+	</table>	
+	
+	<!-- begin footer -->
+<div id="footer">
+	<div id="footernav">
+		<a href="/index.html">Home</a> | 
+		<a href="/topfives.html">Top 5 Lists</a> | 
+		<a href="/reviews.html">Reviews</a> | 
+		<a href="/chickflicks.html">Chick Flicks</a> | 
+		<a href="/others.html">Other Features</a> | 
+		<a href="/about.html">About Us</a>
+	</div>
+	
+	<div id="copyright">
+		<div id="cclogo">
+			<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/" title="learn more about Creative Commons licensing"><img src="/images/somerights20.png" alt="Creative Commons" /></a>
+		</div>
+		<div id="cctext">
+			This site design and all articles by Greg are free for non-commercial use with attribution.<br />
+			All other articles contained herein are the copyright of their respective authors, unless otherwise noted. 
+		</div>
+	</div>
+
+	<div id="intra">
+		<a href="/intra/"><img src="/images/lockgray.gif" alt="" /></a>
+	</div>
+	
+	<div id="tech">
+		<a href="http://validator.w3.org/check?outline=1&amp;verbose=1&amp;uri=http%3A//localhost/reviews.html" 
+			title="this page validates against the W3C XHTML 1.0 Transitional Specification" target="validate">xhtml 1.0</a> | 
+		<a type="application/rss+xml" href="/index.xml" title="Syndicate TopFiveMovies with an RSS feed">rss 2.0</a>
+	</div>
+</div>
+
+	<!-- 
+	<rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+		<Work rdf:about="http://topfivemovies.gkline.com/">
+			<dc:title>Top Five Movies</dc:title>
+			<dc:description>Movie reviews by guys from a boring college.</dc:description>
+			<license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/2.5/" />
+			<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+		</Work>
+		<License rdf:about="http://creativecommons.org/licenses/by-nc-sa/2.5/">
+			<permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+			<permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+			<requires rdf:resource="http://web.resource.org/cc/Notice"/>
+			<requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+			<prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/>
+			<permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+			<requires rdf:resource="http://web.resource.org/cc/ShareAlike"/>
+		</License>
+	</rdf:RDF> 
+	-->
+
+<!-- end footer -->	
+</div>
+</body>
+</html>

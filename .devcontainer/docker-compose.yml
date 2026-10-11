@@ -23,7 +23,7 @@ services:
 
   db:
     # No official PHP 4 image exists and MySQL 5.2 was never released; 5.5 is the oldest
-    # release that can load the utf8mb4 dumps in data/ unmodified. The image is amd64-only.
+    # release that can load the utf8mb4 dumps in legacy/sql/ unmodified. The image is amd64-only.
     image: mysql:5.5
     platform: linux/amd64
     environment:

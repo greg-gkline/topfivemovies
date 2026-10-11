@@ -1,0 +1,182 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type"	content="text/html;charset=iso-8859-1" />
+	<meta name="keywords" 			content="top 5, top five, top 5 movies, top five movies, chick flicks, My Dog Skip, Kevin Bacon, Frankie Muniz, Legally Blonde, Reese Witherspoon, Heartbreakers, Sigourney Weaver, Jennifer Love Hewitt, Gene Hackman, Snow Dogs,   Cuba Gooding Jr., James Coburn, a bunch of dogs, Summer Catch, Freddie Prinze Jr., Jessica Biel, Matthew Lillard" />
+	<meta name="description"		content="" />	
+
+	<title>Top Five Movies -- Chick Flicks</title>
+	
+	<!-- begin style -->
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="index.xml" />	
+	
+	<style type="text/css">
+		@import url(styles/elegant_inner.css);
+	</style>
+<!-- end style --></head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="index.html">Top Five Movies</a></h1>
+		<a href="index.html"><span id="bannerimg"></span></a>
+	</div>
+
+	<!-- begin navbar -->
+	<div id="navbar">
+		<div class="access"><a href="#skipnav">skip navigation</a></div>
+		<ul>
+			<li><a href="/topfives.html">Top 5 Lists</a></li>
+			<li><a href="/reviews.html">Reviews</a></li>
+			<li><a href="/chickflicks.html">Chick Flicks</a></li>
+			<li><a href="/others.html">Other</a></li>
+			<li><a href="/about.html">About Us</a></li>
+		</ul>
+	</div>
+	<a name="skipnav" class="access">&nbsp;</a>
+<!-- end navbar -->
+		
+	
+	<h2 class="pageheader">Chick Flicks</h2>
+	
+	<p>
+	As more and more members of the Top Five Movies Staff become romantically attached and/or married, the proportion of chick flicks we've been
+	forced to endure has risen exponentially.  In an attempt to protect our fellow males from having to suffer through the most excruciating entries
+	in the genre, we've decided to offer our thoughts on the muff movies we get suckered into watching.  This way, you can learn from our mistakes,
+	and hopefully select the least painful options so you can get your brownie points and not hate yourself in the morning.
+	</p>
+	<p>
+	The rating system:
+	<ul>
+	<li><strong>0 - 2 :</strong> Excruciating, avoid at all costs</li>
+	<li><strong>2 - 4 :</strong> Tolerable when drunk</li>
+	<li><strong>4 - 6 :</strong> Tolerable when sober</li>
+	<li><strong>6 - 8 :</strong> Not half bad</li>
+	<li><strong>8 - 10 :</strong> Surprisingly decent</li>
+	</ul>
+	</p>
+	<p>
+	Bear in mind that points awarded to movies in the Chick Flick section count only half as much as those in the normal Reviews, so the most
+	a chick flick can ever score is equivalent to a 5.0 on the overall scale.
+	</p>
+	<p>
+	Check out our full listing of regular <a href='reviews.html'>Reviews</a>.
+	</p>
+
+	<table cellspacing='0' cellpadding='0' border='0'>
+		<tr class="heading">
+			<th class="review_name"><a href="/chickflicks.html?order=movie">Movie</a></th>
+			<th class="review_rating"><a href="/chickflicks.html?order=rating">Rating</a></th>
+			<th class="review_reviewer"><a href="/chickflicks.html?order=author">Reviewer</a></th>
+			<th class="review_date"><a href="/chickflicks.html?order=date">Date</a></th>
+		</tr>
+<tr class='even'>
+<td class='review_name'><a href='chickflick_5.html'>My Dog Skip</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Nick</td>
+<td class='review_date'>2001-06-25</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='chickflick_16.html'>Legally Blonde</a></td>
+<td class='review_rating'>8.5</td>
+<td class='review_reviewer'>Ryan</td>
+<td class='review_date'>2001-07-31</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='chickflick_48.html'>Heartbreakers</a></td>
+<td class='review_rating'>7.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-04-02</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='chickflick_43.html'>Snow Dogs</a></td>
+<td class='review_rating'>6.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-02-16</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='chickflick_61.html'>Summer Catch</a></td>
+<td class='review_rating'>5.0</td>
+<td class='review_reviewer'>Jesse</td>
+<td class='review_date'>2002-07-14</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='chickflick_69.html'>Chasing Liberty</a></td>
+<td class='review_rating'>5.0</td>
+<td class='review_reviewer'>Greg</td>
+<td class='review_date'>2004-08-08</td>
+</tr>
+<tr class='even'>
+<td class='review_name'><a href='chickflick_35.html'>Harry Potter and the Sorcerer's Stone</a></td>
+<td class='review_rating'>2.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2001-12-11</td>
+</tr>
+<tr class='odd'>
+<td class='review_name'><a href='chickflick_46.html'>Jimmy Neutron: Boy Genius</a></td>
+<td class='review_rating'>2.0</td>
+<td class='review_reviewer'>Bruce</td>
+<td class='review_date'>2002-03-28</td>
+</tr>
+	</table>	
+	
+	<!-- begin footer -->
+<div id="footer">
+	<div id="footernav">
+		<a href="/index.html">Home</a> | 
+		<a href="/topfives.html">Top 5 Lists</a> | 
+		<a href="/reviews.html">Reviews</a> | 
+		<a href="/chickflicks.html">Chick Flicks</a> | 
+		<a href="/others.html">Other Features</a> | 
+		<a href="/about.html">About Us</a>
+	</div>
+	
+	<div id="copyright">
+		<div id="cclogo">
+			<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/" title="learn more about Creative Commons licensing"><img src="/images/somerights20.png" alt="Creative Commons" /></a>
+		</div>
+		<div id="cctext">
+			This site design and all articles by Greg are free for non-commercial use with attribution.<br />
+			All other articles contained herein are the copyright of their respective authors, unless otherwise noted. 
+		</div>
+	</div>
+
+	<div id="intra">
+		<a href="/intra/"><img src="/images/lockgray.gif" alt="" /></a>
+	</div>
+	
+	<div id="tech">
+		<a href="http://validator.w3.org/check?outline=1&amp;verbose=1&amp;uri=http%3A//localhost/chickflicks.html" 
+			title="this page validates against the W3C XHTML 1.0 Transitional Specification" target="validate">xhtml 1.0</a> | 
+		<a type="application/rss+xml" href="/index.xml" title="Syndicate TopFiveMovies with an RSS feed">rss 2.0</a>
+	</div>
+</div>
+
+	<!-- 
+	<rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+		<Work rdf:about="http://topfivemovies.gkline.com/">
+			<dc:title>Top Five Movies</dc:title>
+			<dc:description>Movie reviews by guys from a boring college.</dc:description>
+			<license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/2.5/" />
+			<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+		</Work>
+		<License rdf:about="http://creativecommons.org/licenses/by-nc-sa/2.5/">
+			<permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+			<permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+			<requires rdf:resource="http://web.resource.org/cc/Notice"/>
+			<requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+			<prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/>
+			<permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+			<requires rdf:resource="http://web.resource.org/cc/ShareAlike"/>
+		</License>
+	</rdf:RDF> 
+	-->
+
+<!-- end footer -->	
+</div>
+</body>
+</html>
