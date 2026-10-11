@@ -1,0 +1,56 @@
+---
+title: Snow Dogs
+author: bruce
+date: 2002-02-16
+rating: 6
+release_year: 2002
+starring: Cuba Gooding Jr., James Coburn, and a bunch of dogs
+image: snow_dogs.jpg
+image_alt: ''
+---
+
+I'm not going to entirely tear up this film like I do to most I review.
+*Snow Dogs* is an entertaining family film. If you want to take your kids to
+a silly family film or you want to see some breathtaking shots of the
+Vancover wilderness, go see this movie.
+
+But if you want to see Cuba Gooding Jr. in an Oscar winning performace,
+then don't go see *Snow Dogs*. I know what *Snow Dogs* is, it's a light-hearted
+family film. Gooding did a great job at this, he kept it fun and I am glad
+to see that he is willing to act in a variety of roles. But for Christmas
+Sake, how many times do we need to see him slip on the ice and fall on his
+ass? Once it was hilarious, twice it was funny, but after the tenth time
+of Gooding slipping on the ice, I kind of wish he would have cracked his
+head open and the film would end.
+
+Here's the plot, Gooding plays Ted, a dentist in Miami who finds out
+that he was adopted and his recently deceased biological mother was a dog
+sled racer in Alaska. Gooding travels to Alaska for the reading of the
+will. There he meets the gruff Thunder Jack ( James Coburn ), the
+ultra-hottie Barb the bartender ( Joanna Bacalso ) and his mother's rag-tag
+misfit sled dog team. Hilarity ensues.
+
+Notable performances include Nichelle Nichols, Star Treks Lt. Uhura,
+who plays Gooding's adoption mother; Bryan Doyle-Murray, who plays the town
+drunk, and Sisqo, Goodings dental partner. I'm not a fan of the Thong Song
+Man, but he did do a good job playing a poofter. The dogs in this film
+were the canine version of the Seven Dwarfs. There was the leader, the dumb
+one, the one who liked to eat, the one who liked to sleep and so on and so
+forth, fairly formulaic. They don't like Gooding in the begining of the
+film, the leader bites Gooding in the ass about nine times, Gooding earns
+their trust then they do heroic shit that no one expected them to do to
+save Gooding. Pretty simple.
+
+If I could have directed this film and improved it, I would have
+changed the whole PG rating and done some crazy Cujo shit. One dog was bad
+ass, but imagine seven. I would have totally cut out the whole Gooding
+adoption part and focused on the dogs flipping out and terrorizing the town.
+Sisqo and Gooding are still dentists, but get turned into FBI
+dentists/rabid dog hunters and have to fight these dogs before they take
+over all of Alaska. First scene, the dogs attack Sisqo and the lead dog
+makes him his bitch. Maybe some aliens, but definitely big rocket-powered
+dog sleds. I also would have made the dogs have British accents and eye
+patches. The final scene would be on top of this snow covered mountain with
+Gooding fighting the lead dog and throwing him down a deep crevass and
+saying, "When you get to doggy hell, tell 'em The Dentist sent you." Just
+an idea.

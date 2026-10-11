@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Staff responses",
+  "description": "data/responses.yaml: legacy staff responses, shown under their item in file order.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "item",
+      "author",
+      "date",
+      "text"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "item": {
+        "$ref": "defs.json#/$defs/item_path"
+      },
+      "author": {
+        "$ref": "defs.json#/$defs/author"
+      },
+      "date": {
+        "$ref": "defs.json#/$defs/date"
+      },
+      "text": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Markdown."
+      }
+    }
+  }
+}

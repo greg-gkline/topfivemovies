@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Other feature",
+  "description": "Front matter of content/other/*.md.",
+  "type": "object",
+  "required": [
+    "title",
+    "author",
+    "date"
+  ],
+  "properties": {
+    "title": {
+      "$ref": "defs.json#/$defs/text"
+    },
+    "subtitle": {
+      "$ref": "defs.json#/$defs/text"
+    },
+    "author": {
+      "$ref": "defs.json#/$defs/author"
+    },
+    "date": {
+      "$ref": "defs.json#/$defs/date"
+    },
+    "caption": {
+      "$ref": "defs.json#/$defs/text",
+      "description": "Image caption, kept from the legacy data."
+    },
+    "image": {
+      "$ref": "defs.json#/$defs/image"
+    },
+    "image_alt": {
+      "type": "string",
+      "description": "Alt text. Empty marks the picture as decorative."
+    },
+    "image_width": {
+      "$ref": "defs.json#/$defs/pixels",
+      "description": "Display width, only when the page shows the picture scaled."
+    },
+    "image_height": {
+      "$ref": "defs.json#/$defs/pixels"
+    },
+    "image_full": {
+      "$ref": "defs.json#/$defs/image",
+      "description": "Larger version of the picture."
+    },
+    "draft": {
+      "const": true,
+      "description": "Not published. Omit the field for published items."
+    }
+  },
+  "additionalProperties": false,
+  "dependentRequired": {
+    "image_alt": [
+      "image"
+    ],
+    "image": [
+      "image_alt"
+    ],
+    "image_width": [
+      "image",
+      "image_height"
+    ],
+    "image_height": [
+      "image",
+      "image_width"
+    ],
+    "image_full": [
+      "image"
+    ]
+  }
+}

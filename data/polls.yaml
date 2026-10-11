@@ -1,0 +1,169 @@
+# Legacy polls, read-only archive with final results.
+- date: 2001-07-14
+  question: Who was the best Godfather?
+  options:
+    - text: Marlon Brando
+      votes: 2
+    - text: Al Pacino
+      votes: 4
+    - text: Robert De Niro
+      votes: 8
+    - text: Andy Garcia
+      votes: 0
+- date: 2001-07-25
+  question: Who was the best Batman?
+  options:
+    - text: Adam West
+      votes: 5
+    - text: Michael Keaton
+      votes: 11
+    - text: Val Kilmer
+      votes: 6
+    - text: George Clooney
+      votes: 1
+- date: 2001-08-03
+  question: What's the best *Star Wars* movie so far?
+  options:
+    - text: The Phantom Menace
+      votes: 2
+    - text: A New Hope
+      votes: 1
+    - text: Empire Strikes Back
+      votes: 1
+    - text: Return of the Jedi
+      votes: 4
+- date: 2001-08-16
+  question: Who was the hottest "old school" babe?
+  options:
+    - text: Rita Hayworth
+      votes: 1
+    - text: Audrey Hepburn
+      votes: 2
+    - text: Grace Kelly
+      votes: 3
+    - text: Marilyn Monroe
+      votes: 3
+    - text: Other
+      votes: 1
+- date: 2001-08-30
+  question: Who's your favorite Baldwin?
+  options:
+    - text: Adam Baldwin
+      votes: 0
+    - text: Alec Baldwin
+      votes: 6
+    - text: Billy Baldwin
+      votes: 1
+    - text: Stephen Baldwin
+      votes: 4
+    - text: Other
+      votes: 0
+- date: 2001-09-22
+  question: Who's your favorite Sheen?
+  options:
+    - text: Martin Sheen
+      votes: 4
+    - text: Charlie Sheen
+      votes: 4
+    - text: Emilio Estevez
+      votes: 1
+    - text: Sheena, Queen of the Jungle
+      votes: 4
+    - text: Other
+      votes: 0
+- date: 2001-10-29
+  question: What's your favorite Kevin Smith movie?
+  options:
+    - text: Clerks
+      votes: 2
+    - text: Mallrats
+      votes: 2
+    - text: Chasing Amy
+      votes: 1
+    - text: Dogma
+      votes: 2
+    - text: Jay & Silent Bob Strike Back
+      votes: 1
+- date: 2001-11-16
+  question: How would you most like to see this Harry Potter punk killed?
+  options:
+    - text: Hanging
+      votes: 1
+    - text: Quartering
+      votes: 2
+    - text: Guillotine
+      votes: 1
+    - text: Tar and Feather
+      votes: 4
+    - text: Other
+      votes: 0
+- date: 2001-12-18
+  question: Who benefitted most from the Cruise/Kidman breakup?
+  options:
+    - text: Tom Cruise
+      votes: 4
+    - text: Nicole Kidman
+      votes: 3
+    - text: Penelope Cruz
+      votes: 3
+    - text: The tabloids
+      votes: 9
+- date: 2002-04-03
+  question: Who's the toughest actress?
+  options:
+    - text: Sigourney Weaver
+      votes: 2
+    - text: Jamie Lee Curtis
+      votes: 1
+    - text: Jodie Foster
+      votes: 1
+    - text: Sandra Bullock
+      votes: 1
+    - text: Other
+      votes: 1
+- date: 2002-04-25
+  question: How good will *Attack of the Clones* be?
+  options:
+    - text: Legitimately good
+      votes: 2
+    - text: Better than *Phantom Menace*
+      votes: 3
+    - text: About the same as *Phantom Menace*
+      votes: 0
+    - text: Worse than *Phantom Menace*
+      votes: 0
+- date: 2002-07-15
+  question: What was the worst Tom Hanks movie?
+  options:
+    - text: Joe vs. the Volcano
+      votes: 1
+    - text: Sleepless in Seattle
+      votes: 0
+    - text: Bachelor Party
+      votes: 2
+    - text: Dragnet
+      votes: 0
+- date: 2002-08-07
+  question: Who has become the biggest embarrassment to the values they supposedly represent?
+  options:
+    - text: Ozzy Osbourne
+      votes: 4
+    - text: Pope John Paul II
+      votes: 2
+    - text: The Rolling Stones
+      votes: 1
+    - text: George Lucas
+      votes: 3
+    - text: Bud Selig
+      votes: 7
+- date: 2004-06-24
+  question: Which former *SNL* performer makes the best movies?
+  options:
+    - text: Will Ferrell
+      votes: 46
+    - text: Mike Myers
+      votes: 37
+    - text: Adam Sandler
+      votes: 42
+    - text: David Spade
+      votes: 4

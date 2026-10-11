@@ -1,0 +1,47 @@
+---
+type: movie
+title: Windtalkers
+author: greg
+date: 2002-06-18
+rating: 6.5
+release_year: 2002
+starring: Nicholas Cage, Christian Slater
+image: windtalkers.jpg
+image_alt: ''
+---
+
+Since September 11th, war movies have been at a premium, capitalizing on the surge of patriotism and pride. Some, like *Black
+Hawk Down*, have been superb. Others, like *Behind Enemy Lines*, were the same old crap in new shoes. *Windtalkers*
+falls somewhere in between.
+
+John Woo directs this based-on-true-events story of Navajo codetalkers in World War II's Pacific theater. After having numerous
+military codes broken by the Japanese, the Marines turned to a new system based on the Navajo language. The code completely
+stumped the Japanese and was instrumental in their defeat. But the success of the code made its protection much more important,
+and bodyguards were assigned to some codetalkers to ensure that the code would never fall into enemy hands.
+
+Nicholas Cage plays Sgt. Joe Enders, a Marine whose blind adherence to orders makes him the perfect man to saddle with the morally
+difficult issue of preventing the capture of the code. Cage's performance is predictably Cage-like. He acts all brave and
+fearless in battle, and stumbles around drunk and melancholy at night. At least here he doesn't use the crappy Southern accent
+that plagued other roles, including *Con Air*. I imagine it was Woo who pushed to have Cage for the role, and though I'd
+hoped the decision would turn out to be a good one, it didn't.
+
+I really hated the casting of Peter Stormare as Gunnery Sgt. Hjelmstad. Stormare was the guy with the Russian accent in
+*Fargo*, the lead nihilist in *The Big Lebowski*, and the cosmonaut in *Armageddon*, among other roles. But here
+I couldn't for the life of me figure out what accent he was trying to use. It seemed to drift from Scottish to Russian to Southern
+in course of a single sentence. The rest of his performance was fine, but I was so distracted by the accent that I found him more
+annoying than anything.
+
+The plot is pretty predictable and pedestrian. It's typical of every partner movie, where the outsider comes in (in this case,
+the Navajo radiomen Ben Yahzee and Charlie Whitehorse) and gets paired with the reluctant partner, Cage. There's awkwardness
+and conflict at first, made worse by Cage's "troubled" character, but by the end they're the best of friends and willing to
+lay down their lives for each other. And of course there's the redneck soldier who hates Injuns but gets saved by Yahzee and
+changes his mind. The writing credits go to John Rice and Joe Bateer, and I guarantee they did this one in their sleep.
+
+The action is pretty much the only strong point of the film. The effects and fight choreography are done well for the most part,
+but sometimes feel a bit contrived and gratuitous. It sometimes seems as though it's there just for its own sake, rather than
+to really advance the story. There's a detached feeling to it that isn't nearly as gripping as the likes of *Saving Private
+Ryan* and *Black Hawk Down*.
+
+In the end, *Windtalkers* is good in that it brings attention to the greatly overlooked contributions of the Navajos in
+World War II, and does so in a reverent and non-exploitative manner. But with the exception of the history lesson, you've already
+seen this movie before, so you might as well wait for the rental.

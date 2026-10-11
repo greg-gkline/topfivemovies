@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared definitions for Top Five Movies content",
+  "$defs": {
+    "slug": {
+      "description": "A filename without its extension: lowercase words joined by hyphens.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "author": {
+      "description": "Filename of the author's page in content/authors/, without .md.",
+      "$ref": "#/$defs/slug"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "text": {
+      "description": "A non-empty single line of text.",
+      "type": "string",
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "markdown": {
+      "description": "Inline markdown. Hard line breaks (a trailing backslash) are allowed.",
+      "type": "string",
+      "minLength": 1
+    },
+    "image": {
+      "description": "Filename of a picture in content/images/, never a path.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+\\.(jpg|jpeg|gif|png|webp)$"
+    },
+    "pixels": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2000
+    },
+    "item_path": {
+      "description": "Section and filename of an item, e.g. reviews/the-hurricane.",
+      "type": "string",
+      "pattern": "^(reviews|chickflicks|other|top5)/[a-z0-9]+(-[a-z0-9]+)*$"
+    }
+  }
+}

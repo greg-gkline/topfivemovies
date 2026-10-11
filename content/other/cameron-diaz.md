@@ -1,0 +1,45 @@
+---
+title: Cameron Diaz
+subtitle: An Actress with a Place in the World of Film, But I'm Not Sure Where
+author: bruce
+date: 2002-02-09
+image: mary.jpg
+image_alt: ''
+---
+
+Cameron Diaz seems to have a knack for playing roles of chicks that
+would talk to guys who write for topfivemovies.com. Seriously, if I was in a
+bar and I saw Cameron Diaz, I would probably go up to her and say, "Hello,
+how are you, can I buy you a drink?" Then I'm sure her bodyguard would
+throw me outside or her middle-aged pony-tailed fruit producer boyfriend
+would mace me, but I'd still talk to her. She seems cool, I don't think I'd
+be embarasssed to fart in front of her.
+
+Cameron Diaz is a good actress too. Everyone knows her from *There's
+Something About Mary* ( 1998 ) or by playing the voice of the princess in
+*Shrek* ( 2000 ). Diaz has made better films however. She played a showgirl
+in *The Mask* ( 1994 ), an abused girlfriend in *Feeling Minnesota* ( 1996 )and
+she was caught in a love triangle in *She's the One* ( 1996 ). By the way,
+*She's the One* was an excellent soundtrack, too bad [Tom Petty is dead](http://petty.cjb.net/).
+
+The thing that appeals to the common man about Cameron Diaz is that
+she's not the sterotypical Hollywood blonde. She's doesn't have the dumb
+blonde label that Marilyn Monroe had or being helpless like Mimi Van Dorn
+was. Diaz lost that image whenever she began kicking ass in *Charlie's
+Angels* ( 2000 ). Do you really think Myrna Loy would have shot Alexander
+Sess in *Buckets of Blood* ( 1948 ) ? Jesse might think so.
+
+So where is Diaz's place in the world of film? I don't see her
+replaying the role Ingrid Bergman played in Casablanca, unless Sam tells
+Bogey that if he doesn't clean his pipes before seeing her that he's walking
+around with a loaded gun. I see Diaz continuing to make the romantic comedy
+that American women drag their boyfriends to. While women weep as Richard
+Gere is in a hospital bed about ready to go through a dangerous, yet life
+saving, rectal gerbil removal operation, Cameron Diaz can play his devoted
+girlfriend. Everyone would be happy then.
+
+Diaz, on a serious note, should also stick with doing to occasional
+independent film. She is a great actress who can stretch herself and play
+some very dramatic characters, *Being John Malkovich* ( 1999 ) is an excellent
+example, where she played a veterinarian turned lesbian. In conclusion,
+Diaz, a great actress who plays roles that guys and chicks can get into.
