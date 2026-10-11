@@ -13,20 +13,20 @@ Move `www.topfivemovies.com` from a PHP 5 / MySQL site to a static site: content
 
 ## Decisions
 
-| Topic | Decision |
-|---|---|
-| Generator | Hugo (single Go binary, no Node). YAML data, Goldmark markdown, one layout per content type. |
-| URLs | Legacy URLs (`review_N.html`, `topfive_N.html` and so on) are not preserved, since the site has been offline for years. Every item's address follows its filename, with no redirects. |
-| Item identity | The filename is the identity (`the-hurricane.md`). There is no `id` field. |
-| Poll | Read-only archive page. No voting, no cookies. |
-| Comments | Read-only legacy. The 60 existing responses render statically. There is no way to add new ones. |
-| Intranet | `intra/` is fully retired and removed, including basic auth. |
-| Look | Inner pages match `styles/elegant_inner.css`. The home page keeps the original `styles/elegant.css` look. |
-| Domain | `www.topfivemovies.com`, plus the bare `topfivemovies.com` redirecting to it. |
-| DNS | Delegate the zone to Route 53 (option A). The domain registrar remains unchanged. |
-| Checks | Spelling is a deterministic blocking check. Grammar is a separate, agentic, advisory check. |
-| Search | Dropped. The response search page is not carried over. |
-| Content | Migrated as-is. No editorial changes or removals. |
+| Topic         | Decision                                                                                                                                                                              |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Generator     | Hugo (single Go binary, no Node). YAML data, Goldmark markdown, one layout per content type.                                                                                          |
+| URLs          | Legacy URLs (`review_N.html`, `topfive_N.html` and so on) are not preserved, since the site has been offline for years. Every item's address follows its filename, with no redirects. |
+| Item identity | The filename is the identity (`the-hurricane.md`). There is no `id` field.                                                                                                            |
+| Poll          | Read-only archive page. No voting, no cookies.                                                                                                                                        |
+| Comments      | Read-only legacy. The 60 existing responses render statically. There is no way to add new ones.                                                                                       |
+| Intranet      | `intra/` is fully retired and removed, including basic auth.                                                                                                                          |
+| Look          | Inner pages match `styles/elegant_inner.css`. The home page keeps the original `styles/elegant.css` look.                                                                             |
+| Domain        | `www.topfivemovies.com`, plus the bare `topfivemovies.com` redirecting to it.                                                                                                         |
+| DNS           | Delegate the zone to Route 53 (option A). The domain registrar remains unchanged.                                                                                                     |
+| Checks        | Spelling is a deterministic blocking check. Grammar is a separate, agentic, advisory check.                                                                                           |
+| Search        | Dropped. The response search page is not carried over.                                                                                                                                |
+| Content       | Migrated as-is. No editorial changes or removals.                                                                                                                                     |
 
 ## Current state (reference)
 
