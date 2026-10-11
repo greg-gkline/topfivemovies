@@ -1,0 +1,58 @@
+<?php
+	include('includes/classes.php');
+
+	$article = new article($_GET['id']);
+	$article->retrieve();
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type"	content="text/html;charset=iso-8859-1" />
+	<meta name="keywords" 			content="top 5, top five, top 5 movies, top five movies, <?php echo $article->collectKeywords(); ?>" />
+	<meta name="description"		content="<?php echo str_replace("\"", '', strip_tags($article->generatePreview(300))); ?>" />	
+
+	<title>Top Five Movies -- <?php echo $article->title; ?></title>
+
+	<?php include('includes/style.php'); ?>
+</head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="index.html">Top Five Movies</a></h1>
+		<a href="index.html"><span id="bannerimg"></span></a>
+	</div>
+
+	<?php include('includes/navbar.php'); ?>
+
+	<div id="clickpath"><a href="index.html">Home</a> &raquo; <a href="others.html">Other Features</a></div>
+
+	<?php include('includes/recent.php'); ?>
+	
+	<div class="review">
+	<?php
+		echo $article->image;
+		printf("\n<h2 class='title'><a href='%s'>%s</a></h2>", $article->getLink(), $article->title);
+		printf("\n<div class='subtitle'>%s</div>", $article->subtitle);
+		printf("\n<div class='author'>by %s</div>", $article->author);
+		printf("\n<div class='date'>(%s)</div>", formatDate($article->article_date));
+
+		/* this line has some <p> hacks to make up for xhtml shortcomings in our saved articles */
+		$text = str_replace('<P>', '</p><p>', $article->text);
+		printf("\n<div class='text'><p>%s</p></div>", $text); 
+
+		$responses = new responses();
+		if ( $responses->retrieve($article->type, $article->id) ) {
+			$responses->outputResponses();
+		}
+	?>
+	</div>
+	
+	<?php include('includes/footer.php'); ?>
+	
+</div>
+</body>
+</html>

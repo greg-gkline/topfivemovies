@@ -1,0 +1,201 @@
+.access {
+	position: absolute;
+	visibility: hidden;	
+}
+	
+body {
+	color: white;
+	background-color: #666666;
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	text-align: center;
+	background-image: url(../images/gasmask.gif);
+	background-attachment : fixed;
+	background-position : bottom right;
+	background-repeat : no-repeat;
+	margin: 0;
+	padding: 0;
+}
+
+div#body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+
+div#banner {
+	background-color: #FF9933;
+	padding: 20px 20px 5px 20px;
+	border-bottom: 10px #666666 double;
+}
+
+img#gasmask_banner {
+	position: relative;
+	visibility: visible;
+}
+
+h1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+}
+
+div#quote {
+	color: #666666;
+	font-size: 10px;
+	float: right;
+	width: 200px;
+}
+
+img#title_banner {
+	border: 0;
+}
+
+div#navbar {
+	width: 450px;
+	text-align: center;
+	margin: -1.5em 10px 2em auto;
+	padding: 0;
+	background-color: #FF9933;
+	border: 3px #666666 solid;
+}
+
+div#navbar ul {
+	margin: 10px 0 0 0;
+	padding: 0;
+	display: inline;
+	list-style: none;
+}
+
+div#navbar li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #FF9933;
+}
+
+a:hover {
+	color: #FFFF33;
+	text-decoration: underline;
+}
+
+div#navbar li a {
+	text-transform: lowercase;
+	font-size: 16px;
+	color: white;
+	background-image: none;
+	letter-spacing: -.1em;
+	padding: 5px 15px;
+	font-family: arial, sans-serif;
+}
+
+div#navbar li a:hover {
+	text-decoration: none;
+	color: #666666;
+}
+
+h2 {
+	color: #FF9933;
+	text-transform: lowercase;
+	letter-spacing: .1em;
+	font-size: 13px;
+	margin-left: 50px;
+	/*border-top: 1px #52A300 dashed;*/
+	border-top: 3px #FF9933 solid;
+	border-bottom: 3px #FF9933 solid;
+	width: 200px;
+}
+
+h2#recentadditions {
+	display: block;
+	clear: all;
+}
+
+div#poll {
+	width: 160px;
+	float: right;
+	font-size: 10px;
+	line-height: 1.5em;
+	padding: 0;
+	border-left: 3px #FF9933 solid;
+	margin-right: 25px;
+}
+
+div#poll h2 {
+	margin: 0;
+	padding-left: 5px;
+	width: 160px;
+}
+
+div#polldescription {
+	margin: 5px 0 15px 5px;
+}
+
+div#poll p {
+	margin: 0 0 5px 0;
+}
+
+div#poll input#submit {
+	margin: 20px 60px;
+}
+
+div.review {
+	width: 60%;
+	line-height: 2em;
+	margin-left: 50px;
+}
+
+div.review img {
+	float: right;
+	margin: 10px 0 0 15px;
+}
+
+div.review .starring {
+	line-height: 1.5em;
+	font-style: italic;
+}
+
+div.review p {
+	margin-right: 200px;
+}
+
+div#recent_articles {
+	padding: 0;
+	margin: 0 0 0 50px;
+	float: left;
+	width: 300px;
+}
+
+div#recent_top5 { 
+	float: left;
+	width: 300px;
+	padding: 0;
+	margin: 0 0 0 50px;
+}  
+
+h3 {
+	font-size: 12px;
+}
+
+div#footer {
+	margin: 4em 0 20px 50px;
+	font-size: 8px;
+	text-align: left;
+	clear: all;
+}
+
+div+div#footer {
+	margin-top: 160px;
+}
+
+div#copyright {
+	margin-top: 2em;
+}
+

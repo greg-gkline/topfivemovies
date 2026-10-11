@@ -1,0 +1,65 @@
+<?php
+	include('includes/classes.php');	
+
+	$articles = new articles();
+	$articles->type = 'movie';
+	
+	if ( isset($_GET['order']) )
+		$articles->sortcol = $_GET['order'];
+		
+	$articles->retrieve();
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type"	content="text/html;charset=iso-8859-1" />
+	<meta name="keywords" 			content="top 5, top five, top 5 movies, top five movies, <?php echo $articles->collectKeywords(); ?>" />
+	<meta name="description"		content="" />	
+
+	<title>Top Five Movies -- Reviews</title>
+	
+	<?php include('includes/style.php'); ?>
+</head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="index.html">Top Five Movies</a></h1>
+		<a href="index.html"><span id="bannerimg"></span></a>
+	</div>
+
+	<?php include('includes/navbar.php'); ?>		
+	
+	<h2 class="pageheader">Reviews</h2>
+	
+	<p>Our staff works tirelessly day and night, watching movie after movie, determined to provide you with the best information possible.  Here are the latest fruits of their efforts.</p>
+	<p>Also check out our special coverage of <a href='chickflicks.html'>Chick Flicks</a>.</p>
+
+	<table cellspacing='0' cellpadding='0' border='0'>
+		<tr class="heading">
+			<th class="review_name"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=movie">Movie</a></th>
+			<th class="review_rating"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=rating">Rating</a></th>
+			<th class="review_reviewer"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=author">Reviewer</a></th>
+			<th class="review_date"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=date">Date</a></th>
+		</tr>
+<?php
+		for ( $i = 0; $i < $articles->count; $i++ )
+		{
+			$article = $articles->get($i);
+			printf("<tr class='%s'>\n", ($i % 2 == 0 ? 'even' : 'odd' ));
+			printf("<td class='review_name'><a href='%s'>%s</a></td>\n", $article->getLink(), $article->title);
+			printf("<td class='review_rating'>%01.1f</td>\n", $article->rating);
+			printf("<td class='review_reviewer'>%s</td>\n", $article->author);
+			printf("<td class='review_date'>%s</td>\n</tr>\n", $article->article_date);
+		}
+?>
+	</table>	
+	
+	<?php include('includes/footer.php'); ?>
+	
+</div>
+</body>
+</html>

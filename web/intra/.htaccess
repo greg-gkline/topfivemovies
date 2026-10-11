@@ -1,0 +1,10 @@
+AuthType Basic
+
+AuthName "Top Five Movies Intranet"
+
+AuthUserFile "/home/gklinec/.htpasswds/topfivemovies/intra/passwd"
+
+
+require valid-user
+
+DirectoryIndex respond.html

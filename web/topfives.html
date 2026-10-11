@@ -1,0 +1,61 @@
+<?php
+	include('includes/classes.php');	
+
+	$topfives = new topfives();
+	
+	if ( isset($_GET['order']) )
+		$topfives->sortcol = $_GET['order'];
+		
+	$topfives->retrieve();
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type"	content="text/html;charset=iso-8859-1" />
+	<meta name="keywords" 			content="top 5, top five, top 5 movies, top five movies" />
+	<meta name="description"		content="" />	
+
+	<title>Top Five Movies -- Top Five Lists</title>
+	
+	<?php include('includes/style.php'); ?>
+</head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="index.html">Top Five Movies</a></h1>
+		<a href="index.html"><span id="bannerimg"></span></a>
+	</div>
+
+	<?php include('includes/navbar.php'); ?>		
+	
+	<h2 class="pageheader">Top Five Lists</h2>
+	
+	<p>This is it, Sonny Jim. The best of the best. The cream of the crop. Here is where we separate the wheat from the chaff. Are your favorite movies tough enough to survive our grueling tests? Take a look at how they fared below:</p>
+
+	<table cellspacing='0' cellpadding='0' border='0'>
+		<tr class="heading">
+			<th class="topfive_title"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=title">Title</a></th>
+			<th class="topfive_author"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=author">Author</a></th>
+			<th class="topfive_date"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?order=date">Date</a></th>
+		</tr>
+<?php
+		for ( $i = 0; $i < $topfives->count; $i++ )
+		{
+			$topfive = $topfives->get($i);
+			printf("<tr class='%s'>\n", ($i % 2 == 0 ? 'even' : 'odd' ));
+			printf("<td class='topfive_title'><a href='%s'>%s</a></td>\n", $topfive->getLink(), $topfive->title);
+			printf("<td class='topfive_author'>%s</td>\n", $topfive->author);
+			printf("<td class='topfive_date'>%s</td>\n</tr>\n", $topfive->article_date);
+		}
+?>
+	</table>	
+	
+	<?php include('includes/footer.php'); ?>
+	
+</div>
+</body>
+</html>
