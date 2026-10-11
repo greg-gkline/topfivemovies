@@ -1,0 +1,16 @@
+---
+type: movie
+title: Unbreakable
+author: brian
+date: 2001-07-31
+rating: 8
+release_year: 2000
+starring: Bruce Willis, Samuel L. Jackson, Robin Wright Penn
+caption: Night's 2nd Thriller No Sophomore Jinx
+image: unbreakable.jpg
+image_alt: ''
+---
+
+M. Night Shyamalan created quite a stir in 1999 when he shocked everyone with The Sixth Sense. His follow-up is just as stunning and artsy featuring another strong cast from Willis, Jackson, and Penn. From the onset you'll find that this film reflects the same vibe as Sixth Sense: dark, melancholy, and introspective. Willis' character, David Dunn, is more mysterious and I have come to the conclusion that Willis always plays these confused/down-and-out/enigmatic characters so masterfully.
+
+The basic premise of the movie: as the lone survivor of a train crash, Dunn is forced to consider the possibility that he is indestructible. A modern day comic book hero who is not the product of an imaginative animator, but placed smack dab in the real world. This notion is proposed by Jackson's character, Elijah, who is an expert comic collector with a rare bone disorder. The idea is brilliant and Shyamalan has once again created one of the most original films in recent years. His forward-thinking shot-making, color schemes, plot twists, and characterization make this film a jewel. Real critics have pointed out the slow pace of the movie as a sandbag, but in all honesty the film is short, clocking in under two hours. It is probably the relative lack of action and psychological nature of the film which gives it the perception of dragging. But the build-up and release of pivotal scenes are so worth it in the end. It is an incredible effort all the way around from Shyamalan-- a new 21st century directing talent in the making.

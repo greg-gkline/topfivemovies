@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Quotes",
+  "description": "data/quotes.yaml: the home page quote rotator. Plain text, not markdown; the page adds the quotation marks around `text`.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": [
+      "text",
+      "source"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "text": {
+        "$ref": "defs.json#/$defs/text"
+      },
+      "source": {
+        "$ref": "defs.json#/$defs/text"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+name: content
+
+# Schema, YAML lint and cross-reference checks for content/ and data/.
+# Phase 4 folds this into the full `validate` check alongside the Hugo build.
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "data/**"
+      - "scripts/content/**"
+      - ".yamllint.yaml"
+      - ".github/workflows/content.yml"
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "data/**"
+      - "scripts/content/**"
+      - ".yamllint.yaml"
+      - ".github/workflows/content.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install tools
+        run: pip install check-jsonschema==0.38.2 yamllint==1.37.1 PyYAML==6.0.2
+      - name: Validate
+        run: scripts/content/validate.sh

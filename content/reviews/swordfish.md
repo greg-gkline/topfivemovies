@@ -1,0 +1,40 @@
+---
+type: movie
+title: Swordfish
+author: greg
+date: 2001-06-30
+rating: 8
+release_year: 2001
+starring: John Travolta, Hugh Jackman, Halle Berry
+image: swordfish.jpg
+image_alt: ''
+---
+
+From the producers of *The Matrix* comes *Swordfish*, the thrilling tale of an attempt to hack into and steal a long-forgotten cache of government money.
+John Travolta leads the cast as the just-crazy-enough ringleader of the group, with sidekick Halle Berry, and Hugh Jackman as the convicted hacker who's just looking for
+a way to rescue his daughter from the sinister clutches of his ex-wife and her porn-producing husband.
+
+Travolta fans can rejoice: he has definitely returned from the brink of disaster that he so carelessly flirted with in making *Battlefield: Earth*.
+*Swordfish* isn't perfect, but it's a helluva solid action movie whose opening sequence features what could possibly be the greatest ten seconds
+in the history of cinematography. Picture the 360 degree rotation scenes of *the Matrix*. But instead of encircling a single kung-fu move, the shot
+depicts the effect of a massive explosion on an entire intersection of the city. Absolutely unbelieveable, and literally breathtaking.
+
+As I said, it's not quite perfect. The opening sequence is great for drawing the audience into the movie, but then the film
+jumps back several days in time, and on more than one occasion I felt like my knowledge of the future cheated me out of part
+of the suspense of later scenes. A chronological presentation may have been more effective.
+
+Also, as one who works in the computer industry, I must say I was thoroughly ++un++impressed by the scenes of "hacking" in the movie.
+It consisted mostly of throwing around just enough buzzwords to make the audience think something of substance is being said,
+combined with the rather standard Hollywood depiction of computers as having tricked-out graphic interfaces dedicated to modelling
+the most mundane of tasks (see *Jurassic Park* and *Independence Day*). But then I remind myself that this isn't a computer movie; it's an action movie. Nobody wants to
+sit around watching Hugh Jackman type away at some blinking UNIX prompt, so I suppose I can forgive the glossy veneer.
+And in some ways, the film makes very effective use of Hitchcock's concept of the "McGuffin": a section of the plot that
+remains undescribed because its details are absolutely immaterial to the story (for example, a quest to retrieve secret documents. What's in the documents? Um, I dunno, spy stuff. Who cares?).
+
+The rest of the action scenes aren't quite on par with benchmarks like *Face/Off* or the latest Bond movies, but
+they're very good in their own right and inspire more than a few *"whoa!"* 's. They advance the story extremely well with
+only a spot or two of predictability, but the great thing about this movie is that even when you think you've got it
+figured out, they'll throw one more curveball that you didn't see coming.
+
+Overall, while *Swordfish* isn't as thought-provoking as *the Matrix* nor as beautifully choreographed as *Face/Off*,
+it will nonetheless stand as an extremely solid and unconventional action flick.

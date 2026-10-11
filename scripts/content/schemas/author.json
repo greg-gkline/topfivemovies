@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Author",
+  "description": "Front matter of content/authors/*.md. The bio is the markdown body.",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "$ref": "defs.json#/$defs/text"
+    },
+    "jobtitle": {
+      "$ref": "defs.json#/$defs/text"
+    },
+    "image": {
+      "$ref": "defs.json#/$defs/image"
+    },
+    "image_alt": {
+      "type": "string",
+      "description": "Alt text. Empty marks the picture as decorative."
+    },
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Key/value bio facts, optionally under headings.",
+      "items": {
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "heading": {
+            "$ref": "defs.json#/$defs/text"
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "label",
+                "value"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "label": {
+                  "$ref": "defs.json#/$defs/text"
+                },
+                "value": {
+                  "$ref": "defs.json#/$defs/markdown"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "dependentRequired": {
+    "image": [
+      "image_alt"
+    ],
+    "image_alt": [
+      "image"
+    ]
+  }
+}

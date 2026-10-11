@@ -1,0 +1,55 @@
+---
+title: Hulk Hogan
+subtitle: An Actor With A Place in the World of Film, But I'm Not Sure Where
+author: bruce
+date: 2001-11-28
+image: hogan.jpg
+image_alt: ''
+---
+
+I'm a big fan of professional wrestling. I'm a big fan of film. When
+you cross film into the world of pro wrestling you get quality documentaries
+like *Beyond the Mat* ( 1999 ) or *Brett Hart: Wrestling with Shadows* ( 1998 ).
+
+When you cross pro wrestling into the world of film you get such crap as
+*Ready to Rumble* ( 1999 ) starring David Arquett and a host of bumbling WCW
+wrestlers and *The Mummy Returns* ( 2001 ) starring Dwayne Johnson a.k.a The
+Rock. Who is to blame? None other than Hulk Hogan. Brilliant as a pro
+wrestler but terribly retarded as an actor.
+
+Hulk Hogan began his film career innocently enough as little more than
+an extra in *Rocky III*, portraying a pro wrestler going against Rocky, a
+boxer, in a charity match. Hogan than stretched his acting skills to
+portraying a pro wrestler who wrestled other pro wrestlers in matches where
+he got paid in the major motion picture *No Holds Barred* ( 1989 ). *No Holds
+Barred* lasted at the box office no longer than a Ernest P. Worrell film
+festival at the Apollo. Most common people would chalk up this failure as a
+learning experice and continue doing what they do best in life. Not Hogan,
+he would further violate the world with his offensive acting skills. Enter
+*Suburban Commando*.
+
+So here's the premise, an alien bounty hunter lands in middle class
+America in search of an evil alien who wants to take over Earth. Sounds good
+so far? You've thought too quick, the bounty hunter, played by Hogan,
+befriends the family and hilarity is allegedly to ensue, but it never does.
+
+Hogan basically repeats the same joke over and over again: he doesn't know
+his own strength and something that's not suppose to get broken, gets
+broken. Car doors, front doors, neighborhood dog's legs it was all the same
+joke. Afterwards Hogan always has the same dumb look on his face as if he
+just got kicked in the balls. Yet again, a terrible, terrible film. Normal
+people would be discouraged, but then again, pro wrestlers aren't normal
+people.
+
+Since *Suburban Commando*, Hogan has defiled the world several times with
+such films as *Mr. Nanny* ( 1993 ), *3 Ninjas* ( 1995 ) and the worst film ever made
+([according to me]({{< relref "top5/top-5-worst-christmas-movies-of-all-time.md" >}})), *Santa With Muscles* ( 1996 ).
+
+So where does Hulk Hogan belong in the world of film? No where!
+Not any place! He shouldn't be in films as an actor, producer or director,
+he shouldn't even be allowed to have a video rental membership for fear that
+he might contaminate good films with his mere pressance. Words can not
+depict how terrible an actor Hogan is, only nightmares of children who have
+lived through a holocaust can. As human beings it is our duty to buy faster cars so we can drive to
+church quicker to pray that God will never let Hulk Hogan make another movie
+again.

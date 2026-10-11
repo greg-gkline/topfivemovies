@@ -1,0 +1,19 @@
+---
+type: movie
+title: Rock Star
+author: greg
+date: 2001-09-22
+rating: 7
+release_year: 2001
+starring: Marky-Mark Wahlberg, Jennifer Aniston, various actual rock stars
+image: rockstar.jpg
+image_alt: ''
+---
+
+*Rock Star* brings us Marky-Mark Wahlberg as Chris Cole, an 80's high-school grad who fronts a tribute band for the fictional group, "Steel Dragon". Cole's insistence on taking the songs too seriously soon leads to his ejection from his own band. But wonder of wonders, he suddenly gets a call from Steel Dragon's guitarist who's looking to replace their band's singer. Cole is quickly snapped up in his dream come true, only to find that it's not all it's cracked up to be.
+
+And that's where it gets predictable as hell. Did any of us really expect him to live happily ever after? Nope. This movie is one of those films that looks like a nice, juicy steak on the outside, but when you bite into it, you find sugar and spice and all the other elements of a typical chick-flick. There are some very mild rockstar-type orgy scenes that are only there to keep the men interested, while the director is really advancing his insidious relationship-oriented themes. In fact, the sudden discovery of a male "member" in a place you wouldn't expect (thankfully it's not seen, only implied) will change your perspective on earlier scenes and cement the fact that your girl will take more home from this flick than you will.
+
+As the movie progresses, we also are subjected to a number of "recurring themes" that besides being easily forseen, left me expecting Elton John to suddenly burst onto the screen singing "The Circle of Life". Throughout the film, I couldn't get over the whole "it's all been done" feeling. You're not going to find any new insight into the rock 'n roll lifestyle here. *Rock Star* should have been made five years ago, before we all burned out on "Behind the Music" stories.
+
+But like *Planet of the Apes*, Marky-Mark's got one last rabbit in his hat, and the wry "poetic justice" ending of *Rock Star* almost makes up for the other shortcomings in the movie. Again, the basics of the finale aren't particularly surprising, but there's a little twist in the details and circumstances that when you think about it, is pretty clever. So I've gotta give some props there, but it's still only enough to raise this film's rating by about half a point. So that computes to a 7.0 for gratuitous mascara and nipple piercing.

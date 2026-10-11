@@ -51,7 +51,7 @@ content/*.yaml, data/*.yaml
 ## Proposed repo layout
 
 ```
-content/reviews/0012-the-hurricane.md   # YAML front matter + markdown body
+content/reviews/the-hurricane.md         # YAML front matter + markdown body
 content/{top5,other,chickflicks,authors}/…
 content/images/rev_hurricane.jpg        # content images, a peer of the sections above
 data/{quotes,responses,polls}.yaml
@@ -75,23 +75,26 @@ legacy/sql/       # original SQL dumps, loaded by the devcontainer; archived at 
 
 ## Phase 1: Content migration (DB to YAML)
 
-- [ ] Write a re-runnable exporter that reads the devcontainer DB or the SQL dumps and writes one YAML file per article, top-five list and author. It runs in the devcontainer (Python or PHP, no Node).
-- [ ] Per-type fields:
+Done. The tooling and every decision made during the export are documented in `scripts/export/README.md`.
+
+- [x] Write a re-runnable exporter that reads the devcontainer DB or the SQL dumps and writes one YAML file per article, top-five list and author. It runs in the devcontainer (Python or PHP, no Node). `scripts/export/export.py` parses the SQL dumps directly, and its output is byte-identical between runs.
+- [x] Per-type fields:
   - Review and DVD: `type, title, author, date, rating, release_year, starring, caption, image, image_alt`, with the review text as the markdown body.
   - Top five: `title, author, date, image, image_alt, items[5]`, with the intro as the markdown body.
   - Author: `name, jobtitle, image, bio` (markdown or structured fields).
-- [ ] Clean data in the exporter:
+  - As built: the author's bio is the markdown body. Items keep `subtitle` and `caption` where the legacy data has them, plus `image_full`, and `image_width/height` for the 3 pictures that displayed scaled. Top-five items are `{title, film, text}`, with `honorable_mentions` after them.
+- [x] Clean data in the exporter:
   - latin1 to UTF-8, with a check for mojibake.
   - `<P>` and raw HTML to markdown.
   - Decode entities such as `&quot;`.
   - Extract `<img>` attributes into structured image fields.
   - Convert the table-based bios (Matt, Brian) to markdown or key/value data.
   - Mark `QA=0` rows as `draft: true`.
-- [ ] Separate content images from theme images (see Image organization below), and have the exporter move each content image into `content/images/`.
-- [ ] Export `Response` and `poll` rows to `data/*.yaml`.
-- [ ] Build `data/quotes.yaml` from **both** quote sources (see Quotes below).
-- [ ] Add a JSON Schema per content type and validate in CI with `check-jsonschema` and `yamllint`.
-- [ ] Spot-check the export against the legacy pages, with `diff`-style review.
+- [x] Separate content images from theme images (see Image organization below), and have the exporter move each content image into `content/images/`. They are copied, not moved, so the legacy devcontainer site keeps working until `web/` is deleted in Phase 7.
+- [x] Export `Response` and `poll` rows to `data/*.yaml`. Response 19 is not exported: its top-five list was deleted before the dump, so it never rendered. That leaves 59 responses.
+- [x] Build `data/quotes.yaml` from **both** quote sources (see Quotes below).
+- [x] Add a JSON Schema per content type and validate in CI with `check-jsonschema` and `yamllint`. The schemas are in `scripts/content/schemas/`. `scripts/content/validate.sh` also checks author, item, relref and image references, and runs as the `content` workflow.
+- [x] Spot-check the export against the legacy pages, with `diff`-style review. `scripts/export/spotcheck.py` renders the export with Hugo and diffs 1,478 fields against `baseline/html/`, with no differences.
 
 ### Image organization
 
@@ -101,7 +104,7 @@ legacy/sql/       # original SQL dumps, loaded by the devcontainer; archived at 
 - **~21 theme images** referenced from CSS, templates and RSS. These move to `assets/` and are used only by templates.
 - **4 referenced from both** (`brian`, `greg`, `matt`, `nick`.jpg), which are author photos also hard-coded in code. They become content images in `content/images/`, and templates reference them through the author's front matter.
 - **~67 unreferenced.** They are mostly old "beige" theme sidebars, the splash page pieces, and `test.gif`. Before deleting, confirm they are not used by the two themes we port. Do not trust the scan alone, since image paths can be built dynamically in code.
-- **1 reference to a missing file** (`maroon_lines.jpg`) to resolve while porting.
+- **1 reference to a missing file** (`maroon_lines.jpg`) to resolve while porting. Resolved: only `sepia.css` uses it, and that theme is not ported.
 - `lockgray.gif` is only used by the intranet link and goes away with it.
 
 Rules the exporter enforces and CI checks:
@@ -119,7 +122,7 @@ Content pages are `.md` files. Each starts with **front matter**: a block of str
 ---
 type: movie
 title: The Hurricane
-author: Jesse
+author: jesse
 date: 2000-10-01
 rating: 5
 release_year: 1999
@@ -138,9 +141,10 @@ of crimes throughout his childhood...
 
 An item's address comes from its filename, so `content/reviews/the-hurricane.md` is published as `/reviews/the-hurricane.html`.
 
-- **Filenames:** lowercase slugs of the title, with a year or number suffix when two titles collide. CI fails on duplicates.
+- **Filenames:** lowercase slugs of the title. When titles collide, every colliding item gets its author appended (`american-pie-2-brian.md`, `american-pie-2-bruce.md`), with a number only if one author reuses a title. CI fails on duplicates.
 - **Ordering and navigation:** the previous/next links, "recent additions" and the featured story are driven by `date` (and filename as a tiebreaker), not by numeric ID. The old `id-1` and `id+1` logic is not carried over.
 - **Links between items:** content links to other items by file path (`{{< relref "reviews/the-hurricane.md" >}}`), so Hugo checks them at build time, and a renamed or deleted file fails the build instead of leaving a dead link.
+- **Authors:** items name their author by filename (`author: jesse` is `content/authors/jesse.md`).
 - **Responses:** each legacy response is attached to its item by the item's filename (`item: reviews/the-hurricane`) in `data/responses.yaml`, not by numeric ID.
 - The exporter uses the old numeric ID only during migration, to map responses to items and to name the files. It is not stored anywhere in the new site.
 
@@ -153,8 +157,8 @@ Today there are two separate quote sources, and they disagree:
 
 So the rotator already works without the database. The work is to put the quotes in one place as data and keep the behavior:
 
-- [ ] Merge both sources into `data/quotes.yaml`, de-duplicated, with fields `text` and `source` (movie). Review the differences once in a PR. The merge decides what the live set is.
-- [ ] Quotes with inline HTML (such as `<i>`) become markdown or plain text.
+- [x] Merge both sources into `data/quotes.yaml`, de-duplicated, with fields `text` and `source` (movie). Review the differences once in a PR. The merge decides what the live set is. The table turned out to be a subset of `quotes.js`. The six rows worded differently are listed in `scripts/export/README.md`, and `quotes.js` wins in each case.
+- [x] Quotes with inline HTML (such as `<i>`) become markdown or plain text. They are plain text, since the rotator inserts them with `textContent`.
 - [ ] At build time, Hugo emits the list as JSON (`quotes.json`, or inlined in the page, which is about 10 KB).
 - [ ] Rewrite the rotator as a small ES module with the same behavior: random order with no repeats until all are shown, a new quote every 20 seconds, text inserted with `textContent`. Fix the old issues while doing so: the inline `setTimeout` string, the global variables, and the repeat-check bug in `getRandom`. Pause rotation when the tab is hidden and when the user prefers reduced motion.
 - [ ] No-JavaScript fallback: the page is built with one quote already in `#quote`, so it is never empty. Hugo picks it deterministically per build.
@@ -162,7 +166,7 @@ So the rotator already works without the database. The work is to put the quotes
 
 ## Phase 2: Hugo site and templates
 
-- [ ] Scaffold Hugo and the layouts for `review`, `dvd`, `top5`, `other`, `chickflick`, `author` and `about`.
+- [ ] Scaffold Hugo and the layouts for `review`, `dvd`, `top5`, `other`, `chickflick`, `author` and `about`. Goldmark settings the content depends on are listed under "Notes for Phase 2" in `scripts/export/README.md`.
 - [ ] Build the index pages: reviews, top fives, others, chickflicks, author bios, quickstart and group bio. Add the "recent additions" partial.
 - [ ] Build the home page as its own layout. The featured story is chosen deterministically at build time, replacing the old "older than 2 weeks, so pick random" logic.
 - [ ] Generate prev/next links, excerpts, keywords and meta descriptions at build time.

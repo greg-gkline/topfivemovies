@@ -1,0 +1,30 @@
+---
+name: Jesse
+jobtitle: Contributing writer
+image: jesse.jpg
+image_alt: Jesse
+---
+
+Please allow me to introduce myself,
+I'm a man of wealth and taste...
+
+I'm also a man who writes reviews and commentaries and, i believe, writes
+them pretty well.
+
+I'm a man who enjoys the simpler things in life: BMW's, fine wine, fine
+women, good lovin'.
+
+When I'm not living the life I love (and loving the life I live), I'm
+donating my time and monetary resources to various research funds in an
+effort to make man's existance more pleasant and managable.
+
+When I'm not funding said research projects, I moonlight as an exotic
+dancer at a dance club called "Mr. Bojangle's". (Rest assured, it is a
+*straight* establishment.) Many a lady has known the pleasure of
+seeing my sculpted body shimmy and shake in front of them.
+
+Finally, when time permits, I watch movies and review them for
+TopFiveMovies.com. However, you ladies should know that often times when
+I'm writing, I'm only wearing a smile...
+
+Until the next time we meet, enjoy what you read and read what you enjoy...

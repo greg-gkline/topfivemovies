@@ -1,0 +1,47 @@
+---
+title: Jim Carrey
+subtitle: An Actor with a Place in the World of Film, But I'm Not Sure Where
+author: bruce
+date: 2002-04-11
+image: carrey.jpg
+image_alt: ''
+---
+
+Jim Carrey is probably the worst marketed actor of all time. Films in
+which he is supposed to be serious get billed as comedies and then flop.
+Films that are meant to be family comedies or dark comedies are billed as
+the average run-of-the-mill comedy, get lots of hype, then flop. It's only
+when Carrey gets no press that he does well.
+
+Jim Carrey's history is well known. He grew up poor in Toronto, sent
+his resume into The Carol Burnett Show at age 10, had a series of miserable
+failures but paid his dues to be a star. What I find remarkable enough is
+that, to steal a line from Cracker, is that he was better when no one knew
+his name and he was pompous. Carrey's early stuff is great.
+
+*Earth Girls are Easy* (1989), *Once Bitten* (1985), *All in Good
+Taste* (1983), and *Ace Ventura: Pet Detective* (1994) are all very funny.
+Carrey isn't over the top in these films like he was in *Liar, Liar* (1997),
+nor did he try to do too much like in *The Truman Show* (1998).
+
+Carrey is also best when the attention isn't all upon him. In Living
+Colour was great because it was a variety show, Carrey got his time and was
+very funny. *The Cable Guy* (1996) was a great dark comedy because it
+wasn't about him, it was about Matthew Broderick's character. In that
+regards that's why *Dumb and Dumber* (1994) was great while *Me, Myself and
+Irene* (1999) blew.
+
+What about Carrey as a serious actor? I believe he can do it. I
+thought he was great in *Man on the Moon* (2000) but I never really liked
+Andy Kaufman. *The Truman Show* sucked because Carrey tried too hard to win
+the Oscar.
+
+Jim Carrey's place in the world of film? He's not a legend, sorry to
+say, not now at least. He's not Buster Keaton or The Three Stooges. He
+needs to focus on one thing. He's either a comedian or a serious actor.
+Tom Hanks pulled it off because Tom Hanks never put himself in the box of
+comedian, but yet he made some very funny movies.
+
+Will there ever be a movie based on Carrey's life like the one based
+on Kaufman? I think so. Give it twenty years after he dies. I think it
+would be a very good film about a guy no one quite understood.

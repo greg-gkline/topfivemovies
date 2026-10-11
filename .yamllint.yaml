@@ -1,0 +1,8 @@
+# yamllint config for data/*.yaml and the front matter of content pages.
+extends: default
+
+rules:
+  document-start: disable    # front matter is fenced by the page, data files start with a comment
+  line-length: disable       # prose fields are one line per value
+  truthy:
+    check-keys: false

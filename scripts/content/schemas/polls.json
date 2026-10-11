@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polls",
+  "description": "data/polls.yaml: read-only poll archive with final results, oldest first.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "date",
+      "question",
+      "options"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "date": {
+        "$ref": "defs.json#/$defs/date"
+      },
+      "question": {
+        "$ref": "defs.json#/$defs/markdown"
+      },
+      "options": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "required": [
+            "text",
+            "votes"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "$ref": "defs.json#/$defs/markdown"
+            },
+            "votes": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    }
+  }
+}
