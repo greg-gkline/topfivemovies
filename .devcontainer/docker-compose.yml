@@ -1,0 +1,35 @@
+services:
+  # VS Code attaches here. It must be a modern image: the PHP 5.6 image is too old
+  # (glibc) to run the VS Code server.
+  dev:
+    image: mcr.microsoft.com/devcontainers/base:debian
+    command: sleep infinity
+    # share web's network so Apache is on localhost:80 for port forwarding
+    network_mode: service:web
+    volumes:
+      - ..:/workspaces/topfivemovies:cached
+    depends_on:
+      - web
+
+  web:
+    build: .
+    volumes:
+      - ..:/workspaces/topfivemovies:cached
+    environment:
+      DB_HOST: db
+      DB_ROOT_PASSWORD: devroot
+    depends_on:
+      - db
+
+  db:
+    # No official PHP 4 image exists and MySQL 5.2 was never released; 5.5 is the oldest
+    # release that can load the utf8mb4 dumps in data/ unmodified. The image is amd64-only.
+    image: mysql:5.5
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: devroot
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
