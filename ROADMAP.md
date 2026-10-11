@@ -16,7 +16,8 @@ Move `www.topfivemovies.com` from a PHP 5 / MySQL site to a static site: content
 | Topic | Decision |
 |---|---|
 | Generator | Hugo (single Go binary, no Node). YAML data, Goldmark markdown, one layout per content type. |
-| URLs | Keep the legacy scheme (`topfive_N.html`, `review_N.html`, `other_N.html`, `about_N.html`, `chickflick_N.html`, `index.xml`), so no redirect layer is needed. |
+| URLs | Legacy URLs (`review_N.html`, `topfive_N.html` and so on) are not preserved, since the site has been offline for years. Every item's address follows its filename, with no redirects. |
+| Item identity | The filename is the identity (`the-hurricane.md`). There is no `id` field. |
 | Poll | Read-only archive page. No voting, no cookies. |
 | Comments | Read-only legacy. The 60 existing responses render statically. There is no way to add new ones. |
 | Intranet | `intra/` is fully retired and removed, including basic auth. |
@@ -50,10 +51,12 @@ content/*.yaml, data/*.yaml
 ## Proposed repo layout
 
 ```
-content/{reviews,top5,other,authors}/*.yaml
+content/reviews/0012-the-hurricane.md   # YAML front matter + markdown body
+content/{top5,other,chickflicks,authors}/…
+content/images/rev_hurricane.jpg        # content images, a peer of the sections above
 data/{quotes,responses,polls}.yaml
 layouts/          # Hugo templates, one per content type, plus home
-assets/           # CSS (elegant_inner port, elegant port), images
+assets/           # theme only: CSS (elegant_inner port, elegant port), decorative images, quote script
 static/
 infra/            # Terraform
 scripts/          # exporter, parity and screenshot tooling
@@ -73,8 +76,8 @@ scripts/          # exporter, parity and screenshot tooling
 
 - [ ] Write a re-runnable exporter that reads the devcontainer DB or the SQL dumps and writes one YAML file per article, top-five list and author. It runs in the devcontainer (Python or PHP, no Node).
 - [ ] Per-type fields:
-  - Review and DVD: `id, type, title, author, date, rating, release_year, starring, caption, image {src, alt, width, height}, body` (markdown).
-  - Top five: `id, title, author, date, image, intro` (markdown), `items[5]`.
+  - Review and DVD: `type, title, author, date, rating, release_year, starring, caption, image, image_alt`, with the review text as the markdown body.
+  - Top five: `title, author, date, image, image_alt, items[5]`, with the intro as the markdown body.
   - Author: `name, jobtitle, image, bio` (markdown or structured fields).
 - [ ] Clean data in the exporter:
   - latin1 to UTF-8, with a check for mojibake.
@@ -83,9 +86,78 @@ scripts/          # exporter, parity and screenshot tooling
   - Extract `<img>` attributes into structured image fields.
   - Convert the table-based bios (Matt, Brian) to markdown or key/value data.
   - Mark `QA=0` rows as `draft: true`.
-- [ ] Export `Quote`, `Response` and `poll` rows to `data/*.yaml`.
+- [ ] Separate content images from theme images (see Image organization below), and have the exporter move each content image into `content/images/`.
+- [ ] Export `Response` and `poll` rows to `data/*.yaml`.
+- [ ] Build `data/quotes.yaml` from **both** quote sources (see Quotes below).
 - [ ] Add a JSON Schema per content type and validate in CI with `check-jsonschema` and `yamllint`.
 - [ ] Spot-check the export against the legacy pages, with `diff`-style review.
+
+### Image organization
+
+`web/images/` mixes theme images and content images (218 files). Scanning the SQL dumps and the code gives roughly:
+
+- **~134 content images**, referenced from article, top-five and author rows. All move to a single flat `content/images/` folder, a peer of `reviews`, `top5`, `authors` and the other sections, so a PR for a new review adds the `.md` file and its picture under `content/`. Author photos go there too.
+- **~21 theme images** referenced from CSS, templates and RSS. These move to `assets/` and are used only by templates.
+- **4 referenced from both** (`brian`, `greg`, `matt`, `nick`.jpg), which are author photos also hard-coded in code. They become content images in `content/images/`, and templates reference them through the author's front matter.
+- **~67 unreferenced.** They are mostly old "beige" theme sidebars, the splash page pieces, and `test.gif`. Before deleting, confirm they are not used by the two themes we port. Do not trust the scan alone, since image paths can be built dynamically in code.
+- **1 reference to a missing file** (`maroon_lines.jpg`) to resolve while porting.
+- `lockgray.gif` is only used by the intranet link and goes away with it.
+
+Rules the exporter enforces and CI checks:
+- Front matter references images by filename (`image: rev_hurricane.jpg`), never by site path.
+- Filenames in `content/images/` are unique by construction, since the folder is flat. The exporter fails on any collision.
+- CI fails on any content image reference that does not resolve, and on any file in `content/images/` that nothing references.
+- Hugo only publishes non-markdown files in `content/` when they belong to a page bundle, and a flat images folder is not one. So `hugo.yaml` mounts `content/images` into Hugo's asset pipeline (`module.mounts`), and templates load images with `resources.Get`. Hugo then resizes and converts them at build time, so the WebP/AVIF, sizes and `width/height` in Phase 3 come from the originals, with no manual conversion step.
+- Only the images that templates request are published, so unused originals add nothing to the output.
+
+### What a content file looks like
+
+Content pages are `.md` files. Each starts with **front matter**: a block of structured YAML fenced by `---` lines that holds the item's fields. The markdown body follows and is converted to HTML by Hugo. Example, `content/reviews/the-hurricane.md`, migrated from the `Article` row for *The Hurricane*:
+
+```markdown
+---
+type: movie
+title: The Hurricane
+author: Jesse
+date: 2000-10-01
+rating: 5
+release_year: 1999
+starring: Denzel Washington
+image: rev_hurricane.jpg
+image_alt: Denzel Washington as Rubin "Hurricane" Carter
+---
+
+The Hurricane follows the true-life story of champion boxer Rubin "Hurricane"
+Carter's wrongful conviction for murder and subsequent jail-cell efforts to
+clear his own name.
+
+The story itself is very compelling. A crooked cop frames Carter for a series
+of crimes throughout his childhood...
+```
+
+An item's address comes from its filename, so `content/reviews/the-hurricane.md` is published as `/reviews/the-hurricane.html`.
+
+- **Filenames:** lowercase slugs of the title, with a year or number suffix when two titles collide. CI fails on duplicates.
+- **Ordering and navigation:** the previous/next links, "recent additions" and the featured story are driven by `date` (and filename as a tiebreaker), not by numeric ID. The old `id-1` and `id+1` logic is not carried over.
+- **Links between items:** content links to other items by file path (`{{< relref "reviews/the-hurricane.md" >}}`), so Hugo checks them at build time, and a renamed or deleted file fails the build instead of leaving a dead link.
+- **Responses:** each legacy response is attached to its item by the item's filename (`item: reviews/the-hurricane`) in `data/responses.yaml`, not by numeric ID.
+- The exporter uses the old numeric ID only during migration, to map responses to items and to name the files. It is not stored anywhere in the new site.
+
+### Quotes
+
+Today there are two separate quote sources, and they disagree:
+
+- The rotator on the home page (`includes/quotes.js`) is a **hard-coded array of 111 quotes** that picks one at random every 20 seconds. It does not touch the database.
+- The `Quote` table has 106 rows, read only by `includes/quote.php`, which nothing includes. That path is dead code.
+
+So the rotator already works without the database. The work is to put the quotes in one place as data and keep the behavior:
+
+- [ ] Merge both sources into `data/quotes.yaml`, de-duplicated, with fields `text` and `source` (movie). Review the differences once in a PR. The merge decides what the live set is.
+- [ ] Quotes with inline HTML (such as `<i>`) become markdown or plain text.
+- [ ] At build time, Hugo emits the list as JSON (`quotes.json`, or inlined in the page, which is about 10 KB).
+- [ ] Rewrite the rotator as a small ES module with the same behavior: random order with no repeats until all are shown, a new quote every 20 seconds, text inserted with `textContent`. Fix the old issues while doing so: the inline `setTimeout` string, the global variables, and the repeat-check bug in `getRandom`. Pause rotation when the tab is hidden and when the user prefers reduced motion.
+- [ ] No-JavaScript fallback: the page is built with one quote already in `#quote`, so it is never empty. Hugo picks it deterministically per build.
+- [ ] Remove `quote.php`, `quotes.js` and the `Quote` table with the PHP code in cleanup.
 
 ## Phase 2: Hugo site and templates
 
@@ -93,9 +165,9 @@ scripts/          # exporter, parity and screenshot tooling
 - [ ] Build the index pages: reviews, top fives, others, chickflicks, author bios, quickstart and group bio. Add the "recent additions" partial.
 - [ ] Build the home page as its own layout. The featured story is chosen deterministically at build time, replacing the old "older than 2 weeks, so pick random" logic.
 - [ ] Generate prev/next links, excerpts, keywords and meta descriptions at build time.
-- [ ] Output legacy filenames, `index.xml` (RSS), a sitemap, `robots.txt` and canonical URLs.
+- [ ] Output filename-based `.html` addresses, an RSS feed, a sitemap, `robots.txt` and canonical URLs.
 - [ ] Replace the request-time features:
-  - Random quote: a small script reading a build-emitted `quotes.json`.
+  - Quote rotator: see Quotes below.
   - Search: dropped. Remove `response_search.php3` and any links to it.
   - Comments: rendered statically from `data/responses.yaml` under each item.
   - Poll: archive page rendered from `data/polls.yaml`, showing final results.
