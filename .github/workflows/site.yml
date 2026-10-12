@@ -4,6 +4,9 @@ name: site
 # HTML validation, accessibility and internal links (scripts/quality/check.sh), and
 # Lighthouse CI budgets (scripts/quality/lighthouserc.json). Phase 4 folds these into
 # the full `validate` check.
+# The gates run only when the design or the checks change (DESIGN_PATHS below), not
+# for content alone. They are skipped jobs rather than a path filter on the workflow,
+# so they still report a status that a required check can rely on.
 # The parity diff (scripts/parity/) is not run here: it compares with the legacy
 # site, so it is run by hand during the cutover, not on every change.
 on:
@@ -16,6 +19,9 @@ permissions:
 
 env:
   HUGO_VERSION: 0.147.9   # also pinned in .devcontainer/devcontainer.json
+  # Templates, styles, scripts and theme images, the site configuration, and the
+  # checks themselves
+  DESIGN_PATHS: assets layouts static hugo.yaml scripts/quality .github/workflows/site.yml
 
 jobs:
   build:
@@ -35,10 +41,34 @@ jobs:
           path: public/
           retention-days: 7
 
+  # Whether anything under DESIGN_PATHS changed: in the pull request, or in the push.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      design: ${{ steps.diff.outputs.design }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: diff
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          # A push with no usable base (a new branch, a force push) counts as a change.
+          if git cat-file -e "$BASE^{commit}" 2>/dev/null \
+              && git diff --quiet "$BASE" HEAD -- $DESIGN_PATHS; then
+            echo "design=false" >> "$GITHUB_OUTPUT"
+            echo "No design or check changes: skipping the quality gates."
+          else
+            echo "design=true" >> "$GITHUB_OUTPUT"
+            git diff --stat "$BASE" HEAD -- $DESIGN_PATHS 2>/dev/null || true
+          fi
+
   # HTML validation (vnu, on the runner's Java), axe on every page (the runner's Chrome)
   # and the internal link check. The tools are pinned and checksummed in tools.sh.
   quality:
-    needs: build
+    needs: [build, changes]
+    if: needs.changes.outputs.design == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -55,7 +85,8 @@ jobs:
         run: NO_BUILD=1 scripts/quality/check.sh html a11y links
 
   lighthouse:
-    needs: build
+    needs: [build, changes]
+    if: needs.changes.outputs.design == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
