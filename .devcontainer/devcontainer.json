@@ -4,19 +4,36 @@
 	"service": "dev",
 	"workspaceFolder": "/workspaces/topfivemovies",
 	"forwardPorts": [80],
+	// Phases 4-6: Terraform and tflint (infra/), the AWS CLI (s3 sync, CloudFront invalidation,
+	// debugging the deploy role) and the GitHub CLI (PR checks, secrets, branch protection).
+	"features": {
+		"ghcr.io/devcontainers/features/terraform:1": { "version": "latest", "tflint": "latest" },
+		"ghcr.io/devcontainers/features/aws-cli:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
 	// Baseline tooling (scripts/baseline): crawler, headless Chromium for screenshots,
 	// the DB client for seeding the crawl, and the site's first-choice font.
 	// Export and content checks (scripts/export, scripts/content): PyYAML, Pillow, html5lib,
 	// yamllint and check-jsonschema.
 	// Hugo extended, pinned to HUGO_VERSION in .github/workflows/site.yml (Debian's is too old).
 	// Quality gates (scripts/quality): Java for the HTML checker; tools.sh fetches the rest.
-	"postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-bs4 python3-lxml python3-selenium chromium chromium-driver default-mysql-client fonts-dejavu fonts-liberation ttf-bitstream-vera python3-yaml python3-pil python3-html5lib yamllint pipx default-jre-headless && curl -fsSL -o /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install check-jsonschema==0.38.2",
+		// PR pipeline and infra checks (Phases 4-5), via pipx: typos (spelling), checkov (Terraform
+		// security scan) and actionlint-py (lints .github/workflows). Pin them once the workflows do.
+	"postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-bs4 python3-lxml python3-selenium chromium chromium-driver default-mysql-client fonts-dejavu fonts-liberation ttf-bitstream-vera python3-yaml python3-pil python3-html5lib yamllint pipx default-jre-headless && curl -fsSL -o /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install check-jsonschema==0.38.2 && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install typos && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install checkov && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install actionlint-py",
 	"portsAttributes": {
 		"80": { "label": "Top Five Movies" }
 	},
 	"customizations": {
 		"vscode": {
-			"extensions": ["bmewburn.vscode-intelephense-client", "anthropic.claude-code"]
+			"extensions": [
+				"bmewburn.vscode-intelephense-client",
+				"anthropic.claude-code",
+				"hashicorp.terraform",
+				"redhat.vscode-yaml",
+				"budparr.language-hugo-vscode",
+				"tekumara.typos-vscode",
+				"github.vscode-github-actions"
+			]
 		}
 	}
 }
