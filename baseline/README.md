@@ -2,6 +2,8 @@
 
 A snapshot of the PHP site as served by the devcontainer, captured 2026-10-11. Later phases compare against it: the Phase 2 parity diff uses `text/`, and the Phase 3 visual comparison uses `screenshots/`.
 
+The PHP site and its devcontainer were removed from `main` at the Phase 7 cutover and are kept at the `0.0.2` tag. `scripts/baseline/crawl.py` and `screenshots.py` need that site running on localhost:80, so they only work from a checkout of the tag (`screenshots.py`'s page list is still imported by `scripts/visual/compare.py`).
+
 Treat these files as read-only reference. Regenerate them only if the legacy site or its data changes.
 
 ## Contents

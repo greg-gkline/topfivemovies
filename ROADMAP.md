@@ -163,7 +163,7 @@ So the rotator already works without the database. The work is to put the quotes
 - [x] At build time, Hugo emits the list as JSON (`quotes.json`, or inlined in the page, which is about 10 KB). Inlined in the home page.
 - [x] Rewrite the rotator as a small ES module with the same behavior: random order with no repeats until all are shown, a new quote every 20 seconds, text inserted with `textContent`. Fix the old issues while doing so: the inline `setTimeout` string, the global variables, and the repeat-check bug in `getRandom`. Pause rotation when the tab is hidden and when the user prefers reduced motion.
 - [x] No-JavaScript fallback: the page is built with one quote already in `#quote`, so it is never empty. Hugo picks it deterministically per build.
-- [ ] Remove `quote.php`, `quotes.js` and the `Quote` table with the PHP code in cleanup.
+- [x] Remove `quote.php`, `quotes.js` and the `Quote` table with the PHP code in cleanup. `web/` is gone (tag `0.0.2`), and the dumps stay in `legacy/sql/`.
 
 ## Phase 2: Hugo site and templates
 
@@ -253,21 +253,21 @@ The current zone has no records beyond the registrar's domain parking, so there 
 - [x] Disable parking at the registrar when switching the nameservers, if it does not release automatically.
 
 **Verify**
-- [ ] Query the new Route 53 nameservers directly and confirm `www` and the apex resolve to CloudFront: `dig @<aws-ns> www.topfivemovies.com`.
+- [x] Query the new Route 53 nameservers directly and confirm `www` and the apex resolve to CloudFront: `dig @<aws-ns> www.topfivemovies.com`.
 - [x] Verify the site on the `*.cloudfront.net` address (`terraform output distribution_domain`): parity diff, screenshots, link check.
 - [x] Lower TTLs at the registrar a day or two before the switch, if the registrar allows it.
 
 **Switch**
 - [x] At the registrar, replace the nameservers with the four Route 53 nameservers (`terraform output name_servers`).
-- [ ] When the Route 53 servers answer for the domain, set `enable_custom_domain = true` in `infra/terraform.tfvars` and apply: Terraform requests the certificate, validates it through the zone, and attaches the domain to CloudFront.
+- [x] When the Route 53 servers answer for the domain, set `enable_custom_domain = true` in `infra/terraform.tfvars` and apply: Terraform requests the certificate, validates it through the zone, and attaches the domain to CloudFront.
 - [ ] Monitor the site and 404s. Propagation can take up to about 48 hours. Visitors on the old nameservers briefly see the parking page.
 - [ ] **Rollback:** switch the nameservers back to the registrar's.
 
 **Cleanup**
 - [ ] Raise TTLs again once stable.
 - [ ] Retire the PHP host and MySQL, and archive the SQL dumps.
-- [ ] Delete `web/`, `intra/`, the PHP includes and the devcontainer from `main`, keeping them reachable through a git tag.
-- [ ] Write the contributor docs: how to add a review, a top-five list or an author by PR, with a content template for each type.
+- [x] Delete `web/` (which held `intra/` and the PHP includes) and the devcontainer's PHP/MySQL stack from `main`, keeping them reachable through the `0.0.2` tag. The devcontainer itself stays, reduced to the Hugo and checking tools, since the codespace is where changes are tried. `scripts/export` and `scripts/baseline` need the tag now (see their READMEs).
+- [x] Write the contributor docs: `CONTRIBUTING.md`, a click-by-click guide that works entirely in the GitHub UI. Creating a branch named `review-<title>`, `dvd-`, `chickflick-`, `top5-`, `other-` or `author-` runs `new-content.yml`, which commits the starting file from `scripts/new-content/templates/`. The contributor edits it in the UI and opens the PR, so the usual checks run (a workflow cannot open the PR itself without a bot token, since PRs made with `GITHUB_TOKEN` do not trigger other workflows).
 
 ---
 

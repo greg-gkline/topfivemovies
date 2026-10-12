@@ -1,0 +1,69 @@
+name: new-content
+
+# Creating a branch named review-<title>, dvd-<title>, chickflick-<title>, top5-<title>,
+# other-<title> or author-<name> adds the starting file for that item to the branch
+# (scripts/new-content/). The contributor then edits it in the GitHub UI and opens the pull
+# request, where the usual checks run. Guide: CONTRIBUTING.md.
+#
+# Why the workflow does not open the pull request: commits and pull requests made with the
+# default token do not trigger other workflows, so `validate` would never run. A person
+# opening it does trigger them.
+#
+# GitHub runs `create` workflows from the default branch, so changes to this file take
+# effect once they are merged.
+on:
+  create:
+
+permissions:
+  contents: write   # to commit the starting file to the new branch
+  issues: write     # to tell the contributor when the branch name cannot be used
+
+jobs:
+  scaffold:
+    if: >-
+      github.event.ref_type == 'branch' && (
+        startsWith(github.event.ref, 'review-') ||
+        startsWith(github.event.ref, 'dvd-') ||
+        startsWith(github.event.ref, 'chickflick-') ||
+        startsWith(github.event.ref, 'top5-') ||
+        startsWith(github.event.ref, 'other-') ||
+        startsWith(github.event.ref, 'author-'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.ref }}
+      - name: Create the starting file
+        env:
+          BRANCH: ${{ github.event.ref }}   # untrusted: only ever used through the environment
+          ACTOR: ${{ github.actor }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          out=$(python3 -I scripts/new-content/new_content.py "$BRANCH")
+          rc=$?
+          set -e
+          echo "$out"
+          case $rc in
+            0)
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add content
+              git commit -m "Add starting file for $BRANCH"
+              git push origin "HEAD:refs/heads/$BRANCH"
+              ;;
+            1)
+              {
+                echo "Hi @$ACTOR, the branch \`$BRANCH\` did not get a starting file."
+                echo
+                echo "$out"
+                echo
+                echo "You can close this issue once you have made a new branch."
+              } > "$RUNNER_TEMP/issue.md"
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "Branch $BRANCH cannot be used" --body-file "$RUNNER_TEMP/issue.md" \
+                || echo "::warning::could not open an issue"
+              exit 1
+              ;;
+            *) exit "$rc" ;;
+          esac

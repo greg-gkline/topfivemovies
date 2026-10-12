@@ -3,7 +3,7 @@
 # are rarely a problem. List only what it gets wrong: real names and deliberate slang.
 
 [files]
-extend-exclude = ["content/images/", "baseline/", "legacy/", "web/", "intra/"]
+extend-exclude = ["content/images/", "baseline/", "legacy/"]
 
 [default.extend-words]
 # People (typos reads these as misspellings of ordinary words)

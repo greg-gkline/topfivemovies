@@ -72,8 +72,10 @@ you need in AWS to apply:
 The site bucket was made by hand, and the first apply adopted it into the state with an `import`
 block, since removed. Both buckets are in `us-east-2` (the `region` variable).
 
+    aws configure
+    export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
     cd infra
-    terraform init -backend-config="bucket=infrastructure-$(aws sts get-caller-identity --query Account --output text)-us-east-2-an"
+    terraform init -backend-config="bucket=infrastructure-${AWS_ACCOUNT_ID}-us-east-2-an"
     terraform plan                 # read it before applying
     terraform apply
 
