@@ -1,41 +1,34 @@
 {{ define "banner" }}
-		<div class="access"><a href="#featuredstory">Go to Featured Story</a></div>
-
 		{{- /* The rotator replaces this quote; it is fixed per build so the page is never empty. */}}
 		{{- $quotes := site.Data.quotes }}
 		{{- $first := index $quotes (mod (hash.FNV32a (site.Lastmod.Format "2006-01-02")) (len $quotes)) }}
-		<div id="quote">"{{ $first.text }}" -- {{ $first.source }}</div>
+		<p id="quote" class="quote">"{{ $first.text }}" -- {{ $first.source }}</p>
 {{- end }}
 
-{{ define "main" }}
-	{{- $polls := sort site.Data.polls "date" "desc" }}
-	<div id="poll">
-		<div class="access"><a href="#skippoll">skip poll</a></div>
-		<h2>Poll</h2>
-		<div id="polltext">
-			{{ partial "poll-results.html" (dict "poll" (index $polls 0) "page" . "barwidth" 150) }}
-			<div id="prevpoll"><a href="{{ (site.GetPage "/polls").RelPermalink }}">View results of previous polls</a></div>
-		</div>
-	</div>
-	<div id="skippoll" class="access"></div>
+{{ define "layout" }}home{{ end }}
 
+{{ define "main" }}
 	{{- /* The newest movie review. The legacy site picked a random recent one each day. */}}
 	{{- with index (partial "ordered.html" (dict "pages" (where site.RegularPages "Type" "movie") "desc" true)) 0 }}
-	<h2 id="featuredstory">Featured Story</h2>
+	<section class="featured" aria-labelledby="featuredstory">
+		<h2 id="featuredstory">Featured Story</h2>
 
-	<div class="review">
-		<div class="access"><a href="#skipfeature">skip featured story</a></div>
-		<a href="{{ .RelPermalink }}">{{ partial "item-image.html" . }}</a>
-		{{- with .Params.caption }}
-		<div id="caption">{{ . }}</div>
-		{{- end }}
-		<h3 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-		<div class="starring">Starring: {{ .Params.starring }}</div>
-		<p>{{ partial "excerpt.html" (dict "page" . "length" 350) }}</p>
-		<p><a href="{{ .RelPermalink }}">Read more...</a></p>
-	</div>
-	<div id="skipfeature" class="access"></div>
+		<article class="review">
+			<a href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">{{ partial "item-image.html" . }}</a>
+			<h3 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+			<div class="starring">Starring: {{ .Params.starring }}</div>
+			<p>{{ partial "excerpt.html" (dict "page" . "length" 350) }}</p>
+			<p><a href="{{ .RelPermalink }}" aria-label="Read more: {{ .Title }}">Read more...</a></p>
+		</article>
+	</section>
 	{{- end }}
+
+	{{- $polls := sort site.Data.polls "date" "desc" }}
+	<section class="poll" aria-labelledby="poll">
+		<h2 id="poll">Poll</h2>
+		{{ partial "poll-results.html" (dict "poll" (index $polls 0) "page" . "barwidth" 150) }}
+		<p class="prevpoll"><a href="{{ (site.GetPage "/polls").RelPermalink }}">View results of previous polls</a></p>
+	</section>
 
 	{{ partial "recent.html" . }}
 {{ end }}

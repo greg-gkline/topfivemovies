@@ -87,7 +87,8 @@ Polls are compared with the dump instead, because the baseline captured no poll 
 | Group | Count | Where it goes |
 |---|---|---|
 | Content: referenced by `Article`, `Top5` or `Author` rows | 134 | `content/images/` |
-| Theme: `elegant.css` and `elegant_inner.css` (bubbles, fades, arrow, banner), plus the poll bar `maroon_dot.jpg`, the footer badge `somerights20.png` and the RSS image `top5gray_small.jpg` | 12 | `assets/images/` |
+| Theme: the banner `top5gray.jpg`, the RSS image `top5gray_small.jpg` and the footer badge `somerights20.png` | 3 | `assets/images/` |
+| Theme, redrawn in CSS and SVG in Phase 3: the bubbles, fades, arrow and frame of `elegant.css` and `elegant_inner.css`, and the poll bar `maroon_dot.jpg` | 9 | left behind |
 | `favicon.ico` | 1 | `static/` |
 | Referenced only by retired code: `gasmask.gif` (`gasmask.css`), `fiveback.jpg` and `greenmenufade.jpg` (`lime.css`), `lockgray.gif` (intranet link) | 4 | left behind |
 | Not referenced by any code or row: the beige theme sidebars, the splash pieces, `test.gif`, and a few unused stills (`apes_*.jpg`, `village_v2.jpg`, …) | 67 | left behind |

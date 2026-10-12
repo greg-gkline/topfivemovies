@@ -1,14 +1,15 @@
 {{ define "main" }}
-<h2 class="pageheader">{{ .Title }}</h2>
+<h1 class="pageheader">{{ .Title }}</h1>
 
 {{ .Content }}
 
-<table data-sortable>
+<div class="table-wrap">
+<table class="index" data-sortable>
 	<thead>
-	<tr class="heading">
-		<th class="other_title" data-sort="text">Title</th>
-		<th class="other_author" data-sort="text">Author</th>
-		<th class="other_date" data-sort="text" data-sort-dir="desc">Date</th>
+	<tr>
+		<th scope="col" class="other_title" data-sort="text">Title</th>
+		<th scope="col" class="other_author" data-sort="text">Author</th>
+		<th scope="col" class="other_date" data-sort="text" data-sort-dir="desc">Date</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -16,11 +17,12 @@
 	<tr class="{{ cond (modBool $i 2) "even" "odd" }} other">
 		<td class="other_title" data-sort-value="{{ .Title }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}</td>
 		<td class="other_author">{{ (partial "author.html" .Params.author).Params.name }}</td>
-		<td class="other_date">{{ .Date.Format "2006-01-02" }}</td>
+		<td class="other_date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></td>
 	</tr>
 	{{- end }}
 	</tbody>
 </table>
+</div>
 {{ end }}
 
 {{ define "scripts" }}{{ partial "sort-script.html" . }}{{ end }}

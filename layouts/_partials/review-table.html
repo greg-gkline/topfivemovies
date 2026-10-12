@@ -1,11 +1,11 @@
 {{- /* The table of reviews on the Reviews and Chick Flicks pages. Takes the page collection. */ -}}
-<table data-sortable>
+<table class="index" data-sortable>
 	<thead>
-	<tr class="heading">
-		<th class="review_name" data-sort="text">Movie</th>
-		<th class="review_rating" data-sort="number" data-sort-dir="desc">Rating</th>
-		<th class="review_reviewer" data-sort="text">Reviewer</th>
-		<th class="review_date" data-sort="text" data-sort-dir="desc">Date</th>
+	<tr>
+		<th scope="col" class="review_name" data-sort="text">Movie</th>
+		<th scope="col" class="review_rating" data-sort="number" data-sort-dir="desc">Rating</th>
+		<th scope="col" class="review_reviewer" data-sort="text">Reviewer</th>
+		<th scope="col" class="review_date" data-sort="text" data-sort-dir="desc">Date</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -14,7 +14,7 @@
 		<td class="review_name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
 		<td class="review_rating">{{ printf "%.1f" (float .Params.rating) }}</td>
 		<td class="review_reviewer">{{ (partial "author.html" .Params.author).Params.name }}</td>
-		<td class="review_date">{{ .Date.Format "2006-01-02" }}</td>
+		<td class="review_date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></td>
 	</tr>
 	{{- end }}
 	</tbody>

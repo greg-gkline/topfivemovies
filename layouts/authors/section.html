@@ -1,21 +1,24 @@
+{{ define "layout" }}about{{ end }}
+
 {{ define "main" }}
-<div id="about_origins">
-	<div id="origins">
-		<h2>{{ .Params.heading }}</h2>
-		<div id="origin_text">
-			{{ .Content }}
-		</div>
+<h1 class="visually-hidden">{{ .Title }}</h1>
+
+<section class="origins" aria-labelledby="origins">
+	<h2 id="origins">{{ .Params.heading }}</h2>
+	<div class="origin">
+		{{ .Content }}
 	</div>
-</div>
-<div id="about_authors">
-	<h2>The Guilty Parties</h2>
-	{{- range $i, $author := sort (where .RegularPages "Params.listed" "!=" false) "Params.name" }}
-	<div class="author{{ if eq $i 0 }} first{{ end }}">
-		<div class="image">{{ partial "item-image.html" . }}</div>
+</section>
+
+<section class="authors" aria-labelledby="authors">
+	<h2 id="authors">The Guilty Parties</h2>
+	{{- range sort (where .RegularPages "Params.listed" "!=" false) "Params.name" }}
+	<div class="author">
+		{{ partial "item-image.html" (dict "page" . "lazy" true) }}
 		<h3 class="name"><a href="{{ .RelPermalink }}">{{ .Params.name }}</a></h3>
 		<div class="jobtitle">{{ .Params.jobtitle }}</div>
 		<div class="link"><a href="{{ .RelPermalink }}">View bio and articles</a></div>
 	</div>
 	{{- end }}
-</div>
+</section>
 {{ end }}

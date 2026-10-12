@@ -111,7 +111,7 @@ Rules the exporter enforces and CI checks:
 - Front matter references images by filename (`image: rev_hurricane.jpg`), never by site path.
 - Filenames in `content/images/` are unique by construction, since the folder is flat. The exporter fails on any collision.
 - CI fails on any content image reference that does not resolve, and on any file in `content/images/` that nothing references.
-- Hugo only publishes non-markdown files in `content/` when they belong to a page bundle, and a flat images folder is not one. So `hugo.yaml` mounts `content/images` into Hugo's asset pipeline (`module.mounts`), and templates load images with `resources.Get`. Hugo then resizes and converts them at build time, so the WebP/AVIF, sizes and `width/height` in Phase 3 come from the originals, with no manual conversion step.
+- Hugo only publishes non-markdown files in `content/` when they belong to a page bundle, and a flat images folder is not one. So `hugo.yaml` mounts `content/images` into Hugo's asset pipeline (`module.mounts`), and templates load images with `resources.Get`. Hugo then resizes and converts them at build time, so the WebP copies, sizes and `width/height` in Phase 3 come from the originals, with no manual conversion step.
 - Only the images that templates request are published, so unused originals add nothing to the output.
 
 ### What a content file looks like
@@ -182,18 +182,20 @@ Done. The templates, the behaviour decided while building them and the parity di
 
 ## Phase 3: Design: faithful look, modern foundation
 
-- [ ] Port `elegant_inner.css` rule by rule for all inner pages. Pull colors and fonts into CSS custom properties.
-- [ ] Port `elegant.css` separately for the home page, sharing the common tokens and header.
-- [ ] Replace float and position layout mechanics with Grid and Flexbox without changing the appearance.
-- [ ] Rebuild the image-based decoration with CSS or SVG where it keeps the look:
+Done. The stylesheets, the decisions made while porting them, the screenshot comparison and the quality gates are documented in `scripts/quality/README.md`.
+
+- [x] Port `elegant_inner.css` rule by rule for all inner pages. Pull colors and fonts into CSS custom properties. `assets/css/inner.css`, with the colours, fonts and type sizes as tokens in `common.css`.
+- [x] Port `elegant.css` separately for the home page, sharing the common tokens and header. `assets/css/home.css`. Each page loads `common.css` plus its own sheet as one minified file.
+- [x] Replace float and position layout mechanics with Grid and Flexbox without changing the appearance. The page layouts are grids, with lengths measured from the legacy pages. Pictures still float, so text wraps around them.
+- [x] Rebuild the image-based decoration with CSS or SVG where it keeps the look:
   - Gradient fades (`grayfade`, `fadeframe`, `smokefade*`) become CSS gradients.
-  - The speech-bubble GIFs become one SVG or CSS shape.
-  - The arrow becomes inline SVG.
-  - Banners and photos are converted to AVIF/WebP with a JPEG fallback.
-- [ ] Semantic HTML5: UTF-8, `lang`, viewport meta, `header/nav/main/article/footer`, a skip link, real `alt` text, and `width/height` with lazy loading.
-- [ ] Keep the desktop appearance identical, and add responsive behavior for small screens.
-- [ ] Screenshot comparison against the Phase 0 captures for each page type, including the home page.
-- [ ] Quality gates: HTML validation (`vnu`), accessibility (pa11y or axe), Lighthouse CI budgets, and a link check (`lychee`).
+  - The speech-bubble GIFs become one SVG or CSS shape. A CSS shape, which also grows with long responses.
+  - The arrow becomes inline SVG. An SVG data URI in the stylesheet, so the CSP needs `img-src data:` (Phase 5). The poll bars are inline SVG too.
+  - Banners and photos are converted to AVIF/WebP with a JPEG fallback. WebP only, where it is smaller (55% fewer image bytes): Hugo 0.147 cannot encode AVIF.
+- [x] Semantic HTML5: UTF-8, `lang`, viewport meta, `header/nav/main/article/footer`, a skip link, real `alt` text, and `width/height` with lazy loading. Alt text comes from `image_alt`. The 125 pictures whose legacy rows had none are marked decorative, since the title beside each names the film. Writing alt text for them is left for a content PR.
+- [x] Keep the desktop appearance identical, and add responsive behavior for small screens. One column below 740 px, with larger type and 24 px link spacing.
+- [x] Screenshot comparison against the Phase 0 captures for each page type, including the home page. `scripts/visual/compare.py`, a review tool rather than a gate. Against the Phase 2 build, which has the same content, item pages are within 0–4%, and the index pages are closer to the legacy look than Phase 2 was.
+- [x] Quality gates: HTML validation (`vnu`), accessibility (pa11y or axe), Lighthouse CI budgets, and a link check (`lychee`). `scripts/quality/check.sh` (vnu, axe, lychee) and `lighthouserc.json`, run by the `site` workflow. Every page passes. axe applies WCAG 2.2 at phone width only, because the legacy desktop rows of links are 22–23 px apart, short of 2.2's 24 px.
 
 ## Phase 4: PR pipeline
 

@@ -1,8 +1,9 @@
 // Home page quote rotator. The quotes come from data/quotes.yaml, inlined in the page
 // as JSON. It shows them in random order with no repeats until every quote has been
-// shown, and changes the quote every 20 seconds. Rotation pauses while the tab is
-// hidden and when the visitor prefers reduced motion. Without JavaScript the page
-// keeps the quote it was built with.
+// shown, and changes the quote every 20 seconds. The page is built with one quote in
+// place, which stays until the first change, so loading the page shifts nothing.
+// Rotation pauses while the tab is hidden and when the visitor prefers reduced motion.
+// Without JavaScript the page keeps the quote it was built with.
 
 const INTERVAL_MS = 20 * 1000;
 
@@ -13,7 +14,7 @@ if (target && source) {
 	const quotes = JSON.parse(source.textContent);
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 	let deck = [];
-	let last = -1;
+	let last = quotes.findIndex(({ text, source }) => target.textContent === `"${text}" -- ${source}`);
 	let timer = null;
 
 	// A shuffled list of every quote's index, never starting with the one just shown.
@@ -46,7 +47,8 @@ if (target && source) {
 		}
 	};
 
-	show();
+	// The quote the page was built with counts as shown.
+	deck = shuffle().filter((i) => i !== last);
 	schedule();
 	document.addEventListener("visibilitychange", schedule);
 	reducedMotion.addEventListener("change", schedule);

@@ -1,4 +1,4 @@
-{{- /* A block of the group bio: {{< origins "origin_text" >}}markdown{{< /origins >}} */ -}}
-<div id="{{ .Get 0 }}">
+{{- /* A block of text in the group bio: {{< origins >}}markdown{{< /origins >}} */ -}}
+<div class="origin">
 {{ .InnerDeindent | .Page.RenderString (dict "display" "block") }}
 </div>

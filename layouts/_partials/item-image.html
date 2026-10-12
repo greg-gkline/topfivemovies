@@ -1,4 +1,12 @@
-{{- /* The picture of a review, list, feature or author, from its front matter. */ -}}
-{{- with .Params.image -}}
-{{ partial "image.html" (dict "name" . "alt" $.Params.image_alt "width" $.Params.image_width "height" $.Params.image_height) }}
+{{- /*
+  The picture of a review, list, feature or author, from its front matter. Takes the
+  page, or dict "page" <page> "lazy" true when it is below the fold. A picture with no
+  image_alt (most legacy rows had none) gets alt="": it is decorative, since the title
+  beside it names the film.
+*/ -}}
+{{- $page := . -}}
+{{- $lazy := false -}}
+{{- if reflect.IsMap . }}{{ $page = .page }}{{ $lazy = .lazy }}{{ end -}}
+{{- with $page.Params.image -}}
+{{ partial "image.html" (dict "name" . "alt" $page.Params.image_alt "width" $page.Params.image_width "height" $page.Params.image_height "lazy" $lazy "class" "item-image") }}
 {{- end -}}

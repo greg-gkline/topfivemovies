@@ -1,11 +1,9 @@
 {{- /* A movie, DVD or chick flick review. */ -}}
 {{ partial "clickpath.html" . }}
 
-{{ partial "recent.html" . }}
-
-<div class="review">
+<article class="review">
 	{{ partial "item-image.html" . }}
-	<h2 class="title"><a href="{{ .RelPermalink }}">{{ .Title }} ({{ .Params.release_year }})</a></h2>
+	<h1 class="title">{{ .Title }} ({{ .Params.release_year }})</h1>
 	{{- with .Params.subtitle }}
 	<div class="subtitle">{{ . }}</div>
 	{{- end }}
@@ -15,4 +13,6 @@
 	<div class="text">{{ .Content }}</div>
 	{{- partial "prevnext.html" . }}
 	{{- partial "responses.html" . }}
-</div>
+</article>
+
+{{ partial "recent.html" . }}

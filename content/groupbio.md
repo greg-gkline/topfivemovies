@@ -4,7 +4,7 @@ heading: In the Beginning....
 layout: groupbio
 ---
 
-{{< origins "origin_text" >}}
+{{< origins >}}
 **TopFiveMovies.com** is the product of 4 years of alcohol-free college. Due to
 the lack of free-flowing beer and all-night parties on our reserved and
 quiet campus, most people were forced to find alternative entertainment.
@@ -32,7 +32,7 @@ petty arguments and never engaged in the obscenities that usually peppered
 the discussions. He was a student of the classics, shunning modern cinema.
 {{< /member >}}
 
-{{< member "brian" >}}
+{{< member "brian" "left" >}}
 [Brian]({{< relref "authors/brian.md" >}}), a tragic hero in the true Greek sense. No one who witnessed the
 epic "12 Monkeys" struggle can doubt his passion, sincerity and integrity
 when it came to movies. However, as with all tragic heroes, his one flaw,
@@ -69,7 +69,7 @@ designed to poke fun at his more intense opponents. Matt will continue
 to play his role to perfection on topfivemovies.com, 3,000 miles and 3 time zones be damned.
 {{< /member >}}
 
-{{< origins "origin_outro" >}}
+{{< origins >}}
 After college, we all went our separate ways into respectable career paths: law
 school, programming, customer service, finance, etc. But as we continue to
 climb further into adulthood, we wanted to put to use all those endless

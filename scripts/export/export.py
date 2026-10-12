@@ -6,7 +6,7 @@ and regenerates, from scratch:
 
     content/{reviews,chickflicks,other,top5,authors}/*.md
     content/images/*            content images, copied from web/images/
-    assets/images/*             theme images used by the two ported stylesheets
+    assets/images/*             theme images the templates still use
     static/favicon.ico
     data/{responses,polls,quotes}.yaml
 
@@ -40,16 +40,11 @@ DATA = ROOT / "data"
 SECTIONS = {"movie": "reviews", "dvd": "reviews", "chick": "chickflicks", "other": "other"}
 OWNED_SECTIONS = ["reviews", "chickflicks", "other", "top5", "authors"]
 
-# Theme images, referenced by styles/elegant.css, styles/elegant_inner.css and the
-# templates (poll bar, footer licence badge, RSS channel image). See README.md for the
-# full inventory, including what is deliberately left behind.
-THEME_IMAGES = [
-    "bubble_left.gif", "bubble_mid.gif", "bubble_right.gif",
-    "fadeframe.gif", "grayarrow.gif", "grayfade.gif",
-    "smokefadeleft.jpg", "smokefaderight.jpg",
-    "top5gray.jpg", "top5gray_small.jpg",
-    "maroon_dot.jpg", "somerights20.png",
-]
+# Theme images the templates use: the banner, the RSS channel image and the footer
+# licence badge. Phase 3 redrew the rest of the legacy stylesheets' images (bubbles,
+# fades, arrow, frame, poll bar) in CSS and SVG. See README.md for the full inventory,
+# including what is deliberately left behind.
+THEME_IMAGES = ["top5gray.jpg", "top5gray_small.jpg", "somerights20.png"]
 STATIC_FILES = ["favicon.ico"]
 
 # Legacy internal link forms. top5.php3 is an older URL scheme that one intro still uses.

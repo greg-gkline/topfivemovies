@@ -1,42 +1,50 @@
+{{ define "layout" }}author-page{{ end }}
+
 {{ define "main" }}
 {{ partial "clickpath.html" . }}
 
-<div class="author_info">
-	<div class="image">{{ partial "item-image.html" . }}</div>
-	<h2 class="name">{{ .Params.name }}</h2>
+<article class="author_info">
+	{{ partial "item-image.html" . }}
+	<h1 class="name">{{ .Params.name }}</h1>
 	<div class="jobtitle">{{ .Params.jobtitle }}</div>
 	<div class="bio">
 		{{- .Content }}
 		{{- with .Params.facts }}
-		<table>
+		<table class="facts">
 			{{- range . }}
-			{{- with .heading }}
-			<tr><td colspan="2" class="authorName">{{ . }}</td></tr>
-			{{- end }}
-			{{- range .items }}
-			<tr><td class="bodyText">{{ .label }}:</td><td class="bodyText">{{ $.RenderString .value }}</td></tr>
-			{{- end }}
+			<tbody>
+				{{- with .heading }}
+				<tr><th colspan="2" scope="rowgroup">{{ . }}</th></tr>
+				{{- end }}
+				{{- range .items }}
+				<tr><th scope="row">{{ .label }}:</th><td>{{ $.RenderString .value }}</td></tr>
+				{{- end }}
+			</tbody>
 			{{- end }}
 		</table>
 		{{- end }}
 	</div>
-</div>
+</article>
 
-<div id="contributions">
-	<h2>Contributions by {{ .Params.name }}:</h2>
+<section class="contributions" aria-labelledby="contributions">
+	<h2 id="contributions">Contributions by {{ .Params.name }}:</h2>
 
 	<table>
-		<tr class="heading">
-			<th class="other_title">Title</th>
-			<th class="other_date">Date</th>
+		<thead>
+		<tr>
+			<th scope="col" class="other_title">Title</th>
+			<th scope="col" class="other_date">Date</th>
 		</tr>
+		</thead>
+		<tbody>
 		{{- $slug := .File.ContentBaseName }}
 		{{- range $i, $p := partial "ordered.html" (dict "pages" (where (partial "items.html" .) "Params.author" $slug) "desc" true) }}
 		<tr class="{{ cond (modBool $i 2) "even" "odd" }}">
 			<td class="other_title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
-			<td class="other_date">{{ .Date.Format "2006-01-02" }}</td>
+			<td class="other_date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></td>
 		</tr>
 		{{- end }}
+		</tbody>
 	</table>
-</div>
+</section>
 {{ end }}

@@ -5,17 +5,23 @@
 </head>
 
 <body>
-<div id="body">
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="page">
 
-	<div id="banner">
-		<h1 class="access"><a href="{{ site.Home.RelPermalink }}">Top Five Movies</a></h1>
+	<header class="site-header">
+		{{- $brand := partial "picture.html" (dict "img" (resources.Get "images/top5gray.jpg") "alt" site.Title) }}
+		{{- if .IsHome }}
+		<h1 class="brand"><a href="{{ site.Home.RelPermalink }}">{{ $brand }}</a></h1>
+		{{- else }}
+		<a class="brand" href="{{ site.Home.RelPermalink }}">{{ $brand }}</a>
+		{{- end }}
 		{{- block "banner" . }}{{ end }}
-		<a href="{{ site.Home.RelPermalink }}"><span id="bannerimg"></span></a>
-	</div>
+		{{ partial "navbar.html" . }}
+	</header>
 
-	{{ partial "navbar.html" . }}
-
+	<main id="main" class="{{ block "layout" . }}single{{ end }}">
 	{{ block "main" . }}{{ end }}
+	</main>
 
 	{{ partial "footer.html" . }}
 
