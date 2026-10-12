@@ -33,9 +33,14 @@ variable "hsts_max_age_seconds" {
 }
 
 variable "alert_email" {
-  description = "Where to send the cost budget and CloudFront error alarms. Empty turns both off."
+  description = <<-EOT
+    Where to send the cost budget and CloudFront error alarms. Empty turns both off. Keep it out
+    of git: set the environment variable TF_VAR_alert_email (README.md). Sensitive, so a plan
+    does not print it, and the plan comment on a pull request cannot leak it.
+  EOT
   type        = string
   default     = ""
+  sensitive   = true
 }
 
 variable "monthly_budget_usd" {

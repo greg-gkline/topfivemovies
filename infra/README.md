@@ -20,7 +20,7 @@ codespace and plan or apply from there.
 | `route53.tf`, `acm.tf` | The zone, alias records, and the certificate with its DNS validation |
 | `iam.tf` | Two IAM users, each in a group that holds its permissions: `deploy` (bucket sync and cache invalidation) and `plan` (read-only) |
 | `terraform-operator-policy.json` | The permissions whoever runs `terraform apply` needs (see below) |
-| `monitoring.tf` | Optional cost budget and CloudFront 5xx alarm, off unless `alert_email` is set |
+| `monitoring.tf` | Optional cost budget and CloudFront 5xx alarm, off unless `alert_email` is set (see below) |
 
 ## State
 
@@ -93,6 +93,24 @@ secret, then `aws iam delete-access-key` for the old one.
 After that, a change to `infra/` goes through a pull request: the `terraform` job in
 `validate.yml` runs fmt, validate, tflint and checkov, `terraform-plan` comments the plan, and
 you apply it after the merge. Delete the `import` block once the first apply has run.
+
+## The alert email
+
+`alert_email` turns on the cost budget and the CloudFront error alarm, and is where they
+email. It is kept out of git: it is not in `terraform.tfvars`, and the variable is marked
+sensitive, so a plan (including the one the workflow comments on a pull request) shows it as
+`(sensitive value)`. Terraform reads it from the environment:
+
+- **Codespace:** add a user secret named `TF_VAR_alert_email`. Codespaces secrets become
+  environment variables, so every `terraform` command there sees it.
+- **Devcontainer:** `export TF_VAR_alert_email=you@example.com` in your shell, not in a file
+  that is committed.
+- **The plan workflow:** `gh secret set ALERT_EMAIL`. Set it the same as above, or the plan
+  will show the alerts as removed.
+
+Use the same address everywhere. It does end up in the Terraform state (in the private state
+bucket) and in AWS, where the budget and the SNS subscription store it. SNS sends a
+confirmation email that has to be answered before alarm emails arrive.
 
 ## Before the cutover
 

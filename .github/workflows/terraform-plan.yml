@@ -28,6 +28,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PLAN_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PLAN_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ vars.AWS_REGION || 'us-east-2' }}
+      TF_VAR_alert_email: ${{ secrets.ALERT_EMAIL }}   # empty if unset, which plans the alerts as off
     steps:
       - id: keys
         run: |

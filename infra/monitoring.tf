@@ -1,6 +1,7 @@
 # Optional: a cost budget and a CloudFront error-rate alarm, both off unless alert_email is set.
 locals {
-  alerts_enabled = var.alert_email != ""
+  # Only whether there is an address, not the address itself, so it is safe to use in count.
+  alerts_enabled = nonsensitive(var.alert_email != "")
 }
 
 resource "aws_budgets_budget" "monthly" {
