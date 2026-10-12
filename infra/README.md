@@ -50,6 +50,14 @@ you need in AWS to apply:
          --policy-arn arn:aws:iam::832474135782:policy/topfivemovies-terraform
        aws iam create-access-key --user-name terraform-admin
 
+   IAM does not update a policy when the file changes. After this file changes, publish the
+   new version as an identity that can manage IAM (not `terraform-admin` itself). A policy
+   keeps five versions at most, so delete an old one first if the command reports a limit:
+
+       aws iam create-policy-version \
+         --policy-arn arn:aws:iam::832474135782:policy/topfivemovies-terraform \
+         --policy-document file://terraform-operator-policy.json --set-as-default
+
 2. **The keys where Terraform can find them.** In a codespace, add them as user secrets
    named `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. In the devcontainer, run
    `aws configure`. Check with `aws sts get-caller-identity`.
