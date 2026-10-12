@@ -248,17 +248,17 @@ DNS delegation is the riskiest step. Do it only after the site is verified on th
 The current zone has no records beyond the registrar's domain parking, so there is no mail or verification setup to preserve. The parking records are replaced by the new site and are not recreated.
 
 **Before touching registrar**
-- [ ] Confirm the zone holds only the parking configuration (check with `dig` for A, AAAA, CNAME, MX, TXT and NS on the apex and `www`).
-- [ ] Confirm DNSSEC is **off** at the registrar. If it is on, it must be disabled first or the domain will fail validation after the move.
-- [ ] Disable parking at the registrar when switching the nameservers, if it does not release automatically.
+- [x] Confirm the zone holds only the parking configuration (check with `dig` for A, AAAA, CNAME, MX, TXT and NS on the apex and `www`).
+- [x] Confirm DNSSEC is **off** at the registrar. If it is on, it must be disabled first or the domain will fail validation after the move.
+- [x] Disable parking at the registrar when switching the nameservers, if it does not release automatically.
 
 **Verify**
 - [ ] Query the new Route 53 nameservers directly and confirm `www` and the apex resolve to CloudFront: `dig @<aws-ns> www.topfivemovies.com`.
-- [ ] Verify the site on the `*.cloudfront.net` address (`terraform output distribution_domain`): parity diff, screenshots, link check.
-- [ ] Lower TTLs at the registrar a day or two before the switch, if the registrar allows it.
+- [x] Verify the site on the `*.cloudfront.net` address (`terraform output distribution_domain`): parity diff, screenshots, link check.
+- [x] Lower TTLs at the registrar a day or two before the switch, if the registrar allows it.
 
 **Switch**
-- [ ] At the registrar, replace the nameservers with the four Route 53 nameservers (`terraform output name_servers`).
+- [x] At the registrar, replace the nameservers with the four Route 53 nameservers (`terraform output name_servers`).
 - [ ] When the Route 53 servers answer for the domain, set `enable_custom_domain = true` in `infra/terraform.tfvars` and apply: Terraform requests the certificate, validates it through the zone, and attaches the domain to CloudFront.
 - [ ] Monitor the site and 404s. Propagation can take up to about 48 hours. Visitors on the old nameservers briefly see the parking page.
 - [ ] **Rollback:** switch the nameservers back to the registrar's.
