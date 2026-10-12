@@ -1,0 +1,113 @@
+name: deploy
+
+# Publishes the site when a change lands on `main`: a full Hugo build, a sync to the
+# private S3 bucket, a CloudFront invalidation and a smoke test of the live address
+# (scripts/deploy/). It signs in as the `topfivemovies-deploy` IAM user (infra/iam.tf), with
+# the access key from the secrets AWS_DEPLOY_ACCESS_KEY_ID and AWS_DEPLOY_SECRET_ACCESS_KEY
+# in the "AWS 832474135782" environment, which only `main` may use.
+#
+# Rollback is a redeploy of an earlier commit: run this workflow by hand (Actions, deploy,
+# Run workflow) and give the commit, tag or branch as `ref`. The workflow file itself is
+# always the one on `main`, and the build is of `ref`.
+#
+# Repository variables (Settings, Variables; infra/README.md):
+#   DISTRIBUTION_ID  `terraform output distribution_id`            (required)
+#   SITE_URL         the address to smoke-test. Before the cutover (Phase 7) this is
+#                    https://<terraform output distribution_domain>; afterwards
+#                    https://www.topfivemovies.com, which is the default.
+#   SITE_BUCKET      defaults to `topfivemovies`
+#   AWS_REGION       defaults to us-east-2
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Commit, tag or branch to deploy (a rollback is the earlier commit)
+        required: false
+        default: main
+      invalidate_all:
+        description: Invalidate the whole cache (/*)
+        type: boolean
+        default: false
+
+# One deploy at a time, and never cancel one halfway through a sync.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  HUGO_VERSION: 0.147.9   # also pinned in validate.yml and .devcontainer/devcontainer.json
+  # Changes to these affect every page, so the whole cache is invalidated (same as the
+  # design paths in validate.yml). Fingerprinted CSS and JS get new names anyway.
+  DESIGN_PATHS: assets layouts static hugo.yaml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: AWS 832474135782
+    timeout-minutes: 30
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEPLOY_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ vars.AWS_REGION || 'us-east-2' }}
+      SITE_BUCKET: ${{ vars.SITE_BUCKET || 'topfivemovies' }}
+      DISTRIBUTION_ID: ${{ vars.DISTRIBUTION_ID }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://www.topfivemovies.com' }}
+    steps:
+      - name: Check the configuration
+        run: |
+          for name in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY DISTRIBUTION_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is not set: see infra/README.md and the header of deploy.yml"
+              exit 1
+            fi
+          done
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.inputs.ref || github.sha }}
+          fetch-depth: 0
+      - name: Install Hugo
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "$RUNNER_TEMP/hugo.deb"
+      - name: Build
+        run: hugo --gc --panicOnWarning
+      - name: Decide how much of the cache to invalidate
+        id: scope
+        env:
+          MANUAL_ALL: ${{ github.event.inputs.invalidate_all }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          all=false
+          if [ "$MANUAL_ALL" = "true" ]; then
+            all=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # A redeploy of another commit can differ from what is live in any way.
+            all=true
+          elif ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            all=true   # no usable base: a new branch or a force push
+          elif ! git diff --quiet "$BEFORE" HEAD -- $DESIGN_PATHS; then
+            all=true   # templates, styles or configuration changed
+          fi
+          echo "all=$all" >> "$GITHUB_OUTPUT"
+          echo "Invalidate everything: $all"
+      - name: Deploy
+        env:
+          INVALIDATE_ALL: ${{ steps.scope.outputs.all }}
+        run: scripts/deploy/deploy.sh
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Deploy"
+            echo
+            echo "- Commit: \`$(git rev-parse --short HEAD)\` ($(git log -1 --format=%s))"
+            echo "- Site: $SITE_URL"
+            echo "- Full invalidation: ${{ steps.scope.outputs.all }}"
+            echo "- Rollback: run this workflow with \`ref\` set to the earlier commit."
+          } >> "$GITHUB_STEP_SUMMARY"

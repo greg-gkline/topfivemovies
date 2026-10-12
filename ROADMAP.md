@@ -233,11 +233,13 @@ Written, and passing `terraform validate`, `tflint` and `checkov`, but **not app
 
 ## Phase 6: Deploy on merge to `main`
 
-- [ ] Full Hugo build. The site is small, so a full build is fast and avoids stale-output bugs, and template and content changes use the same path.
-- [ ] `aws s3 sync --delete`, with long immutable caching on fingerprinted assets and short caching on HTML.
-- [ ] Invalidate changed paths, or `/*` when templates or CSS changed.
-- [ ] Post-deploy smoke test against the live URL.
-- [ ] Rollback by redeploying the previous commit.
+Written, not yet run: it needs the `DISTRIBUTION_ID` (and, before the cutover, `SITE_URL`) repository variables from `infra/README.md`. `deploy.yml` and `scripts/deploy/`.
+
+- [x] Full Hugo build. The site is small, so a full build is fast and avoids stale-output bugs, and template and content changes use the same path.
+- [x] Sync with `--delete` semantics, with long immutable caching on fingerprinted assets (a digest in the name, or Hugo's `_hu_` image suffix), five minutes on HTML, feeds and `robots.txt`, and a day on the rest. `deploy.sh` compares ETags so only changed files upload, uploads fingerprinted files before HTML, and deletes removed files last. It is not a literal `aws s3 sync`, because that cannot set caching by file name pattern.
+- [x] Invalidate the changed paths, or `/*` when templates, CSS or the site configuration changed (or a manual run asks for it, or a rollback). Fingerprinted files are never invalidated, since a change gives them a new name.
+- [x] Post-deploy smoke test against the live URL (`scripts/deploy/smoke.sh`): the home page, a page of each section, the feed, sitemap, 404 status, the assets the home page names, and the security headers.
+- [x] Rollback by redeploying the previous commit: run the workflow by hand with `ref` set to that commit.
 
 ## Phase 7: DNS migration and cutover
 
