@@ -1,18 +1,26 @@
-name: site
+name: validate
 
-# Builds the site with Hugo, then runs the Phase 3 quality gates on the build:
-# HTML validation, accessibility and internal links (scripts/quality/check.sh), and
-# Lighthouse CI budgets (scripts/quality/lighthouserc.json). Phase 4 folds these into
-# the full `validate` check.
-# The gates run only when the design or the checks change (DESIGN_PATHS below), not
-# for content alone. They are skipped jobs rather than a path filter on the workflow,
-# so they still report a status that a required check can rely on.
+# The required `validate` check. Every job below feeds the one called `validate` at the
+# bottom, so branch protection needs only that name:
+#   content     schema, YAML lint and cross-reference checks (scripts/content/validate.sh)
+#   build       the Hugo build, kept as an artifact for the jobs that follow
+#   html-links  HTML validation (vnu) and the internal link check (scripts/quality/check.sh)
+#   a11y        axe on every page, and lighthouse for the performance budgets
+#               (scripts/quality/lighthouserc.json)
+# The accessibility and Lighthouse jobs run only when the design or the checks change
+# (DESIGN_PATHS below), not for content alone. They are skipped jobs rather than a path
+# filter on the workflow, so `validate` still reports a status that a required check can
+# rely on.
 # The parity diff (scripts/parity/) is not run here: it compares with the legacy
 # site, so it is run by hand during the cutover, not on every change.
 on:
   pull_request:
   push:
     branches: [main]
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -21,9 +29,21 @@ env:
   HUGO_VERSION: 0.147.9   # also pinned in .devcontainer/devcontainer.json
   # Templates, styles, scripts and theme images, the site configuration, and the
   # checks themselves
-  DESIGN_PATHS: assets layouts static hugo.yaml scripts/quality .github/workflows/site.yml
+  DESIGN_PATHS: assets layouts static hugo.yaml scripts/quality .github/workflows/validate.yml
 
 jobs:
+  content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install tools
+        run: pip install check-jsonschema==0.38.2 yamllint==1.37.1 PyYAML==6.0.2
+      - name: Validate
+        run: scripts/content/validate.sh
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -64,9 +84,23 @@ jobs:
             git diff --stat "$BASE" HEAD -- $DESIGN_PATHS 2>/dev/null || true
           fi
 
-  # HTML validation (vnu, on the runner's Java), axe on every page (the runner's Chrome)
-  # and the internal link check. The tools are pinned and checksummed in tools.sh.
-  quality:
+  # HTML validation (vnu, on the runner's Java) and the internal link check. They run on
+  # every change, since content can break links and markup too. The tools are pinned and
+  # checksummed in tools.sh.
+  html-links:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: public
+          path: public/
+      - name: Check
+        run: NO_BUILD=1 scripts/quality/check.sh html links
+
+  # axe on every page, in the runner's Chrome.
+  a11y:
     needs: [build, changes]
     if: needs.changes.outputs.design == 'true'
     runs-on: ubuntu-latest
@@ -82,7 +116,7 @@ jobs:
       - name: Install Selenium
         run: pip install selenium==4.49.0
       - name: Check
-        run: NO_BUILD=1 scripts/quality/check.sh html a11y links
+        run: NO_BUILD=1 scripts/quality/check.sh a11y
 
   lighthouse:
     needs: [build, changes]
@@ -102,3 +136,18 @@ jobs:
           name: lighthouse
           path: .cache/lighthouse/
           retention-days: 7
+
+  # The one name branch protection requires. A skipped job (the design-only ones) counts
+  # as passing; a failed or cancelled one does not.
+  validate:
+    needs: [content, build, html-links, a11y, lighthouse]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "job results: $RESULTS"
+          case " $RESULTS " in
+            *" failure "* | *" cancelled "*) exit 1 ;;
+          esac

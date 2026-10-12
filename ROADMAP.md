@@ -5,7 +5,7 @@ Move `www.topfivemovies.com` from a PHP 5 / MySQL site to a static site: content
 ## Goals
 
 - No request-time processing. Content is YAML files in git, and the site is static HTML.
-- A pull request renders a preview, gets a spelling check, and gets a separate agentic grammar review.
+- A pull request renders a preview, gets a spelling check, and gets a separate grammar review.
 - Merging to `main` rebuilds everything and deploys it.
 - Markdown in content is converted to HTML by the template engine.
 - Modern, semantic HTML and CSS, visually faithful to the original design.
@@ -24,7 +24,7 @@ Move `www.topfivemovies.com` from a PHP 5 / MySQL site to a static site: content
 | Look          | Inner pages match `styles/elegant_inner.css`. The home page keeps the original `styles/elegant.css` look.                                                                             |
 | Domain        | `www.topfivemovies.com`, plus the bare `topfivemovies.com` redirecting to it.                                                                                                         |
 | DNS           | Delegate the zone to Route 53 (option A). The domain registrar remains unchanged.                                                                                                     |
-| Checks        | Spelling is a deterministic blocking check. Grammar is a separate, agentic, advisory check.                                                                                           |
+| Checks        | Spelling and grammar are separate, advisory checks that post PR reviews. Spelling is deterministic (`typos`); grammar uses LanguageTool and Harper.                                                                                           |
 | Search        | Dropped. The response search page is not carried over.                                                                                                                                |
 | Content       | Migrated as-is. No editorial changes or removals.                                                                                                                                     |
 
@@ -44,7 +44,7 @@ content/*.yaml, data/*.yaml
         v
    hugo build  ---->  public/  ---->  S3 (private)  <--OAC--  CloudFront  <--  Route 53  <--  domain registrar
         ^
-   PR: validate, spelling, agentic grammar review, preview
+   PR: validate, spelling and grammar reviews, preview
    main: build, sync, invalidate (GitHub Actions + OIDC)
 ```
 
@@ -93,7 +93,7 @@ Done. The tooling and every decision made during the export are documented in `s
 - [x] Separate content images from theme images (see Image organization below), and have the exporter move each content image into `content/images/`. They are copied, not moved, so the legacy devcontainer site keeps working until `web/` is deleted in Phase 7.
 - [x] Export `Response` and `poll` rows to `data/*.yaml`. Response 19 is not exported: its top-five list was deleted before the dump, so it never rendered. That leaves 59 responses.
 - [x] Build `data/quotes.yaml` from **both** quote sources (see Quotes below).
-- [x] Add a JSON Schema per content type and validate in CI with `check-jsonschema` and `yamllint`. The schemas are in `scripts/content/schemas/`. `scripts/content/validate.sh` also checks author, item, relref and image references, and runs as the `content` workflow.
+- [x] Add a JSON Schema per content type and validate in CI with `check-jsonschema` and `yamllint`. The schemas are in `scripts/content/schemas/`. `scripts/content/validate.sh` also checks author, item, relref and image references, and runs as the `content` job of the `validate` workflow.
 - [x] Spot-check the export against the legacy pages, with `diff`-style review. `scripts/export/spotcheck.py` renders the export with Hugo and diffs 1,478 fields against `baseline/html/`, with no differences.
 
 ### Image organization
@@ -178,7 +178,7 @@ Done. The templates, the behaviour decided while building them and the parity di
   - Search: dropped. Remove `response_search.php3` and any links to it. Nothing links to it; the file goes with `web/` in Phase 7.
   - Comments: rendered statically from `data/responses.yaml` under each item.
   - Poll: archive page rendered from `data/polls.yaml`, showing final results.
-- [x] Build the parity diff against the Phase 0 snapshot. Every legacy page's text should be present in the new output. `scripts/parity/parity.py` checks 12,549 lines on 169 pages. It is a cutover tool, run by hand (see Phase 7), not a PR check, since the site will diverge from the legacy one as content is added. The `site` workflow builds the site, with Hugo pinned to 0.147.9 there and in the devcontainer.
+- [x] Build the parity diff against the Phase 0 snapshot. Every legacy page's text should be present in the new output. `scripts/parity/parity.py` checks 12,549 lines on 169 pages. It is a cutover tool, run by hand (see Phase 7), not a PR check, since the site will diverge from the legacy one as content is added. The `validate` workflow builds the site, with Hugo pinned to 0.147.9 there and in the devcontainer.
 
 ## Phase 3: Design: faithful look, modern foundation
 
@@ -195,23 +195,23 @@ Done. The stylesheets, the decisions made while porting them, the screenshot com
 - [x] Semantic HTML5: UTF-8, `lang`, viewport meta, `header/nav/main/article/footer`, a skip link, real `alt` text, and `width/height` with lazy loading. Alt text comes from `image_alt`. The 125 pictures whose legacy rows had none are marked decorative, since the title beside each names the film. Writing alt text for them is left for a content PR.
 - [x] Keep the desktop appearance identical, and add responsive behavior for small screens. One column below 740 px, with larger type and 24 px link spacing.
 - [x] Screenshot comparison against the Phase 0 captures for each page type, including the home page. `scripts/visual/compare.py`, a review tool rather than a gate. Against the Phase 2 build, which has the same content, item pages are within 0–4%, and the index pages are closer to the legacy look than Phase 2 was.
-- [x] Quality gates: HTML validation (`vnu`), accessibility (pa11y or axe), Lighthouse CI budgets, and a link check (`lychee`). `scripts/quality/check.sh` (vnu, axe, lychee) and `lighthouserc.json`, run by the `site` workflow. Every page passes. axe applies WCAG 2.2 at phone width only, because the legacy desktop rows of links are 22–23 px apart, short of 2.2's 24 px.
+- [x] Quality gates: HTML validation (`vnu`), accessibility (pa11y or axe), Lighthouse CI budgets, and a link check (`lychee`). `scripts/quality/check.sh` (vnu, axe, lychee) and `lighthouserc.json`, run by the `validate` workflow. Every page passes. axe applies WCAG 2.2 at phone width only, because the legacy desktop rows of links are 22–23 px apart, short of 2.2's 24 px.
 
 ## Phase 4: PR pipeline
 
 Each item is its own workflow and its own status check.
 
-- [ ] **validate**: schema and YAML lint, Hugo build, HTML validation, link check. Required.
-- [ ] **spelling**: `typos` or `codespell` on changed content only, with a project dictionary for actor names, film titles and the site's slang. Inline annotations on the PR. Required.
-- [ ] **grammar-review** (agentic, advisory):
-  - Runs on PRs that touch `content/**` or `data/**`, and only on same-repo branches because it needs a secret.
-  - Uses the Claude Code Action or a small Python script against the Claude API, over the changed prose only, with a cap on files per run.
-  - The prompt includes a style guide: the voice is intentionally informal and irreverent, so flag real errors and not tone.
-  - Posts an inline review with suggestions, and is not a required check until it has proven useful.
-  - Needs an `ANTHROPIC_API_KEY` repo secret.
-- [ ] **preview**: build and publish under a per-PR prefix in staging, comment the link on the PR, and clean up when the PR closes.
-- [ ] **terraform-plan**: runs on `infra/**` changes and posts the plan as a PR comment.
-- [ ] Turn on branch protection requiring `validate`, `spelling` and the Terraform checks.
+- [x] **validate**: schema and YAML lint, Hugo build, HTML validation, link check. Required. `validate.yml` runs the content checks, the build and `html-links` on every change, and the accessibility and Lighthouse jobs only when the design changes. A final job named `validate` collects them, so branch protection needs only that name. It replaces the earlier `content` and `site` workflows.
+- [x] **spelling** (advisory): `typos` on the lines a PR changes, with a project dictionary (`_typos.toml`) for actor names and slang. `spelling.yml`, `scripts/prose/spelling.py`. It checks changed lines, not whole files, so touching a legacy review does not mean fixing its old typos. Not a required check.
+- [x] **grammar-review** (advisory): `grammar-review.yml`, `scripts/prose/grammar.py`, documented in `scripts/prose/README.md`.
+  - Runs on PRs that touch `content/**` or `data/**`, over the changed prose only, with a cap of 50 files per run.
+  - Changed from the plan: it uses LanguageTool and Harper, not the Claude API. The goal is wrong-word errors a spell checker misses (to/too/two, its/it's), and the two tools together cover them for free. So it needs no `ANTHROPIC_API_KEY`.
+  - The rules (`scripts/prose/rules.json`) leave out style, punctuation and tone, since the voice is intentionally informal and irreverent.
+  - Both prose checks post a comment-only PR review with inline comments and, where the fix is a plain replacement, a suggestion block (`scripts/prose/review.py`). Comments already posted are not repeated on a push. On a fork, where the token is read-only, they fall back to warning annotations.
+  - Not a required check until the grammar review has proven useful.
+- [ ] **preview** (needs the Phase 5 staging bucket and deploy role): build and publish under a per-PR prefix in staging, comment the link on the PR, and clean up when the PR closes.
+- [ ] **terraform-plan** (needs the Phase 5 state backend and role): runs on `infra/**` changes and posts the plan as a PR comment.
+- [ ] Turn on branch protection requiring `validate` and the Terraform checks. `scripts/github/branch-protection.sh` does it for `validate`; run it by hand, and add the Terraform checks to it in Phase 5.
 
 ## Phase 5: Infrastructure (Terraform)
 
@@ -268,7 +268,7 @@ The current zone has no records beyond the registrar's domain parking, so there 
 - **DNS cutover:** low risk, since the zone holds no mail or verification records. The main hazard is DNSSEC being enabled, which would break resolution after the move. Mitigated by checking it first and querying the Route 53 nameservers directly before the switch.
 - **Visual fidelity:** the float layout and image decoration are where the look drifts. Mitigated by screenshot diffs against the Phase 0 captures.
 - **Silent data loss:** the encoding conversion and the hand-written HTML bodies. Mitigated by the parity diff.
-- **Agentic check noise and cost:** bounded by scoping to changed files, a per-run cap, and keeping it advisory.
+- **Grammar check noise:** bounded by scoping to changed lines, a per-run cap, a rule list that leaves out style, and keeping it advisory.
 
 ## Open items
 

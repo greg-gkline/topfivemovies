@@ -1,0 +1,39 @@
+name: spelling
+
+# Advisory: typos on the lines a pull request changes in content/ and data/
+# (scripts/prose/spelling.py). Names and slang go in _typos.toml.
+# Findings are posted as a pull request review with suggestions, and listed in the job
+# summary. The review only comments, and the job never fails because of a misspelling.
+# On a fork the token is read-only, so there the findings are warnings on the lines
+# instead.
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "data/**"
+      - "_typos.toml"
+      - "scripts/prose/**"
+      - ".github/workflows/spelling.yml"
+
+permissions:
+  contents: read
+  pull-requests: write   # to post the review
+
+jobs:
+  spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}   # the commit the review comments on
+          fetch-depth: 0   # the diff against the merge base
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install typos
+        run: pip install typos==1.51.1
+      - name: Check changed lines
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 -I scripts/prose/spelling.py --base "$BASE"

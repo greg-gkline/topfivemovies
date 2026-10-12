@@ -1,0 +1,32 @@
+{
+  "_comment": "Which rules the grammar check (grammar.py) reports. The point is wrong-word errors that a spell checker cannot see (to/too/two, its/it's, then/than), so style, punctuation and tone rules are off: the voice is informal on purpose.",
+  "languagetool": {
+    "disabled_categories": [
+      "TYPOGRAPHY", "PUNCTUATION", "STYLE", "CASING", "REDUNDANCY", "REPETITIONS_STYLE",
+      "MULTITOKEN_SPELLING", "BRITISH_ENGLISH", "COMPOUNDING", "NONSTANDARD_PHRASES"
+    ],
+    "disabled_rules": [
+      "MORFOLOGIK_RULE_EN_US",
+      "HARPERS_BAZAAR",
+      "DETERMINER_GEOGRAPHICAL_WORD",
+      "COLLECTIVE_NOUN_VERB_AGREEMENT_VBP",
+      "DAY_TO_DAY_HYPHEN",
+      "I_LOWERCASE",
+      "DEGREE_HYPHEN", "HOUR_HYPHEN", "ALL_TIME_HYPHEN", "SO_CALLED_HYPHEN", "CA_BRAND_NEW",
+      "EN_SPLIT_WORDS_HYPHEN", "HOLE_COMPOUNDS", "THE_SUPERLATIVE", "POSSESSIVE_APOSTROPHE",
+      "BOB_WIRE", "IS_US", "YO_TO"
+    ],
+    "disabled_rule_prefixes": ["EN_COMPOUNDS_", "EN_DIACRITICS_"]
+  },
+  "harper": {
+    "kinds": [
+      "Grammar", "Agreement", "Word Choice", "Usage", "Typo", "Miscellaneous", "Repetition",
+      "BoundaryError"
+    ],
+    "disabled_rules": [
+      "AvoidCurses", "SplitWords", "WillNonLemma", "GoodAt", "MassNouns", "Everyone",
+      "FillerWords", "Overall", "CompoundNouns", "MissingPreposition", "QuantifierNumeralConflict",
+      "QuantifierNeedsOf"
+    ]
+  }
+}

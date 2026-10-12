@@ -10,7 +10,7 @@ python3 scripts/export/spotcheck.py  # field-by-field comparison of the content 
 scripts/content/validate.sh          # schemas, YAML lint, cross-references
 ```
 
-Hugo is pinned to **0.147.9 extended**, in `.github/workflows/site.yml` and `.devcontainer/devcontainer.json`, and `hugo.yaml` requires at least that version. The templates use the template layout introduced in 0.146 (`layouts/_partials/`, `layouts/<type>/page.html`), so Debian's older Hugo package cannot build the site. Two builds of the same commit are byte-identical.
+Hugo is pinned to **0.147.9 extended**, in `.github/workflows/validate.yml` and `.devcontainer/devcontainer.json`, and `hugo.yaml` requires at least that version. The templates use the template layout introduced in 0.146 (`layouts/_partials/`, `layouts/<type>/page.html`), so Debian's older Hugo package cannot build the site. Two builds of the same commit are byte-identical.
 
 ## Addresses
 
