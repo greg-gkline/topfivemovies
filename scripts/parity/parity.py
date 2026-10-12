@@ -45,6 +45,12 @@ REMOVED_LINES = {
     "xhtml 1.0": "XHTML validator link; the pages are HTML5 now",
     "View results w/o voting": "voting is retired; the home page shows the latest results",
 }
+# The legacy pages had hidden "skip" links before each block (display: none, so no one
+# could use them). Phase 3 replaced them with one "Skip to main content" link and landmarks.
+SKIP_LINKS = "hidden skip link; replaced by one 'Skip to main content' link and landmarks"
+REMOVED_LINES.update({line: SKIP_LINKS for line in (
+    "skip navigation", "skip recent additions", "skip poll", "skip featured story",
+    "Go to Featured Story")})
 
 # Text removed from one page on purpose: (legacy page, exact line) -> reason.
 # The home page's featured story was a random recent review chosen each day; it is

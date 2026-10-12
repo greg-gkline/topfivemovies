@@ -1,0 +1,14 @@
+{{- /*
+  A <picture> for an image resource: a WebP source when it is smaller than the original,
+  then the original as the <img> fallback. Hugo 0.147 cannot encode AVIF (it returns the
+  original format), so WebP is the only modern format offered.
+  Takes dict "img" <resource> "alt" <text>, and optional "width"/"height" to show it
+  scaled (otherwise its own size), "lazy" true for pictures below the fold and "class"
+  for the <picture>.
+*/ -}}
+{{- $img := .img -}}
+{{- $webp := $img.Process "webp" -}}
+<picture{{ with .class }} class="{{ . }}"{{ end }}>
+{{- if lt (len $webp.Content) (len $img.Content) }}<source srcset="{{ $webp.RelPermalink }}" type="image/webp">{{ end -}}
+<img src="{{ $img.RelPermalink }}" width="{{ .width | default $img.Width }}" height="{{ .height | default $img.Height }}" alt="{{ .alt }}"{{ if .lazy }} loading="lazy" decoding="async"{{ end }}></picture>
+{{- /* no trailing newline */ -}}

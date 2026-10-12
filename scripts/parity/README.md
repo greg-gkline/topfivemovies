@@ -16,7 +16,7 @@ Hugo is pinned to **0.147.9 extended**, in `.github/workflows/site.yml` and `.de
 
 `uglyURLs` publishes every item at its filename: `content/reviews/the-hurricane.md` is `/reviews/the-hurricane.html`. Sections are `/reviews.html`, `/chickflicks.html`, `/other.html`, `/top5.html` and `/authors.html` (About Us). The standalone pages are `/groupbio.html` and `/polls.html`. Also built: `/index.xml` (RSS), `/sitemap.xml`, `/robots.txt` and `/404.html`.
 
-Content images are published at `/content/images/<name>`, theme images at `/images/<name>`. The CSS and JavaScript are fingerprinted, with `integrity` attributes.
+Content images are published at `/content/images/<name>`, with a WebP copy beside each where it is smaller; theme images at `/images/<name>`. The CSS and JavaScript are fingerprinted, with `integrity` attributes.
 
 ## Templates
 
@@ -28,7 +28,7 @@ Content images are published at `/content/images/<name>`, theme images at `/imag
 | Home | `home.html`, RSS `home.rss.xml` |
 | Group bio, poll archive | `groupbio.html`, `polls.html`, chosen by `layout:` in `content/groupbio.md` and `content/polls.md` |
 
-All pages share `baseof.html` (banner, navigation, footer). The markup keeps the legacy element structure, ids and classes, so `assets/css/elegant_inner.css` and `assets/css/elegant.css` are the legacy stylesheets with only their image URLs changed (they run as templates so Hugo publishes the images) and a few rules for new elements at the end. Phase 3 ports them and moves the markup to semantic HTML.
+All pages share `baseof.html` (header, navigation, footer). Phase 3 moved the markup to semantic HTML and replaced the legacy stylesheets with `assets/css/common.css`, `inner.css` and `home.css`; see `scripts/quality/README.md`.
 
 The copy that the legacy templates hard-coded is now content, so the spelling and grammar checks will cover it: each section's introduction is its `_index.md`, About Us's teaser is `content/authors/_index.md`, and the group bio is `content/groupbio.md`, laid out with the `origins` and `member` shortcodes. Their front matter is checked by `scripts/content/schemas/section.json` and `page.json`.
 
@@ -61,6 +61,7 @@ Expected differences are listed in the script with the reason for each:
 
 - pages not carried over (above), and the draft `other_15`;
 - the "xhtml 1.0" and "View results w/o voting" links;
+- the hidden "skip navigation"-style links, replaced in Phase 3 by one "Skip to main content" link and landmarks;
 - the home page's featured story, since the baseline captured that day's random pick.
 
 With every legacy item in `content/`, it checks 12,549 lines on 169 pages and finds nothing missing. A changed rating or byline in one built page is reported.

@@ -1,0 +1,280 @@
+/* common.css: shared by every page. Design tokens, the page frame, the header, the
+   navigation and the footer. Ported from the rules that web/styles/elegant_inner.css
+   and web/styles/elegant.css repeat. Inner pages add inner.css, the home page home.css.
+   Every length is the legacy one, so the desktop layout matches it pixel for pixel. */
+
+:root {
+	--color-text: #000;
+	--color-bg: #fff;
+	--color-link: #666;          /* links, headings, the picture borders */
+	--color-link-hover: #000;
+	--color-heading: gray;       /* page headings */
+	--color-rule: silver;        /* navigation and box borders */
+	--color-rule-dark: #666;     /* dotted separators, column dividers */
+	--color-stripe: whitesmoke;  /* every other table row */
+	--color-frame: #080808;      /* the line around the top of the page */
+	--color-fade: #c6c6c6;       /* bottom of the gray fade in the side boxes */
+	--color-bar: maroon;         /* poll results */
+
+	--font-sans: "bitstream vera sans", tahoma, arial, sans-serif;
+	--font-serif: georgia, serif;
+	/* Type sizes, in the legacy pixels. Larger on small screens (see the end). */
+	--text-xs: 9px;
+	--text-s: 10px;
+	--text-base: 11px;
+	--text-m: 12px;
+	--text-l: 14px;
+	--text-xl: 16px;
+	--text-2xl: 18px;
+	--text-3xl: 24px;
+
+	--page-width: 700px;
+	--gutter: 16px;              /* side margin on small screens */
+
+	/* The bullet of the side lists: a gray arrow, the size of the legacy grayarrow.gif. */
+	--arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='20'%3E%3Cpath d='M1.5 16.5h9M7.5 13.5l3 3-3 3' fill='none' stroke='%23919191' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-size: var(--text-base);
+	font-family: var(--font-sans);
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+a {
+	color: var(--color-link);
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	text-decoration: underline;
+}
+
+a:focus-visible {
+	outline: 2px solid var(--color-link);
+	outline-offset: 1px;
+}
+
+/* A <picture> lays out as its <img>, so pictures float and size as images did. */
+picture {
+	display: contents;
+}
+
+/* Not rendered either way; hidden so a <picture> with display: contents does not
+   hand a grid or flex container an extra item. */
+source {
+	display: none;
+}
+
+/* Borders go outside an image's width and height attributes, as they did. */
+img {
+	box-sizing: content-box;
+	border: 0;
+}
+
+/* Hidden on screen, read by screen readers. */
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.skip-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	padding: 4px 8px;
+	background: var(--color-bg);
+	transform: translateY(-100%);
+}
+
+.skip-link:focus {
+	transform: none;
+}
+
+
+/* --- Page and frame --- */
+
+.page {
+	position: relative;
+	width: var(--page-width);
+	margin: 15px auto;
+}
+
+/* The frame around the top of the page: a dark line across the top and down both
+   sides, with a shadow on the right, fading out downwards. It was fadeframe.gif,
+   a 745 x 375 background centred on the body; the opacities are measured from it. */
+.page::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: -7px;
+	left: -14px;
+	width: 733px;
+	height: 367px;
+	background:
+		linear-gradient(var(--color-frame), var(--color-frame)) 0 0 / 727px 1px no-repeat,
+		linear-gradient(var(--color-frame), var(--color-frame)) 0 0 / 1px 100% no-repeat,
+		linear-gradient(var(--color-frame), var(--color-frame)) 726px 0 / 1px 100% no-repeat,
+		linear-gradient(to right,
+			rgb(0 0 0 / 0.77) 0.5px, rgb(0 0 0 / 0.62) 1.5px, rgb(0 0 0 / 0.51) 2.5px,
+			rgb(0 0 0 / 0.31) 3.5px, rgb(0 0 0 / 0.17) 4.5px, rgb(0 0 0 / 0.06) 5.5px)
+			727px 2px / 6px 100% no-repeat;
+	mask-image: linear-gradient(#000, rgb(0 0 0 / 0.94) 12px, rgb(0 0 0 / 0.61) 92px,
+		rgb(0 0 0 / 0.35) 192px, rgb(0 0 0 / 0.16) 292px, transparent);
+	pointer-events: none;
+}
+
+
+/* --- Header --- */
+
+.site-header {
+	display: grid;
+	grid-template-columns: 300px 400px;
+	align-items: start;
+}
+
+.brand {
+	grid-column: 1;
+	grid-row: 1;
+	width: 235px;
+	margin: 0;
+	font-size: inherit;
+}
+
+.brand a,
+.brand img {
+	display: block;
+}
+
+/* The items stay inline, as they were: the spaces between them are part of the spacing. */
+.site-nav {
+	grid-column: 2;
+	grid-row: 1;
+	border-top: 1px solid var(--color-rule);
+	text-align: right;
+}
+
+.site-nav ul {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.site-nav li {
+	display: inline;
+	margin-left: 10px;
+	text-transform: lowercase;
+}
+
+
+/* --- Footer --- */
+
+.site-footer {
+	margin: 2em 0;
+}
+
+.license {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	height: 35px;
+	margin: 1em 0;
+}
+
+.license a,
+.license img {
+	display: block;
+	flex: none;
+}
+
+.license p,
+.feeds {
+	margin: 0;
+}
+
+
+/* --- Small screens: one column, the frame and fixed widths go --- */
+
+@media (max-width: 739px) {
+	/* The legacy 9-11px text is too small to read on a phone. */
+	:root {
+		--text-xs: 12px;
+		--text-s: 13px;
+		--text-base: 14px;
+		--text-m: 15px;
+		--text-l: 16px;
+		--text-xl: 18px;
+		--text-2xl: 20px;
+		--text-3xl: 26px;
+	}
+
+	.page {
+		width: auto;
+		margin: 15px var(--gutter);
+	}
+
+	.page::before {
+		display: none;
+	}
+
+	.site-header {
+		grid-template-columns: 1fr;
+		row-gap: 1em;
+	}
+
+	.brand,
+	.site-nav {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	.brand {
+		max-width: 100%;
+	}
+
+	.site-nav {
+		text-align: left;
+	}
+
+	.site-nav ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 14px;
+	}
+
+	.site-nav li {
+		display: block;
+		margin: 0;
+		padding: 6px 0;
+	}
+
+	.license {
+		height: auto;
+	}
+
+	/* Touch targets at least 24px apart (WCAG 2.2, 2.5.8) */
+	.recent li {
+		padding: 5px 0;
+	}
+}

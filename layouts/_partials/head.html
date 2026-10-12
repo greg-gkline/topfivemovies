@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ partial "page-title.html" . }}</title>
 {{- $keywords := slice -}}
 {{- $description := site.Params.description -}}
@@ -31,7 +32,9 @@
 {{- with site.Home.OutputFormats.Get "rss" }}
 <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{{ .RelPermalink }}">
 {{- end }}
-{{- $css := cond .IsHome "css/elegant.css" "css/elegant_inner.css" }}
-{{- with resources.Get $css | resources.ExecuteAsTemplate $css . | fingerprint }}
+{{- /* common.css plus the home page's or the inner pages' sheet, as one file */}}
+{{- $sheet := cond .IsHome "home" "inner" }}
+{{- $css := slice (resources.Get "css/common.css") (resources.Get (printf "css/%s.css" $sheet)) }}
+{{- with $css | resources.Concat (printf "css/%s.bundle.css" $sheet) | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
 {{- end }}

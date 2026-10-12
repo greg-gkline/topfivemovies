@@ -1,18 +1,18 @@
 {{- /*
   The final results of one poll. Takes dict "poll" <entry of data/polls.yaml>
   "page" <page, to render markdown> "barwidth" <pixels of a 100% bar>.
+  Each bar is an inline SVG, so its length needs no style attribute.
 */ -}}
 {{- $total := 0 -}}
 {{- range .poll.options }}{{ $total = add $total .votes }}{{ end -}}
 <div class="polldescription">{{ .page.RenderString .poll.question }}</div>
 {{- if eq $total 0 }}
-<div class="results">No one voted in this poll</div>
+<p class="results">No one voted in this poll</p>
 {{- else }}
-{{- $bar := resources.Get "images/maroon_dot.jpg" }}
 {{- range .poll.options }}
 {{- $pct := int (div (mul 100.0 .votes) $total) }}
 <p>{{ $.page.RenderString .text }} ({{ $pct }}%)<br>
-<img src="{{ $bar.RelPermalink }}" height="3" width="{{ int (div (mul $.barwidth $pct) 100) }}" alt="{{ .votes }} {{ cond (eq .votes 1) "vote" "votes" }}"></p>
+<svg class="bar" width="{{ int (div (mul $.barwidth $pct) 100) }}" height="3" role="img" aria-label="{{ .votes }} {{ cond (eq .votes 1) "vote" "votes" }}"><rect width="100%" height="100%"/></svg></p>
 {{- end }}
-<div class="bodyText">Based on {{ $total }} total votes</div>
+<p class="total">Based on {{ $total }} total votes</p>
 {{- end }}

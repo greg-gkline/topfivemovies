@@ -4,3 +4,7 @@
 .hugo_build.lock
 
 __pycache__/
+
+# Quality-gate tools and reports (scripts/quality)
+/.cache/
+/.lighthouseci/

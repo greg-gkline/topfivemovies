@@ -1,6 +1,9 @@
 name: site
 
-# Builds the site with Hugo. Phase 4 folds this into the full `validate` check.
+# Builds the site with Hugo, then runs the Phase 3 quality gates on the build:
+# HTML validation, accessibility and internal links (scripts/quality/check.sh), and
+# Lighthouse CI budgets (scripts/quality/lighthouserc.json). Phase 4 folds these into
+# the full `validate` check.
 # The parity diff (scripts/parity/) is not run here: it compares with the legacy
 # site, so it is run by hand during the cutover, not on every change.
 on:
@@ -30,4 +33,41 @@ jobs:
         with:
           name: public
           path: public/
+          retention-days: 7
+
+  # HTML validation (vnu, on the runner's Java), axe on every page (the runner's Chrome)
+  # and the internal link check. The tools are pinned and checksummed in tools.sh.
+  quality:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: public
+          path: public/
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install Selenium
+        run: pip install selenium==4.49.0
+      - name: Check
+        run: NO_BUILD=1 scripts/quality/check.sh html a11y links
+
+  lighthouse:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: public
+          path: public/
+      - name: Lighthouse CI
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=scripts/quality/lighthouserc.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: lighthouse
+          path: .cache/lighthouse/
           retention-days: 7

@@ -1,26 +1,22 @@
-<div id="footer">
-	<div id="footernav">
+<footer class="site-footer">
+	<nav class="footer-nav" aria-label="Site">
 		<a href="{{ site.Home.RelPermalink }}">Home</a> |
 		<a href="{{ (site.GetPage "/top5").RelPermalink }}">Top 5 Lists</a> |
 		<a href="{{ (site.GetPage "/reviews").RelPermalink }}">Reviews</a> |
 		<a href="{{ (site.GetPage "/chickflicks").RelPermalink }}">Chick Flicks</a> |
 		<a href="{{ (site.GetPage "/other").RelPermalink }}">Other Features</a> |
 		<a href="{{ (site.GetPage "/authors").RelPermalink }}">About Us</a>
-	</div>
+	</nav>
 
-	<div id="copyright">
-		<div id="cclogo">
-			<a href="https://creativecommons.org/licenses/by-nc-sa/2.5/" title="learn more about Creative Commons licensing" rel="license">{{ with resources.Get "images/somerights20.png" }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Creative Commons">{{ end }}</a>
-		</div>
-		<div id="cctext">
+	<div class="license">
+		<a href="https://creativecommons.org/licenses/by-nc-sa/2.5/" title="learn more about Creative Commons licensing" rel="license">{{ partial "picture.html" (dict "img" (resources.Get "images/somerights20.png") "alt" "Creative Commons" "lazy" true) }}</a>
+		<p>
 			This site design and all articles by Greg are free for non-commercial use with attribution.<br>
 			All other articles contained herein are the copyright of their respective authors, unless otherwise noted.
-		</div>
+		</p>
 	</div>
 
-	<div id="tech">
-		{{- with site.Home.OutputFormats.Get "rss" }}
-		<a type="application/rss+xml" href="{{ .RelPermalink }}" title="Syndicate TopFiveMovies with an RSS feed">rss 2.0</a>
-		{{- end }}
-	</div>
-</div>
+	{{- with site.Home.OutputFormats.Get "rss" }}
+	<p class="feeds"><a type="application/rss+xml" href="{{ .RelPermalink }}" title="Syndicate TopFiveMovies with an RSS feed">rss 2.0</a></p>
+	{{- end }}
+</footer>

@@ -1,11 +1,11 @@
+{{ define "layout" }}item{{ end }}
+
 {{ define "main" }}
 {{ partial "clickpath.html" . }}
 
-{{ partial "recent.html" . }}
-
-<div class="topfive">
+<article class="topfive">
 	{{ partial "item-image.html" . }}
-	<h2 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+	<h1 class="title">{{ .Title }}</h1>
 	{{- partial "byline.html" . }}
 	<div class="text">{{ .Content }}</div>
 	<ol>
@@ -28,5 +28,7 @@
 	</ol>
 	{{- partial "prevnext.html" . }}
 	{{- partial "responses.html" . }}
-</div>
+</article>
+
+{{ partial "recent.html" . }}
 {{ end }}

@@ -1,11 +1,8 @@
-<div id="navbar">
-	<div class="access"><a href="#skipnav">skip navigation</a></div>
+<nav class="site-nav" aria-label="Sections">
 	<ul>
-		<li><a href="{{ (site.GetPage "/top5").RelPermalink }}">Top 5 Lists</a></li>
-		<li><a href="{{ (site.GetPage "/reviews").RelPermalink }}">Reviews</a></li>
-		<li><a href="{{ (site.GetPage "/chickflicks").RelPermalink }}">Chick Flicks</a></li>
-		<li><a href="{{ (site.GetPage "/other").RelPermalink }}">Other</a></li>
-		<li><a href="{{ (site.GetPage "/authors").RelPermalink }}">About Us</a></li>
+		{{- range slice (dict "path" "/top5" "label" "Top 5 Lists") (dict "path" "/reviews" "label" "Reviews") (dict "path" "/chickflicks" "label" "Chick Flicks") (dict "path" "/other" "label" "Other") (dict "path" "/authors" "label" "About Us") }}
+		{{- $section := site.GetPage .path }}
+		<li><a href="{{ $section.RelPermalink }}"{{ if $.Eq $section }} aria-current="page"{{ end }}>{{ .label }}</a></li>
+		{{- end }}
 	</ul>
-</div>
-<div id="skipnav" class="access"></div>
+</nav>

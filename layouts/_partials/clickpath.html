@@ -1,2 +1,2 @@
 {{- /* "Home » <section>" above an item. Takes the page. */ -}}
-<div id="clickpath"><a href="{{ site.Home.RelPermalink }}">Home</a> &raquo; <a href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.Title }}</a></div>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ site.Home.RelPermalink }}">Home</a> &raquo; <a href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.Title }}</a></nav>

@@ -1,14 +1,15 @@
 {{ define "main" }}
-<h2 class="pageheader">{{ .Title }}</h2>
+<h1 class="pageheader">{{ .Title }}</h1>
 
 {{ .Content }}
 
-<div id="pollarchive">
+<div class="pollarchive">
 	{{- range sort site.Data.polls "date" "desc" }}
-	<div class="poll">
-		<div class="polldate">{{ (time.AsTime .date).Format "January 02, 2006" }}</div>
+	<section class="poll">
+		{{- $date := time.AsTime .date }}
+		<h2 class="polldate"><time datetime="{{ $date.Format "2006-01-02" }}">{{ $date.Format "January 02, 2006" }}</time></h2>
 		{{ partial "poll-results.html" (dict "poll" . "page" $ "barwidth" 300) }}
-	</div>
+	</section>
 	{{- end }}
 </div>
 {{ end }}

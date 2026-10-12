@@ -1,10 +1,10 @@
 {{- with partial "neighbors.html" . }}
-<div class="prevnext">
-	{{- with .next }}
-	<a class="next" href="{{ .RelPermalink }}" rel="next">Next: {{ .Title }} &raquo;</a>
-	{{- end }}
+<nav class="prevnext" aria-label="Previous and next">
 	{{- with .prev }}
 	<a class="prev" href="{{ .RelPermalink }}" rel="prev">&laquo; Previous: {{ .Title }}</a>
 	{{- end }}
-</div>
+	{{- with .next }}
+	<a class="next" href="{{ .RelPermalink }}" rel="next">Next: {{ .Title }} &raquo;</a>
+	{{- end }}
+</nav>
 {{- end }}

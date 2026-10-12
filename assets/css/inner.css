@@ -1,0 +1,694 @@
+/* inner.css: every page but the home page. A port of web/styles/elegant_inner.css.
+   The page layouts (item, author, About Us) are grids where the legacy sheet used
+   floats and margins; pictures still float, so the text wraps around them as before.
+   Lengths are the legacy ones, measured from the legacy pages where its margins
+   collapsed into float clearance (noted where they differ from the old rule). */
+
+h1,
+h2 {
+	margin-top: 0;
+	padding: 0;
+	color: var(--color-link);
+	font-size: var(--text-m);
+	font-family: var(--font-serif);
+	font-style: italic;
+	text-transform: lowercase;
+}
+
+h1 {
+	margin-bottom: 0.83em;
+}
+
+h3 {
+	margin: 0;
+	padding: 0;
+	font-size: var(--text-m);
+	border-bottom: 1px solid var(--color-rule);
+}
+
+main {
+	display: flow-root;
+}
+
+/* "Home » Reviews" above an item. Was 6em on top, which the float clearance absorbed. */
+.breadcrumb {
+	margin: 1px 0 3em 10px;
+}
+
+/* Section headings: Reviews, Top Five Lists and so on. Was 3em on top, collapsed by
+   float clearance to 7px. */
+h1.pageheader {
+	margin: 7px 0 0.83em;
+	color: var(--color-heading);
+	font-size: var(--text-3xl);
+	font-weight: bold;
+}
+
+
+/* A table straight after the heading (Other Features): the legacy page had an empty
+   paragraph between them, so the gap is the heading's margin, one 13px line and the
+   paragraph's 11px margin. */
+h1.pageheader + .table-wrap {
+	margin-top: calc(19.92px + 13px + 11px);
+}
+
+
+/* --- Item pages: the recent additions box on the left, the item on the right --- */
+
+main.item {
+	display: grid;
+	grid-template-columns: 182px 480px;
+	column-gap: 18px;
+	align-items: start;
+}
+
+main.item > .breadcrumb {
+	grid-column: 1 / -1;
+}
+
+main.item > article {
+	grid-column: 2;
+	grid-row: 2;
+	margin-bottom: 20px;
+}
+
+main.item > .recent {
+	grid-column: 1;
+	grid-row: 2;
+}
+
+/* Recent additions. The gray fade was grayfade.gif, the arrows grayarrow.gif. */
+.recent {
+	padding: 5px;
+	border: 1px solid var(--color-rule);
+	background: linear-gradient(var(--color-bg), var(--color-fade)) bottom / 100% 90px no-repeat;
+}
+
+.recent ul {
+	margin: 0 15px 30px -15px;
+	list-style-image: var(--arrow);
+}
+
+.recent li {
+	font-size: var(--text-base);
+}
+
+/* The item: a review, a feature or a top-five list */
+.review .item-image img,
+.topfive .item-image img {
+	float: right;
+	margin-left: 20px;
+	border: 2px solid var(--color-link);
+}
+
+.review p,
+.topfive p {
+	margin-top: 0;
+	margin-right: 160px;
+	padding-top: 0;
+	line-height: 1.8em;
+	text-indent: 20px;
+}
+
+.review .title,
+.topfive .title {
+	margin: 0 0 0.5em;
+	font-size: var(--text-l);
+	font-family: var(--font-sans);
+	font-style: normal;
+	font-weight: bold;
+	text-transform: none;
+}
+
+.review .starring {
+	margin-bottom: 2em;
+	font-style: italic;
+}
+
+.review .rating,
+.byline .author {
+	font-weight: bold;
+}
+
+.review .subtitle {
+	margin-bottom: 0.5em;
+	color: var(--color-link);
+}
+
+.byline .author,
+.byline .date {
+	margin-right: 10px;
+}
+
+.review .text,
+.topfive .text {
+	margin-top: 2em;
+}
+
+.review .text ul {
+	width: 250px;
+	line-height: 1.5em;
+}
+
+.review .text ul li {
+	margin-bottom: 0.5em;
+}
+
+.topfive ol {
+	margin-top: 1.5em;
+}
+
+.topfive li {
+	margin-bottom: 1.5em;
+	color: var(--color-link);
+	font-size: var(--text-l);
+	font-weight: bold;
+}
+
+.topfive li .bodyText {
+	font-size: var(--text-s);
+	font-weight: normal;
+}
+
+.topfive li .headline {
+	margin-top: 1em;
+}
+
+/* Previous and next item (new; the legacy pages had none) */
+.prevnext {
+	display: flex;
+	gap: 1em;
+	clear: both;
+	margin: 3em 160px 0 0;
+	padding-top: 0.5em;
+	border-top: 1px solid var(--color-rule);
+}
+
+.prevnext .next {
+	margin-left: auto;
+	text-align: right;
+}
+
+
+/* --- Staff responses: a photo and a speech bubble --- */
+
+#staff_responses {
+	margin-top: 4em;
+	border-top: 1px dotted var(--color-rule-dark);
+}
+
+.response {
+	display: grid;
+	grid-template-columns: 100px 357px;
+	align-items: start;
+}
+
+.response img {
+	grid-column: 1;
+	display: block;
+	margin-left: 20px;
+	border: 2px solid var(--color-link);
+}
+
+/* The bubble was three GIFs (bubble_left, bubble_mid, bubble_right): a rounded box
+   with a black outline and a soft shadow, and a tail pointing at the photo. */
+.bubble {
+	grid-column: 2;
+	position: relative;
+	min-height: 92px;
+	margin: 3px 5px 0 28px;
+	padding: 5px 12px 5px 8px;
+	border: 2px solid #000;
+	border-radius: 11px;
+	background: var(--color-bg);
+	filter: drop-shadow(2px 2px 1.5px rgb(0 0 0 / 0.35));
+}
+
+/* The tail: a black wedge, and a white one inside it that also hides the box's
+   outline where the two join. */
+.bubble::before,
+.bubble::after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -26px;
+	width: 28px;
+	height: 80px;
+}
+
+.bubble::before {
+	background: #000;
+	clip-path: polygon(0 67px, 26px 64px, 26px 77px, 0 70px);
+}
+
+.bubble::after {
+	background: var(--color-bg);
+	clip-path: polygon(3.5px 68.8px, 28px 66px, 28px 75.2px);
+}
+
+
+/* --- Index pages: Reviews, Top Five Lists, Chick Flicks, Other --- */
+
+table {
+	width: 700px;
+	border-spacing: 0;
+	font-size: var(--text-base);
+	font-family: var(--font-sans);
+}
+
+/* Cell widths are content widths, as in the legacy sheet. */
+th,
+td {
+	box-sizing: content-box;
+	padding: 0;
+}
+
+th {
+	text-align: left;
+}
+
+tr {
+	height: 2em;
+}
+
+tr.other {
+	height: 4em;
+}
+
+.review_type,
+.review_rating {
+	text-align: center;
+}
+
+.review_name {
+	width: 300px;
+}
+
+td.other_title .subtitle {
+	display: block;
+	font-size: var(--text-xs);
+}
+
+.topfive_title,
+.other_title {
+	width: 400px;
+	padding-right: 20px;
+}
+
+/* Striped rows, fading to white at both ends (were smokefadeleft.jpg and
+   smokefaderight.jpg) */
+tr.even {
+	background-color: var(--color-stripe);
+}
+
+tr.even td:first-child {
+	background: linear-gradient(to right, var(--color-bg), var(--color-stripe) 30px);
+}
+
+tr.even td:last-child {
+	background: linear-gradient(to left, var(--color-bg), var(--color-stripe) 30px);
+}
+
+td a {
+	display: block;
+	width: 100%;
+}
+
+/* Sortable columns: sort-table.js turns the headings into buttons */
+th button {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--color-link);
+	font: inherit;
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+th button:hover {
+	color: var(--color-link-hover);
+}
+
+
+/* --- About Us: the group's origins on the left, the authors on the right --- */
+
+main.about {
+	display: grid;
+	grid-template-columns: 326px 350px;
+	column-gap: 24px;
+	align-items: start;
+	margin-top: 22px;
+}
+
+main.about .origins {
+	padding-right: 25px;
+	border-right: 1px solid var(--color-rule-dark);
+}
+
+main.about .authors {
+	margin-top: 1px;
+}
+
+.authors .author {
+	clear: right;
+	margin-bottom: 1em;
+	padding-top: 3px;
+	border-top: 1px dotted var(--color-rule-dark);
+}
+
+.authors .author:first-of-type {
+	border-top: 0;
+}
+
+.author .item-image img {
+	float: right;
+}
+
+.author .name {
+	margin-bottom: 0.5em;
+	border: 0;
+	color: var(--color-link);
+	font-size: var(--text-l);
+	font-weight: bold;
+}
+
+.author .jobtitle {
+	margin-bottom: 2.5em;
+	font-style: italic;
+}
+
+
+/* --- An author's page: bio on the left, contributions on the right --- */
+
+main.author-page {
+	display: grid;
+	grid-template-columns: 331px 320px;
+	column-gap: 19px;
+	align-items: start;
+}
+
+main.author-page > .breadcrumb {
+	grid-column: 1 / -1;
+}
+
+.author_info {
+	margin: 3em 0 0 10px;
+	padding-right: 20px;
+	border-right: 1px solid var(--color-rule-dark);
+}
+
+.author_info .item-image img {
+	float: right;
+	margin-left: 20px;
+}
+
+.author_info .name {
+	margin-bottom: 0.5em;
+	color: var(--color-link);
+	font-size: var(--text-xl);
+	font-family: var(--font-sans);
+	font-style: normal;
+	font-weight: bold;
+	text-transform: none;
+}
+
+.author_info .jobtitle {
+	margin-bottom: 2em;
+	font-size: var(--text-m);
+	font-style: italic;
+}
+
+.author_info .bio {
+	margin-bottom: 2em;
+	line-height: 1.5em;
+}
+
+/* Vital stats and fun facts (were a layout table in the bio text) */
+.facts {
+	width: 300px;
+	border-spacing: 2px;
+}
+
+.facts th,
+.facts td {
+	padding: 2px;
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+.facts th[scope="row"] {
+	width: 15%;
+}
+
+.facts tbody + tbody th[scope="rowgroup"] {
+	padding-top: 1.5em;
+}
+
+.contributions {
+	margin-top: 3em;
+}
+
+.contributions table {
+	width: 320px;
+}
+
+/* Links fill 24px rows, the minimum target size of WCAG 2.2 (2.5.8). The legacy table
+   was always empty, so there was no look to keep here. */
+.contributions tr {
+	height: auto;
+}
+
+.contributions td {
+	padding: 0;
+}
+
+.contributions td a {
+	padding: 5.5px 0;
+}
+
+.contributions td.other_date {
+	padding: 5.5px 0;
+}
+
+.contributions td.other_title {
+	width: 80%;
+	padding-right: 5px;
+}
+
+.contributions .other_date {
+	white-space: nowrap;
+}
+
+
+/* --- Group bio --- */
+
+.groupbio {
+	width: 500px;
+	margin: 1px 0 2em 50px;
+}
+
+/* Blocks of the group's story, on About Us and the group bio */
+.origin,
+.member {
+	clear: both;
+	margin-top: 2em;
+	line-height: 1.5em;
+}
+
+.member p {
+	margin-right: 100px;
+}
+
+.member img {
+	float: right;
+}
+
+.member.left p {
+	margin-right: 0;
+	margin-left: 100px;
+}
+
+.member.left img {
+	float: left;
+}
+
+
+/* --- Poll archive (new; the legacy site showed one poll at a time) --- */
+
+.pollarchive {
+	width: 500px;
+	margin: 3em 0 0 10px;
+}
+
+.pollarchive .poll {
+	margin-bottom: 2em;
+	padding-bottom: 1em;
+	border-bottom: 1px dotted var(--color-rule-dark);
+}
+
+.pollarchive .polldate {
+	margin: 0 0 1em;
+	color: inherit;
+	font-size: var(--text-base);
+	font-family: var(--font-sans);
+	font-weight: normal;
+	text-transform: none;
+}
+
+.pollarchive p {
+	margin: 8px 0;
+}
+
+.bar {
+	fill: var(--color-bar);
+}
+
+
+/* --- Small screens: one column --- */
+
+@media (max-width: 739px) {
+	main.item,
+	main.about,
+	main.author-page {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 2em;
+	}
+
+	main.item > article,
+	main.item > .recent,
+	main.author-page > * {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	.breadcrumb {
+		margin: 1em 0;
+	}
+
+	h1.pageheader {
+		margin-top: 0.5em;
+	}
+
+	main.about .origins {
+		padding-right: 0;
+		border-right: 0;
+	}
+
+	.author_info {
+		margin: 0;
+		padding-right: 0;
+		border-right: 0;
+	}
+
+	.contributions {
+		margin-top: 0;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.review .item-image img,
+	.topfive .item-image img,
+	.member img {
+		max-width: 40%;
+	}
+
+	.review p,
+	.topfive p,
+	.prevnext,
+	.member p,
+	.member.left p {
+		margin-right: 0;
+		margin-left: 0;
+	}
+
+	.review .text ul {
+		width: auto;
+	}
+
+	.response {
+		grid-template-columns: 64px minmax(0, 1fr);
+		margin-bottom: 8px;
+	}
+
+	.response img {
+		width: 60px;
+		margin-left: 0;
+	}
+
+	.bubble {
+		min-height: 0;
+		margin-right: 4px;
+	}
+
+	.bubble::before,
+	.bubble::after {
+		top: -52px;
+	}
+
+	.table-wrap {
+		overflow-x: auto;
+	}
+
+	table,
+	.contributions table,
+	.facts,
+	.groupbio,
+	.pollarchive {
+		width: 100%;
+	}
+
+	.groupbio,
+	.pollarchive {
+		margin-left: 0;
+	}
+
+	.groupbio {
+		margin-top: 1em;
+	}
+
+	.review_name,
+	.topfive_title,
+	.other_title {
+		width: auto;
+	}
+
+	th,
+	td {
+		padding-right: 8px;
+	}
+
+	/* Touch targets at least 24px apart (WCAG 2.2, 2.5.8) */
+	tr {
+		height: 32px;
+	}
+
+	tr.other {
+		height: auto;
+	}
+
+	td.other_title {
+		padding: 6px 8px 6px 0;
+	}
+
+	th button {
+		min-height: 24px;
+	}
+
+	.review_date,
+	.topfive_date,
+	.other_date {
+		white-space: nowrap;
+	}
+
+	.member img {
+		margin: 0 0 4px 12px;
+	}
+
+	.member.left img {
+		margin: 0 12px 4px 0;
+	}
+}
