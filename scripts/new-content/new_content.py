@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Create the starting file for a new item from the name of a branch.
 
-A branch called `review-popeye` gets content/reviews/popeye.md, filled in from
+A branch called `review/popeye` gets content/reviews/popeye.md, filled in from
 templates/review.md. Used by .github/workflows/new-content.yml; it can also be run by hand:
 
-    python3 scripts/new-content/new_content.py review-the-hurricane
+    python3 scripts/new-content/new_content.py review/the-hurricane
 
 The branch name is untrusted input (anyone who can create a branch picks it), so it is
 checked against a strict pattern before it becomes a file name.
@@ -44,21 +44,21 @@ def main(argv):
         print(__doc__)
         return 2
     branch = argv[1]
-    prefix, _, slug = branch.partition("-")
+    prefix, _, slug = branch.partition("/")
     if prefix not in KINDS:
         print(f"{branch!r} is not a content branch.")
         return 2
     folder, template, kind_type = KINDS[prefix]
     if not SLUG.match(slug) or len(slug) > 80:
-        print(f"Cannot use the branch name {branch!r}: after '{prefix}-' use only lowercase letters, "
+        print(f"Cannot use the branch name {branch!r}: after '{prefix}/' use only lowercase letters, "
               "digits and single hyphens, for example "
-              f"'{prefix}-the-hurricane'. Delete the branch and create it again with a name like that.")
+              f"'{prefix}/the-hurricane'. Delete the branch and create it again with a name like that.")
         return 1
     target = ROOT / "content" / folder / f"{slug}.md"
     if target.exists():
         print(f"Cannot use the branch name {branch!r}: content/{folder}/{slug}.md already exists. "
               f"If this is a different item with the same title, delete the branch and create it "
-              f"again with the author's name on the end, for example '{prefix}-{slug}-greg'.")
+              f"again with the author's name on the end, for example '{prefix}/{slug}-greg'.")
         return 1
     text = (TEMPLATES / template).read_text(encoding="utf-8")
     title = title_from(slug)

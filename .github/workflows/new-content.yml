@@ -1,7 +1,7 @@
 name: new-content
 
-# Creating a branch named review-<title>, dvd-<title>, chickflick-<title>, top5-<title>,
-# other-<title> or author-<name> adds the starting file for that item to the branch
+# Creating a branch named review/<title>, dvd/<title>, chickflick/<title>, top5/<title>,
+# other/<title> or author/<name> adds the starting file for that item to the branch
 # (scripts/new-content/). The contributor then edits it in the GitHub UI and opens the pull
 # request, where the usual checks run. Guide: CONTRIBUTING.md.
 #
@@ -22,12 +22,12 @@ jobs:
   scaffold:
     if: >-
       github.event.ref_type == 'branch' && (
-        startsWith(github.event.ref, 'review-') ||
-        startsWith(github.event.ref, 'dvd-') ||
-        startsWith(github.event.ref, 'chickflick-') ||
-        startsWith(github.event.ref, 'top5-') ||
-        startsWith(github.event.ref, 'other-') ||
-        startsWith(github.event.ref, 'author-'))
+        startsWith(github.event.ref, 'review/') ||
+        startsWith(github.event.ref, 'dvd/') ||
+        startsWith(github.event.ref, 'chickflick/') ||
+        startsWith(github.event.ref, 'top5/') ||
+        startsWith(github.event.ref, 'other/') ||
+        startsWith(github.event.ref, 'author/'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

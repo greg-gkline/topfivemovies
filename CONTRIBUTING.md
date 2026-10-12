@@ -6,14 +6,14 @@ You can do everything here in your web browser on GitHub. You don't need to inst
 
 | You want to add | Name your branch |
 |---|---|
-| A movie review | `review-` and the movie's title |
-| A DVD review | `dvd-` and the title |
-| A chick flick review | `chickflick-` and the title |
-| A top-five list | `top5-` and the list's title |
-| An "other" feature | `other-` and the feature's title |
-| A new writer's page | `author-` and the writer's first name |
+| A movie review | `review/` and the movie's title |
+| A DVD review | `dvd/` and the title |
+| A chick flick review | `chickflick/` and the title |
+| A top-five list | `top5/` and the list's title |
+| An "other" feature | `other/` and the feature's title |
+| A new writer's page | `author/` and the writer's first name |
 
-Write the title in lowercase, with hyphens instead of spaces and no punctuation. For example, *The Hurricane* is `review-the-hurricane`, and a list called "Top 5 Actors to Avoid" is `top5-top-5-actors-to-avoid`.
+Write the title after the slash in lowercase, with hyphens instead of spaces and no punctuation. For example, *The Hurricane* is `review/the-hurricane`, and a list called "Top 5 Actors to Avoid" is `top5/top-5-actors-to-avoid`.
 
 ## Step by step
 
@@ -22,8 +22,8 @@ Write the title in lowercase, with hyphens instead of spaces and no punctuation.
 A branch is your own copy of the site to work on, so nothing you do affects the live site until it's approved.
 
 1. Open the repository's main page and click the branch button at the top left. It says **main**.
-2. Type your branch name, for example `review-popeye`.
-3. Click **Create branch review-popeye from main**.
+2. Type your branch name, for example `review/popeye`.
+3. Click **Create branch review/popeye from main**.
 
 Wait about a minute. GitHub then adds a starting file for you, in the right folder, with your title and today's date filled in.
 
