@@ -77,13 +77,15 @@ block, since removed. Both buckets are in `us-east-2` (the `region` variable).
 
 Terraform creates the CI users but not their access keys, because a key created by Terraform
 would have its secret stored in the state file. Create them by hand and hand them to GitHub
-as secrets of the `AWS 832474135782` GitHub environment (the secret never touches your disk):
+as GitHub secrets (the secret never touches your disk). The plan keys are repository secrets,
+which the plan workflow reads on pull requests. The deploy keys go in the `AWS 832474135782`
+environment, which is limited to `main`, so only a run on `main` can read them:
 
     aws iam create-access-key --user-name topfivemovies-plan   --query AccessKey --output json \
       | jq -r '.AccessKeyId, .SecretAccessKey' \
       | { read -r id; read -r secret; \
-          gh secret set AWS_PLAN_ACCESS_KEY_ID --env "AWS 832474135782" --body "$id"; \
-          gh secret set AWS_PLAN_SECRET_ACCESS_KEY --env "AWS 832474135782" --body "$secret"; }
+          gh secret set AWS_PLAN_ACCESS_KEY_ID --body "$id"; \
+          gh secret set AWS_PLAN_SECRET_ACCESS_KEY --body "$secret"; }
     aws iam create-access-key --user-name topfivemovies-deploy --query AccessKey --output json \
       | jq -r '.AccessKeyId, .SecretAccessKey' \
       | { read -r id; read -r secret; \
@@ -91,9 +93,9 @@ as secrets of the `AWS 832474135782` GitHub environment (the secret never touche
           gh secret set AWS_DEPLOY_SECRET_ACCESS_KEY --env "AWS 832474135782" --body "$secret"; }
 
 Until the `AWS_PLAN_*` secrets exist, the `terraform-plan` workflow does nothing. The deploy
-secrets are for the deploy workflow (Phase 6), which also has to name the environment.
-A job can read an environment's secrets only if it declares `environment:`; if the environment
-restricts its deployment branches, a pull request's branch has to be allowed for the plan job. Both users can do only what `iam.tf` gives
+secrets are for the deploy workflow (Phase 6), which declares `environment: "AWS 832474135782"`: a job
+can read an environment's secrets only if it declares the environment. The plan keys can be read by any workflow run in the repository, including a pull request's, so
+that user is read-only on purpose. Both users can do only what `iam.tf` gives
 their user policy: the plan user reads configuration and no object data, and the deploy user
 writes the site bucket and invalidates the cache, so a leaked key cannot change the
 infrastructure. Rotate them now and then with `aws iam create-access-key`, update the
@@ -114,7 +116,8 @@ sensitive, so a plan (including the one the workflow comments on a pull request)
   environment variables, so every `terraform` command there sees it.
 - **Devcontainer:** `export TF_VAR_alert_email=you@example.com` in your shell, not in a file
   that is committed.
-- **The plan workflow:** `gh secret set ALERT_EMAIL --env "AWS 832474135782"`. Set it the same as above, or the plan
+- **The plan workflow:** `gh secret set ALERT_EMAIL` (a repository secret, since the plan job
+  reads it). Set it the same as above, or the plan
   will show the alerts as removed.
 
 Use the same address everywhere. It does end up in the Terraform state (in the private state

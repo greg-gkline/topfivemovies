@@ -3,7 +3,8 @@ name: terraform-plan
 # Advisory: on a pull request that changes infra/, runs `terraform plan` and comments what
 # it would change. It signs in as the read-only `topfivemovies-plan` IAM user (infra/iam.tf)
 # with an access key from the secrets AWS_PLAN_ACCESS_KEY_ID and
-# AWS_PLAN_SECRET_ACCESS_KEY of the "AWS 832474135782" GitHub environment, and plans with -lock=false so it never writes to the state
+# AWS_PLAN_SECRET_ACCESS_KEY (repository secrets, not the environment that holds the deploy
+# keys), and plans with -lock=false so it never writes to the state
 # bucket. Without those secrets the job does nothing: create them after the first apply
 # (infra/README.md). A fork's pull request gets no secrets, so it does nothing either.
 # The formatting, validation and security checks are the `terraform` job in validate.yml.
@@ -24,10 +25,6 @@ permissions:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    # The AWS secrets belong to this environment, so only a job that names it can read them.
-    # If the environment limits which branches can deploy to it, a pull request's branch
-    # has to be allowed too, or the job is refused.
-    environment: "AWS 832474135782"
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PLAN_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PLAN_SECRET_ACCESS_KEY }}

@@ -59,6 +59,7 @@ data "aws_iam_policy_document" "plan" {
       "s3:GetAccelerateConfiguration",
       "s3:GetReplicationConfiguration",
       "s3:ListBucket",
+      "cloudfront:Describe*",
       "cloudfront:Get*",
       "cloudfront:List*",
       "route53:Get*",
@@ -69,6 +70,8 @@ data "aws_iam_policy_document" "plan" {
       "iam:Get*",
       "iam:List*",
       "budgets:ViewBudget",
+      "budgets:ListTagsForResource",
+      "budgets:DescribeBudgetActionsForBudget",
     ]
     resources = ["*"]
   }
