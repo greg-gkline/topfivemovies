@@ -5,7 +5,7 @@
       "Sid": "StateRead",
       "Effect": "Allow",
       "Action": "s3:ListBucket",
-      "Resource": "arn:aws:s3:::infrastructure-832474135782-us-east-2-an",
+      "Resource": "arn:aws:s3:::infrastructure-${ACCOUNT_ID}-us-east-2-an",
       "Condition": {
         "StringLike": {
           "s3:prefix": [
@@ -22,7 +22,7 @@
         "s3:PutObject",
         "s3:DeleteObject"
       ],
-      "Resource": "arn:aws:s3:::infrastructure-832474135782-us-east-2-an/topfivemovies/terraform/*"
+      "Resource": "arn:aws:s3:::infrastructure-${ACCOUNT_ID}-us-east-2-an/topfivemovies/terraform/*"
     },
     {
       "Sid": "SiteBucket",
@@ -61,7 +61,7 @@
         "iam:ListAttachedUserPolicies"
       ],
       "Resource": [
-        "arn:aws:iam::832474135782:user/topfivemovies-*"
+        "arn:aws:iam::${ACCOUNT_ID}:user/topfivemovies-*"
       ]
     },
     {

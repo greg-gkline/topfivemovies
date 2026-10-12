@@ -6,6 +6,8 @@ set -euo pipefail
 
 url=${1:?usage: smoke.sh <site-url> [<built-dir>]}
 url=${url%/}
+# A bare host would be fetched over http, which CloudFront answers with a 301 to https.
+case $url in http://* | https://*) ;; *) url=https://$url ;; esac
 dir=${2:-public}
 fail=0
 

@@ -24,7 +24,7 @@ codespace and plan or apply from there.
 
 ## State
 
-The state bucket, `infrastructure-832474135782-us-east-2-an`, was made by hand and is not in
+The state bucket, `infrastructure-<account id>-us-east-2-an`, was made by hand and is not in
 this configuration. The state is `topfivemovies/terraform/terraform.tfstate` in it, with
 locking by a lockfile beside it (`use_lockfile`), so there is no DynamoDB table. The AWS
 provider is pinned by `.terraform.lock.hcl`.
@@ -43,11 +43,13 @@ you need in AWS to apply:
    Route 53, ACM, the `topfivemovies-*` IAM users, and the optional budget. It was written from what the configuration uses and has not been run against AWS,
    so if an apply stops with `AccessDenied`, add the action it names:
 
+       export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+       envsubst < terraform-operator-policy.json > /tmp/operator-policy.json   # fills in ${ACCOUNT_ID}
        aws iam create-policy --policy-name topfivemovies-terraform \
-         --policy-document file://terraform-operator-policy.json
+         --policy-document file:///tmp/operator-policy.json
        aws iam create-user --user-name terraform-admin
        aws iam attach-user-policy --user-name terraform-admin \
-         --policy-arn arn:aws:iam::832474135782:policy/topfivemovies-terraform
+         --policy-arn arn:aws:iam::$ACCOUNT_ID:policy/topfivemovies-terraform
        aws iam create-access-key --user-name terraform-admin
 
    IAM does not update a policy when the file changes. After this file changes, publish the
@@ -55,8 +57,8 @@ you need in AWS to apply:
    keeps five versions at most, so delete an old one first if the command reports a limit:
 
        aws iam create-policy-version \
-         --policy-arn arn:aws:iam::832474135782:policy/topfivemovies-terraform \
-         --policy-document file://terraform-operator-policy.json --set-as-default
+         --policy-arn arn:aws:iam::$ACCOUNT_ID:policy/topfivemovies-terraform \
+         --policy-document file:///tmp/operator-policy.json --set-as-default
 
 2. **The keys where Terraform can find them.** In a codespace, add them as user secrets
    named `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. In the devcontainer, run
@@ -71,14 +73,14 @@ The site bucket was made by hand, and the first apply adopted it into the state 
 block, since removed. Both buckets are in `us-east-2` (the `region` variable).
 
     cd infra
-    terraform init
+    terraform init -backend-config="bucket=infrastructure-$(aws sts get-caller-identity --query Account --output text)-us-east-2-an"
     terraform plan                 # read it before applying
     terraform apply
 
 Terraform creates the CI users but not their access keys, because a key created by Terraform
 would have its secret stored in the state file. Create them by hand and hand them to GitHub
 as GitHub secrets (the secret never touches your disk). The plan keys are repository secrets,
-which the plan workflow reads on pull requests. The deploy keys go in the `AWS 832474135782`
+which the plan workflow reads on pull requests. The deploy keys go in the `Production AWS`
 environment, which is limited to `main`, so only a run on `main` can read them:
 
     aws iam create-access-key --user-name topfivemovies-plan   --query AccessKey --output json \
@@ -89,8 +91,14 @@ environment, which is limited to `main`, so only a run on `main` can read them:
     aws iam create-access-key --user-name topfivemovies-deploy --query AccessKey --output json \
       | jq -r '.AccessKeyId, .SecretAccessKey' \
       | { read -r id; read -r secret; \
-          gh secret set AWS_DEPLOY_ACCESS_KEY_ID --env "AWS 832474135782" --body "$id"; \
-          gh secret set AWS_DEPLOY_SECRET_ACCESS_KEY --env "AWS 832474135782" --body "$secret"; }
+          gh secret set AWS_DEPLOY_ACCESS_KEY_ID --env "Production AWS" --body "$id"; \
+          gh secret set AWS_DEPLOY_SECRET_ACCESS_KEY --env "Production AWS" --body "$secret"; }
+
+The plan workflow also needs the account id, as a repository secret, to name the state bucket
+at `terraform init` (the id is not a credential, but this keeps it out of the repository and
+masks it in logs):
+
+    gh secret set AWS_ACCOUNT_ID --body "$(aws sts get-caller-identity --query Account --output text)"
 
 The deploy workflow also needs the distribution id, and the address to smoke-test, as
 repository variables (not secrets). Before the cutover the address is the
@@ -100,7 +108,7 @@ repository variables (not secrets). Before the cutover the address is the
     gh variable set SITE_URL --body "https://$(terraform -chdir=infra output -raw distribution_domain)"
 
 Until the `AWS_PLAN_*` secrets exist, the `terraform-plan` workflow does nothing. The deploy
-secrets are for the deploy workflow (Phase 6), which declares `environment: "AWS 832474135782"`: a job
+secrets are for the deploy workflow (Phase 6), which declares `environment: "Production AWS"`: a job
 can read an environment's secrets only if it declares the environment. The plan keys can be read by any workflow run in the repository, including a pull request's, so
 that user is read-only on purpose. Both users can do only what `iam.tf` gives
 their user policy: the plan user reads configuration and no object data, and the deploy user

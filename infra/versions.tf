@@ -9,9 +9,10 @@ terraform {
   }
 
   # The state bucket was created by hand and is not managed here. Locking uses a lockfile
-  # next to the state object, so no DynamoDB table is needed.
+  # next to the state object, so no DynamoDB table is needed. The bucket name contains the
+  # account id, which stays out of git: pass it at init (-backend-config="bucket=...",
+  # see README.md).
   backend "s3" {
-    bucket       = "infrastructure-832474135782-us-east-2-an"
     key          = "topfivemovies/terraform/terraform.tfstate"
     region       = "us-east-2"
     encrypt      = true

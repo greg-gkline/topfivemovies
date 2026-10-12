@@ -4,7 +4,7 @@ name: deploy
 # private S3 bucket, a CloudFront invalidation and a smoke test of the live address
 # (scripts/deploy/). It signs in as the `topfivemovies-deploy` IAM user (infra/iam.tf), with
 # the access key from the secrets AWS_DEPLOY_ACCESS_KEY_ID and AWS_DEPLOY_SECRET_ACCESS_KEY
-# in the "AWS 832474135782" environment, which only `main` may use.
+# in the "Production AWS" environment, which only `main` may use.
 #
 # Rollback is a redeploy of an earlier commit: run this workflow by hand (Actions, deploy,
 # Run workflow) and give the commit, tag or branch as `ref`. The workflow file itself is
@@ -48,7 +48,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: AWS 832474135782
+    environment: Production AWS
     timeout-minutes: 30
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEPLOY_ACCESS_KEY_ID }}

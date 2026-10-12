@@ -6,8 +6,10 @@
 # have its secret stored in the state file. Create them by hand and put them in GitHub
 # secrets (README.md). Rotate them from time to time.
 
+data "aws_caller_identity" "current" {}
+
 locals {
-  state_bucket = "infrastructure-832474135782-us-east-2-an"
+  state_bucket = "infrastructure-${data.aws_caller_identity.current.account_id}-${var.region}-an"
   state_prefix = "topfivemovies/terraform"
   ci_users     = toset(["deploy", "plan"])
 }
