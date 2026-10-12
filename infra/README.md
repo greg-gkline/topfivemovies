@@ -18,9 +18,9 @@ codespace and plan or apply from there.
 | `cloudfront.tf` | The distribution, origin access control, security headers, the viewer-request function |
 | `functions/viewer-request.js.tftpl` | The CloudFront Function: apex redirect and `index.html` |
 | `route53.tf`, `acm.tf` | The zone, alias records, and the certificate with its DNS validation |
-| `iam.tf` | Two IAM users, each in a group that holds its permissions: `deploy` (bucket sync and cache invalidation) and `plan` (read-only) |
+| `iam.tf` | Two IAM users with their permissions attached directly (the account has no IAM groups): `deploy` (bucket sync and cache invalidation) and `plan` (read-only) |
 | `terraform-operator-policy.json` | The permissions whoever runs `terraform apply` needs (see below) |
-| `monitoring.tf` | Optional cost budget and CloudFront 5xx alarm, off unless `alert_email` is set (see below) |
+| `monitoring.tf` | Optional monthly cost budget, off unless `alert_email` is set (see below) |
 
 ## State
 
@@ -40,8 +40,7 @@ you need in AWS to apply:
    and you can skip to the next step. Otherwise create a user, for example `terraform-admin`,
    and give it the permissions in `terraform-operator-policy.json`. It covers the state
    bucket's `topfivemovies/terraform/` prefix, the `topfivemovies` bucket, CloudFront,
-   Route 53, ACM, the `topfivemovies-*` IAM users and groups, and the optional budget and
-   alarm. It was written from what the configuration uses and has not been run against AWS,
+   Route 53, ACM, the `topfivemovies-*` IAM users, and the optional budget. It was written from what the configuration uses and has not been run against AWS,
    so if an apply stops with `AccessDenied`, add the action it names:
 
        aws iam create-policy --policy-name topfivemovies-terraform \
@@ -85,7 +84,7 @@ as secrets (the secret never touches your disk):
 
 Until the `AWS_PLAN_*` secrets exist, the `terraform-plan` workflow does nothing. The deploy
 secrets are for the deploy workflow (Phase 6). Both users can do only what `iam.tf` gives
-their group: the plan user reads configuration and no object data, and the deploy user
+their user policy: the plan user reads configuration and no object data, and the deploy user
 writes the site bucket and invalidates the cache, so a leaked key cannot change the
 infrastructure. Rotate them now and then with `aws iam create-access-key`, update the
 secret, then `aws iam delete-access-key` for the old one.
@@ -96,8 +95,8 @@ you apply it after the merge. Delete the `import` block once the first apply has
 
 ## The alert email
 
-`alert_email` turns on the cost budget and the CloudFront error alarm, and is where they
-email. It is kept out of git: it is not in `terraform.tfvars`, and the variable is marked
+`alert_email` turns on the monthly cost budget and is where it emails. There is no CloudFront
+error alarm: it would need an SNS topic, and this account's organization policy denies SNS. It is kept out of git: it is not in `terraform.tfvars`, and the variable is marked
 sensitive, so a plan (including the one the workflow comments on a pull request) shows it as
 `(sensitive value)`. Terraform reads it from the environment:
 
@@ -109,8 +108,7 @@ sensitive, so a plan (including the one the workflow comments on a pull request)
   will show the alerts as removed.
 
 Use the same address everywhere. It does end up in the Terraform state (in the private state
-bucket) and in AWS, where the budget and the SNS subscription store it. SNS sends a
-confirmation email that has to be answered before alarm emails arrive.
+bucket) and in AWS, where the budget stores it.
 
 ## Before the cutover
 

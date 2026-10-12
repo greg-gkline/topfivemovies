@@ -225,10 +225,10 @@ Written, and passing `terraform validate`, `tflint` and `checkov`, but **not app
 - [x] Redirect from `topfivemovies.com` to `https://www.topfivemovies.com`: the same CloudFront Function, with the apex also on the distribution.
 - [x] ACM certificate in `us-east-1` covering `www.topfivemovies.com` and `topfivemovies.com`, validated by DNS records Terraform creates in Route 53. It is created at the cutover, not before: ACM can only validate once the domain is served from Route 53, so the custom domain, certificate and alias records are behind `enable_custom_domain`, which is `false` until Phase 7.
 - [x] Route 53 hosted zone for `topfivemovies.com`, with alias records for `www` and the apex pointing to CloudFront (A and AAAA, created with the custom domain).
-- [x] Two IAM users for CI, in groups that hold the permissions, since the account does not support OIDC: `deploy`, limited to the bucket sync and CloudFront invalidations, and `plan`, read-only and unable to read object data. Their access keys are created by hand and kept in repository secrets, not in Terraform.
+- [x] Two IAM users for CI, with the permissions attached to each user since the account supports neither OIDC nor IAM groups: `deploy`, limited to the bucket sync and CloudFront invalidations, and `plan`, read-only and unable to read object data. Their access keys are created by hand and kept in repository secrets, not in Terraform.
 - [x] ~~Separate `staging` and `prod` environments.~~ Dropped: one environment. Before the cutover the site is reachable at the distribution's `*.cloudfront.net` address.
 - [x] Terraform checks in CI: `fmt`, `validate`, `tflint`, `checkov`. Each `checkov` skip is explained beside the resource.
-- [x] Optional: a budget alert and a CloudFront error-rate alarm, off unless `alert_email` is set.
+- [x] Optional: a monthly cost budget that emails `alert_email`, off unless that is set. The CloudFront error-rate alarm is dropped: it needs an SNS topic, which the account's organization policy denies.
 
 ## Phase 6: Deploy on merge to `main`
 

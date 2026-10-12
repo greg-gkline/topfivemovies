@@ -1,8 +1,8 @@
 # GitHub Actions signs in with access keys, since the account does not support OIDC. Two
-# IAM users, each in a group that carries its permissions:
+# IAM users, with their permissions attached to the user (the account has no IAM groups):
 #   deploy  writes the bucket and invalidates the cache (the deploy workflow, Phase 6)
 #   plan    reads, never changes (the terraform-plan workflow on pull requests)
-# Terraform creates the users and groups but NOT their access keys: a key created here would
+# Terraform creates the users but NOT their access keys: a key created here would
 # have its secret stored in the state file. Create them by hand and put them in GitHub
 # secrets (README.md). Rotate them from time to time.
 
@@ -12,25 +12,11 @@ locals {
   ci_users     = toset(["deploy", "plan"])
 }
 
-resource "aws_iam_group" "ci" {
-  for_each = local.ci_users
-
-  name = "topfivemovies-${each.key}"
-}
-
 resource "aws_iam_user" "ci" {
   #checkov:skip=CKV_AWS_273:The account does not support OIDC or SSO, so CI uses access keys; the permissions are the narrowest the jobs need
   for_each = local.ci_users
 
   name = "topfivemovies-${each.key}"
-}
-
-resource "aws_iam_group_membership" "ci" {
-  for_each = local.ci_users
-
-  name  = "topfivemovies-${each.key}"
-  group = aws_iam_group.ci[each.key].name
-  users = [aws_iam_user.ci[each.key].name]
 }
 
 data "aws_iam_policy_document" "deploy" {
@@ -53,9 +39,10 @@ data "aws_iam_policy_document" "deploy" {
   }
 }
 
-resource "aws_iam_group_policy" "deploy" {
+resource "aws_iam_user_policy" "deploy" {
+  #checkov:skip=CKV_AWS_40:The account has no IAM groups, so the permissions are attached to the user
   name   = "deploy"
-  group  = aws_iam_group.ci["deploy"].name
+  user   = aws_iam_user.ci["deploy"].name
   policy = data.aws_iam_policy_document.deploy.json
 }
 
@@ -82,10 +69,6 @@ data "aws_iam_policy_document" "plan" {
       "iam:Get*",
       "iam:List*",
       "budgets:ViewBudget",
-      "cloudwatch:Describe*",
-      "cloudwatch:List*",
-      "sns:Get*",
-      "sns:List*",
     ]
     resources = ["*"]
   }
@@ -98,8 +81,9 @@ data "aws_iam_policy_document" "plan" {
   }
 }
 
-resource "aws_iam_group_policy" "plan" {
+resource "aws_iam_user_policy" "plan" {
+  #checkov:skip=CKV_AWS_40:The account has no IAM groups, so the permissions are attached to the user
   name   = "plan"
-  group  = aws_iam_group.ci["plan"].name
+  user   = aws_iam_user.ci["plan"].name
   policy = data.aws_iam_policy_document.plan.json
 }
