@@ -1,5 +1,7 @@
 # Content export (Phase 1)
 
+> **Historical.** `web/` and the devcontainer's PHP/MySQL stack were deleted at the Phase 7 cutover, so the exporter and `spotcheck.py` can no longer run on `main`: they read `web/images/` and `web/includes/quotes.js`. Check out the `0.0.2` tag to run them (`git worktree add ../topfivemovies-legacy 0.0.2`). The content has been edited by hand since the migration; do not regenerate it.
+
 Moves the legacy MySQL content into the files Hugo reads. The tooling is re-runnable and deterministic: two runs produce byte-identical output.
 
 ```sh
@@ -16,7 +18,7 @@ The exporter owns everything it writes and rewrites it from scratch. Once the co
 |---|---|
 | `legacy/sql/*.sql` | Parsed directly (`sqldump.py`), so no database is needed. The dumps are UTF-8 (`SET NAMES utf8mb4`) over latin1 tables, so reading them as UTF-8 is the latin1 to UTF-8 step. The parser was checked value by value against the devcontainer DB (1,676 strings, no differences). |
 | `web/includes/quotes.js` | The live quote rotator. Its bytes are Windows-1252 (`0x92` is `’`), decoded strictly. |
-| `web/images/` | Content images are copied, not moved, so the legacy site keeps working until `web/` is deleted in Phase 7. |
+| `web/images/` | Content images are copied, not moved, so the legacy site kept working until `web/` was deleted in Phase 7 (tag `0.0.2`). |
 
 Every string is scanned for mojibake (`Ã`, `â€`, C1 control characters, U+FFFD) and the export fails if any is found. None are.
 
