@@ -1,0 +1,4 @@
+{{- /* The picture of a review, list, feature or author, from its front matter. */ -}}
+{{- with .Params.image -}}
+{{ partial "image.html" (dict "name" . "alt" $.Params.image_alt "width" $.Params.image_width "height" $.Params.image_height) }}
+{{- end -}}

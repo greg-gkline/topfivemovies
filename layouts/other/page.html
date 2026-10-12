@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ partial "clickpath.html" . }}
+
+{{ partial "recent.html" . }}
+
+<div class="review">
+	{{ partial "item-image.html" . }}
+	<h2 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+	<div class="subtitle">{{ .Params.subtitle }}</div>
+	{{- partial "byline.html" . }}
+	<div class="text">{{ .Content }}</div>
+	{{- partial "prevnext.html" . }}
+	{{- partial "responses.html" . }}
+</div>
+{{ end }}

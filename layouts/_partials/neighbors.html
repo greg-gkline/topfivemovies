@@ -1,0 +1,17 @@
+{{- /*
+  The previous (older) and next (newer) item in the page's section, in the order of
+  ordered.html. Returns dict "prev" <page or nil> "next" <page or nil>; empty for
+  anything that is not a review, chick flick, other feature or top-five list.
+*/ -}}
+{{- $result := dict -}}
+{{- if and .IsPage (in (slice "reviews" "chickflicks" "other" "top5") .Section) -}}
+  {{- $pages := partial "ordered.html" .CurrentSection.RegularPages -}}
+  {{- $path := .File.Path -}}
+  {{- range $i, $p := $pages -}}
+    {{- if eq $p.File.Path $path -}}
+      {{- if gt $i 0 }}{{ $result = merge $result (dict "prev" (index $pages (sub $i 1))) }}{{ end -}}
+      {{- if lt (add $i 1) (len $pages) }}{{ $result = merge $result (dict "next" (index $pages (add $i 1))) }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

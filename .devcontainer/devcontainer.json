@@ -7,8 +7,9 @@
 	// Baseline tooling (scripts/baseline): crawler, headless Chromium for screenshots,
 	// the DB client for seeding the crawl, and the site's first-choice font.
 	// Export and content checks (scripts/export, scripts/content): PyYAML, Pillow, html5lib,
-	// yamllint, check-jsonschema, and Hugo for the spot-check (Phase 2 pins its own Hugo).
-	"postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-bs4 python3-lxml python3-selenium chromium chromium-driver default-mysql-client fonts-dejavu fonts-liberation ttf-bitstream-vera python3-yaml python3-pil python3-html5lib yamllint pipx hugo && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install check-jsonschema==0.38.2",
+	// yamllint and check-jsonschema.
+	// Hugo extended, pinned to HUGO_VERSION in .github/workflows/site.yml (Debian's is too old).
+	"postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-bs4 python3-lxml python3-selenium chromium chromium-driver default-mysql-client fonts-dejavu fonts-liberation ttf-bitstream-vera python3-yaml python3-pil python3-html5lib yamllint pipx && curl -fsSL -o /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install check-jsonschema==0.38.2",
 	"portsAttributes": {
 		"80": { "label": "Top Five Movies" }
 	},

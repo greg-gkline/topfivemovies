@@ -1,0 +1,42 @@
+{{ define "main" }}
+{{ partial "clickpath.html" . }}
+
+<div class="author_info">
+	<div class="image">{{ partial "item-image.html" . }}</div>
+	<h2 class="name">{{ .Params.name }}</h2>
+	<div class="jobtitle">{{ .Params.jobtitle }}</div>
+	<div class="bio">
+		{{- .Content }}
+		{{- with .Params.facts }}
+		<table>
+			{{- range . }}
+			{{- with .heading }}
+			<tr><td colspan="2" class="authorName">{{ . }}</td></tr>
+			{{- end }}
+			{{- range .items }}
+			<tr><td class="bodyText">{{ .label }}:</td><td class="bodyText">{{ $.RenderString .value }}</td></tr>
+			{{- end }}
+			{{- end }}
+		</table>
+		{{- end }}
+	</div>
+</div>
+
+<div id="contributions">
+	<h2>Contributions by {{ .Params.name }}:</h2>
+
+	<table>
+		<tr class="heading">
+			<th class="other_title">Title</th>
+			<th class="other_date">Date</th>
+		</tr>
+		{{- $slug := .File.ContentBaseName }}
+		{{- range $i, $p := partial "ordered.html" (dict "pages" (where (partial "items.html" .) "Params.author" $slug) "desc" true) }}
+		<tr class="{{ cond (modBool $i 2) "even" "odd" }}">
+			<td class="other_title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+			<td class="other_date">{{ .Date.Format "2006-01-02" }}</td>
+		</tr>
+		{{- end }}
+	</table>
+</div>
+{{ end }}

@@ -1,0 +1,48 @@
+{{ define "banner" }}
+		<div class="access"><a href="#featuredstory">Go to Featured Story</a></div>
+
+		{{- /* The rotator replaces this quote; it is fixed per build so the page is never empty. */}}
+		{{- $quotes := site.Data.quotes }}
+		{{- $first := index $quotes (mod (hash.FNV32a (site.Lastmod.Format "2006-01-02")) (len $quotes)) }}
+		<div id="quote">"{{ $first.text }}" -- {{ $first.source }}</div>
+{{- end }}
+
+{{ define "main" }}
+	{{- $polls := sort site.Data.polls "date" "desc" }}
+	<div id="poll">
+		<div class="access"><a href="#skippoll">skip poll</a></div>
+		<h2>Poll</h2>
+		<div id="polltext">
+			{{ partial "poll-results.html" (dict "poll" (index $polls 0) "page" . "barwidth" 150) }}
+			<div id="prevpoll"><a href="{{ (site.GetPage "/polls").RelPermalink }}">View results of previous polls</a></div>
+		</div>
+	</div>
+	<div id="skippoll" class="access"></div>
+
+	{{- /* The newest movie review. The legacy site picked a random recent one each day. */}}
+	{{- with index (partial "ordered.html" (dict "pages" (where site.RegularPages "Type" "movie") "desc" true)) 0 }}
+	<h2 id="featuredstory">Featured Story</h2>
+
+	<div class="review">
+		<div class="access"><a href="#skipfeature">skip featured story</a></div>
+		<a href="{{ .RelPermalink }}">{{ partial "item-image.html" . }}</a>
+		{{- with .Params.caption }}
+		<div id="caption">{{ . }}</div>
+		{{- end }}
+		<h3 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+		<div class="starring">Starring: {{ .Params.starring }}</div>
+		<p>{{ partial "excerpt.html" (dict "page" . "length" 350) }}</p>
+		<p><a href="{{ .RelPermalink }}">Read more...</a></p>
+	</div>
+	<div id="skipfeature" class="access"></div>
+	{{- end }}
+
+	{{ partial "recent.html" . }}
+{{ end }}
+
+{{ define "scripts" }}
+<script type="application/json" id="quotes">{{ site.Data.quotes | jsonify | safeJS }}</script>
+{{- with resources.Get "js/quotes.js" | fingerprint }}
+<script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+{{- end }}
+{{ end }}

@@ -1,0 +1,9 @@
+{{- /*
+  An <img> for a content picture. Takes dict "name" <file in content/images/> "alt"
+  <text>, and optional "width"/"height" to show it scaled; otherwise the file's own size.
+*/ -}}
+{{- with .name -}}
+  {{- $img := resources.Get (printf "content/images/%s" .) -}}
+  {{- if not $img }}{{ errorf "image %q is not in content/images/" . }}{{ end -}}
+  <img src="{{ $img.RelPermalink }}" width="{{ $.width | default $img.Width }}" height="{{ $.height | default $img.Height }}" alt="{{ $.alt }}">
+{{- end -}}

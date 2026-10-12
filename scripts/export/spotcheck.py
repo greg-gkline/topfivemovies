@@ -41,6 +41,9 @@ dataDir: {root}/data
 uglyURLs: true
 disableKinds: [section, taxonomy, term, rss, sitemap, robotsTXT, 404]
 buildDrafts: true
+# Only items, authors and data are compared: skip the section and standalone pages,
+# which need the site's own shortcodes.
+ignoreFiles: ['/_index[.]md$', '/content/[a-z0-9-]+[.]md$']
 markup:
   goldmark:
     extensions:
@@ -176,6 +179,11 @@ class Report:
         self.verbose = verbose
         self.failures = self.expected = self.checked = 0
 
+    def missing(self, page, path):
+        self.checked += 1
+        self.failures += 1
+        print(f"DIFF  {page}: content/{path}.md does not exist")
+
     def compare(self, page, field, legacy, new):
         self.checked += 1
         if legacy == new:
@@ -224,7 +232,7 @@ def main():
     exp = Exporter()
     pages = render(exp)
     authors = {p.stem: yaml.safe_load(p.read_text().split("---")[1])
-               for p in (ROOT / "content/authors").glob("*.md")}
+               for p in (ROOT / "content/authors").glob("*.md") if p.name != "_index.md"}
     author_names = {slug: a["name"] for slug, a in authors.items()}
 
     def check_responses(name, region, page):
@@ -251,6 +259,9 @@ def main():
         row = exp.articles[ident]
         prefix = {"movie": "review", "dvd": "review", "chick": "chickflick", "other": "other"}[row["Type"]]
         name = f"{prefix}_{ident}.html"
+        if path not in pages:
+            report.missing(name, path)
+            continue
         page = pages[path]
         params = page["params"]
         region = legacy_page(name).select_one("div.review")
@@ -273,6 +284,9 @@ def main():
 
     for ident, path in sorted(exp.top5_path.items()):
         name = f"topfive_{ident}.html"
+        if path not in pages:
+            report.missing(name, path)
+            continue
         page = pages[path]
         params = page["params"]
         region = legacy_page(name).select_one("div.topfive")

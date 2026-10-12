@@ -1,0 +1,28 @@
+{{- /* The five newest reviews and chick flicks, and the five newest top-five lists. */ -}}
+{{- $articles := where site.RegularPages "Type" "in" (slice "movie" "chickflicks") -}}
+{{- $lists := where site.RegularPages "Section" "top5" -}}
+<div id="articlebar">
+	<h2 id="recentadditions">Recent Additions</h2>
+	<div class="access"><a href="#skiprecent">skip recent additions</a></div>
+
+	<div id="recent">
+		<div id="recent_articles">
+			<h3><a href="{{ (site.GetPage "/reviews").RelPermalink }}">Articles</a></h3>
+			<ul>
+			{{- range first 5 (partial "ordered.html" (dict "pages" $articles "desc" true)) }}
+				<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			{{- end }}
+			</ul>
+		</div>
+
+		<div id="recent_top5">
+			<h3><a href="{{ (site.GetPage "/top5").RelPermalink }}">Top 5 Lists</a></h3>
+			<ul>
+			{{- range first 5 (partial "ordered.html" (dict "pages" $lists "desc" true)) }}
+				<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			{{- end }}
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="skiprecent" class="access"></div>

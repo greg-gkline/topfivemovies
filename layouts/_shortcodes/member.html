@@ -1,0 +1,9 @@
+{{- /*
+  One person in the group bio, with their photo from their author page:
+  {{< member "nick" >}}markdown{{< /member >}}
+*/ -}}
+{{- $author := partial "author.html" (.Get 0) -}}
+<div id="{{ .Get 0 }}_text">
+{{ partial "item-image.html" $author }}
+{{ .InnerDeindent | .Page.RenderString (dict "display" "block") }}
+</div>

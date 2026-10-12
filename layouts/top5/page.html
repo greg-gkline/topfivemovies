@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{ partial "clickpath.html" . }}
+
+{{ partial "recent.html" . }}
+
+<div class="topfive">
+	{{ partial "item-image.html" . }}
+	<h2 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+	{{- partial "byline.html" . }}
+	<div class="text">{{ .Content }}</div>
+	<ol>
+	{{- range $n, $item := .Params.items }}
+		<li>{{ $.RenderString .title }}
+		{{- with .film }}
+			<div class="quote">{{ $.RenderString . }}</div>
+		{{- end }}
+		{{- with .text }}
+			<div class="bodyText">{{ $.RenderString . }}</div>
+		{{- end }}
+		{{- if eq $n 4 }}
+		{{- range $.Params.honorable_mentions }}
+			<div class="headline">{{ with .title }}Honorable Mention: {{ $.RenderString . }}{{ else }}Honorable Mentions:{{ end }}</div>
+			<div class="bodyText">{{ $.RenderString .text }}</div>
+		{{- end }}
+		{{- end }}
+		</li>
+	{{- end }}
+	</ol>
+	{{- partial "prevnext.html" . }}
+	{{- partial "responses.html" . }}
+</div>
+{{ end }}

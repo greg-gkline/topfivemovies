@@ -18,14 +18,20 @@ run python3 scripts/content/front_matter.py "$work"
 
 run yamllint --strict -c .yamllint.yaml data/
 # From inside $work, so messages name <section>/<page>.yaml
-echo "+ yamllint (front matter of content/*/*.md)"
+echo "+ yamllint (front matter of content/**/*.md)"
 (cd "$work" && yamllint --strict -c "$root/.yamllint.yaml" .) || status=1
 
-for pair in reviews:review chickflicks:chickflick other:other top5:top5 authors:author; do
-	section=${pair%%:*} schema=${pair#*:}
-	files=("$work/$section"/*.yaml)
+for pair in reviews:review chickflicks:chickflick other:other top5:top5 authors:author \
+		sections:section pages:page; do
+	dir=${pair%%:*} schema=${pair#*:}
+	files=("$work/$dir"/*.yaml)
 	[ -e "${files[0]}" ] || continue
-	echo "+ check-jsonschema $schema.json (front matter of content/$section/*.md)"
+	case $dir in
+		sections) what="content/*/_index.md" ;;
+		pages) what="content/*.md" ;;
+		*) what="content/$dir/*.md" ;;
+	esac
+	echo "+ check-jsonschema $schema.json (front matter of $what)"
 	check-jsonschema --schemafile "$schemas/$schema.json" "${files[@]}" || status=1
 done
 for name in responses polls quotes; do

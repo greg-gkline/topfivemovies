@@ -1,0 +1,33 @@
+name: site
+
+# Builds the site with Hugo. Phase 4 folds this into the full `validate` check.
+# The parity diff (scripts/parity/) is not run here: it compares with the legacy
+# site, so it is run by hand during the cutover, not on every change.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  HUGO_VERSION: 0.147.9   # also pinned in .devcontainer/devcontainer.json
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Hugo
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "$RUNNER_TEMP/hugo.deb"
+      - name: Build
+        run: hugo --gc --panicOnWarning
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public
+          path: public/
+          retention-days: 7

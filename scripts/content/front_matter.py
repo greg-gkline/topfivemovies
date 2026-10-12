@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Copy the YAML front matter of every content page into OUTDIR/<section>/<name>.yaml.
+"""Copy the YAML front matter of every content page into OUTDIR for validation.
 
-check-jsonschema and yamllint read plain YAML files, not markdown, so CI validates
-these extracts. Line N of an extract is line N+1 of the page.
+Items go to OUTDIR/<section>/<name>.yaml, section pages (content/<section>/_index.md)
+to OUTDIR/sections/<section>.yaml, and the pages at the top of content/ to
+OUTDIR/pages/<name>.yaml. check-jsonschema and yamllint read plain YAML files, not
+markdown, so CI validates these extracts. Line N of an extract is line N+1 of the page.
 
 Usage: python3 scripts/content/front_matter.py OUTDIR
 """
@@ -25,21 +27,33 @@ def split(path):
     return text[4:end + 1], text[end + 5:]
 
 
+def pages():
+    """Yield (page, extract path relative to OUTDIR) for every content page."""
+    for section in SECTIONS:
+        for page in sorted((ROOT / "content" / section).glob("*.md")):
+            if page.name == "_index.md":
+                yield page, Path("sections", f"{section}.yaml")
+            else:
+                yield page, Path(section, f"{page.stem}.yaml")
+    for page in sorted((ROOT / "content").glob("*.md")):
+        yield page, Path("pages", f"{page.stem}.yaml")
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
     out = Path(sys.argv[1])
     errors = 0
-    for section in SECTIONS:
-        (out / section).mkdir(parents=True, exist_ok=True)
-        for page in sorted((ROOT / "content" / section).glob("*.md")):
-            try:
-                front, _ = split(page)
-            except ValueError as e:
-                print(e, file=sys.stderr)
-                errors += 1
-                continue
-            (out / section / f"{page.stem}.yaml").write_text(front, encoding="utf-8")
+    for directory in [*SECTIONS, "sections", "pages"]:
+        (out / directory).mkdir(parents=True, exist_ok=True)
+    for page, extract in pages():
+        try:
+            front, _ = split(page)
+        except ValueError as e:
+            print(e, file=sys.stderr)
+            errors += 1
+            continue
+        (out / extract).write_text(front, encoding="utf-8")
     sys.exit(1 if errors else 0)
 
 

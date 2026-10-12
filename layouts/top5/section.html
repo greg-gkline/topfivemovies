@@ -1,0 +1,26 @@
+{{ define "main" }}
+<h2 class="pageheader">{{ .Title }}</h2>
+
+{{ .Content }}
+
+<table data-sortable>
+	<thead>
+	<tr class="heading">
+		<th class="topfive_title" data-sort="text">Title</th>
+		<th class="topfive_author" data-sort="text">Author</th>
+		<th class="topfive_date" data-sort="text" data-sort-dir="desc">Date</th>
+	</tr>
+	</thead>
+	<tbody>
+	{{- range $i, $p := partial "ordered.html" (dict "pages" .RegularPages "desc" true) }}
+	<tr class="{{ cond (modBool $i 2) "even" "odd" }}">
+		<td class="topfive_title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+		<td class="topfive_author">{{ (partial "author.html" .Params.author).Params.name }}</td>
+		<td class="topfive_date">{{ .Date.Format "2006-01-02" }}</td>
+	</tr>
+	{{- end }}
+	</tbody>
+</table>
+{{ end }}
+
+{{ define "scripts" }}{{ partial "sort-script.html" . }}{{ end }}

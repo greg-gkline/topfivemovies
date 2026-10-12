@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div id="about_origins">
+	<div id="origins">
+		<h2>{{ .Params.heading }}</h2>
+		<div id="origin_text">
+			{{ .Content }}
+		</div>
+	</div>
+</div>
+<div id="about_authors">
+	<h2>The Guilty Parties</h2>
+	{{- range $i, $author := sort (where .RegularPages "Params.listed" "!=" false) "Params.name" }}
+	<div class="author{{ if eq $i 0 }} first{{ end }}">
+		<div class="image">{{ partial "item-image.html" . }}</div>
+		<h3 class="name"><a href="{{ .RelPermalink }}">{{ .Params.name }}</a></h3>
+		<div class="jobtitle">{{ .Params.jobtitle }}</div>
+		<div class="link"><a href="{{ .RelPermalink }}">View bio and articles</a></div>
+	</div>
+	{{- end }}
+</div>
+{{ end }}

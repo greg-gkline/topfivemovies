@@ -1,0 +1,2 @@
+{{- /* Every published review, chick flick, other feature and top-five list. */ -}}
+{{- return where site.RegularPages "Section" "in" (slice "reviews" "chickflicks" "other" "top5") -}}

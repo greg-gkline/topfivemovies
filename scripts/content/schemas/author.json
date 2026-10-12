@@ -56,6 +56,10 @@
           }
         }
       }
+    },
+    "listed": {
+      "const": false,
+      "description": "Leave the author off the About Us page (the shared staff account). Omit the field for people."
     }
   },
   "additionalProperties": false,

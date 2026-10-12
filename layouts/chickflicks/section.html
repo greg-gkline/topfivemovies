@@ -1,0 +1,9 @@
+{{ define "main" }}
+<h2 class="pageheader">{{ .Title }}</h2>
+
+{{ .Content }}
+
+{{ partial "review-table.html" .RegularPages }}
+{{ end }}
+
+{{ define "scripts" }}{{ partial "sort-script.html" . }}{{ end }}

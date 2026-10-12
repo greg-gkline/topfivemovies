@@ -1,0 +1,213 @@
+/* elegant.css: copied from web/styles/elegant.css for Phase 2, with image URLs resolved
+   through Hugo's asset pipeline (this file is executed as a template). Phase 3 ports
+   it rule by rule. Additions for the static site are at the end. */
+
+body {
+	margin: 0;
+	background-image: url({{ (resources.Get "images/fadeframe.gif").RelPermalink }});
+	background-repeat: no-repeat;
+	background-position: top center;
+	text-align: center;
+	font-size: 11px;
+	font-family: "bitstream vera sans", tahoma, arial, sans-serif;
+}
+
+span#bannerimg {
+	display: block;
+	width: 235px;
+	height: 79px;
+	background-image: url({{ (resources.Get "images/top5gray.jpg").RelPermalink }});
+}
+
+a {
+	color: #666666;
+	text-decoration: none;
+	font-weight: bold;
+}
+	
+a:hover {
+	color: black;
+	text-decoration: underline;
+}
+	
+.access {
+	display: none;
+}	
+
+img {
+	border: 0;
+}
+
+div#body {
+	width: 700px;
+	margin: 15px auto;
+	text-align: left;
+}
+
+div#quote {
+	width: 300px;
+	font-family: georgia;
+	font-style: italic;
+	font-size: 10px;
+	color: #666666;
+	float: right;
+	margin-top: 1em;
+	text-align: left;
+}
+
+h1 {
+	display: none;
+}
+	
+h2 {
+	font-size: 18px;
+	font-family: georgia, serif;
+	font-style: italic;
+	text-transform: lowercase;
+	color: #666666;
+	padding: 0;
+	margin-top: 0;
+}
+
+h3 {
+	font-size: 12px;
+}
+	
+div#navbar {
+	clear: both;
+	width: 400px;
+	text-align: right;
+	border-top: 1px silver solid;
+	margin-left: 300px;
+	margin-bottom: 2em;
+}
+
+div#navbar ul {
+	list-style: none;
+	display: inline;
+}
+
+div#navbar ul li {
+	display: inline;
+	text-transform: lowercase;
+	margin-left: 10px;
+
+}
+
+div#poll {
+	background-image: url({{ (resources.Get "images/grayfade.gif").RelPermalink }});
+	background-repeat: repeat-x;
+	background-position: bottom;
+	width: 150px;
+	padding: 5px;
+	border: 1px #666666 solid;
+	float: left;
+	/*margin-top: 15px;*/
+}
+
+div#poll p {
+	display: block;
+	margin: 8px 0;
+	padding: 0;
+}
+
+div#poll input#submit {
+	margin: 12px 50px;
+}
+
+div#poll #results,
+div#poll #prevpoll {
+	font-size: 9px;
+	text-align: center;
+	margin-bottom: 1em;	
+}
+
+h2#featuredstory,
+h2#recentadditions {
+	margin-left: 180px;
+}
+
+div.review {
+	margin: 0 20px 20px 190px;
+}
+
+div.review img {
+	float: right;
+	margin-left: 20px;
+	position: relative;
+	visibility: visible;
+	border: 2px #666666 solid;
+}
+
+div.review .title {
+	font-size: 14px;
+	text-transform: none;
+	margin-bottom: .5em;
+}
+
+div.review p {
+	line-height: 1.5em;
+}
+
+div#caption {
+	display: none;
+}
+
+div#recent {
+	clear: right;
+	margin-left: 190px;	
+	border: 1px white solid;
+}
+
+div#recent_articles ul, 
+div#recent_top5 ul {
+	list-style-image: url({{ (resources.Get "images/grayarrow.gif").RelPermalink }});
+}
+
+div#recent_articles {
+	float: left;
+	width: 250px;
+}
+
+div#recent_articles ul {
+	/*margin-left: 20px;*/
+}
+
+div#recent_top5 {
+	margin-left: 250px;
+	width: 250px;
+}
+
+div#footer {
+	clear: all;
+	float: left;
+	width: 700px;
+	margin: 2em 0;
+	text-align: left;
+	display: block;
+}
+
+div#footer #intra {
+	float: right;
+}
+
+div#copyright {
+	margin: 1em 0;
+	height: 35px;
+}
+
+div#copyright div#cclogo {
+	float: left;
+}
+
+div#copyright div#cctext {
+	float: left;
+	margin-left: 10px;
+}
+
+
+/* --- Phase 2 additions --- */
+
+div#poll #prevpoll a {
+	display: block;
+}

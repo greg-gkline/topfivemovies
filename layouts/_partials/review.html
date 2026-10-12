@@ -1,0 +1,18 @@
+{{- /* A movie, DVD or chick flick review. */ -}}
+{{ partial "clickpath.html" . }}
+
+{{ partial "recent.html" . }}
+
+<div class="review">
+	{{ partial "item-image.html" . }}
+	<h2 class="title"><a href="{{ .RelPermalink }}">{{ .Title }} ({{ .Params.release_year }})</a></h2>
+	{{- with .Params.subtitle }}
+	<div class="subtitle">{{ . }}</div>
+	{{- end }}
+	<div class="starring">{{ .Params.starring }}</div>
+	<div class="rating">Rating: {{ printf "%.1f" (float .Params.rating) }} / 10.0</div>
+	{{- partial "byline.html" . }}
+	<div class="text">{{ .Content }}</div>
+	{{- partial "prevnext.html" . }}
+	{{- partial "responses.html" . }}
+</div>
