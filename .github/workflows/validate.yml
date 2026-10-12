@@ -7,10 +7,13 @@ name: validate
 #   html-links  HTML validation (vnu) and the internal link check (scripts/quality/check.sh)
 #   a11y        axe on every page, and lighthouse for the performance budgets
 #               (scripts/quality/lighthouserc.json)
+#   terraform   fmt, validate, tflint and checkov on infra/
 # The accessibility and Lighthouse jobs run only when the design or the checks change
-# (DESIGN_PATHS below), not for content alone. They are skipped jobs rather than a path
-# filter on the workflow, so `validate` still reports a status that a required check can
-# rely on.
+# (DESIGN_PATHS below), and the Terraform job only when infra/ changes (INFRA_PATHS).
+# They are skipped jobs rather than a path filter on the workflow, so `validate` still
+# reports a status that a required check can rely on.
+# `preview` is not part of `validate`: on a pull request it screenshots the pages the
+# content changes affect and publishes the images as an artifact (scripts/preview/).
 # The parity diff (scripts/parity/) is not run here: it compares with the legacy
 # site, so it is run by hand during the cutover, not on every change.
 on:
@@ -30,6 +33,8 @@ env:
   # Templates, styles, scripts and theme images, the site configuration, and the
   # checks themselves
   DESIGN_PATHS: assets layouts static hugo.yaml scripts/quality .github/workflows/validate.yml
+  # Terraform and its checks
+  INFRA_PATHS: infra .github/workflows/validate.yml
 
 jobs:
   content:
@@ -66,6 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       design: ${{ steps.diff.outputs.design }}
+      infra: ${{ steps.diff.outputs.infra }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -75,14 +81,18 @@ jobs:
           BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
         run: |
           # A push with no usable base (a new branch, a force push) counts as a change.
-          if git cat-file -e "$BASE^{commit}" 2>/dev/null \
-              && git diff --quiet "$BASE" HEAD -- $DESIGN_PATHS; then
-            echo "design=false" >> "$GITHUB_OUTPUT"
-            echo "No design or check changes: skipping the quality gates."
-          else
-            echo "design=true" >> "$GITHUB_OUTPUT"
-            git diff --stat "$BASE" HEAD -- $DESIGN_PATHS 2>/dev/null || true
-          fi
+          usable=false
+          git cat-file -e "$BASE^{commit}" 2>/dev/null && usable=true
+          for group in design:"$DESIGN_PATHS" infra:"$INFRA_PATHS"; do
+            name=${group%%:*} paths=${group#*:}
+            if $usable && git diff --quiet "$BASE" HEAD -- $paths; then
+              echo "$name=false" >> "$GITHUB_OUTPUT"
+              echo "No $name changes: skipping its checks."
+            else
+              echo "$name=true" >> "$GITHUB_OUTPUT"
+              git diff --stat "$BASE" HEAD -- $paths 2>/dev/null || true
+            fi
+          done
 
   # HTML validation (vnu, on the runner's Java) and the internal link check. They run on
   # every change, since content can break links and markup too. The tools are pinned and
@@ -137,10 +147,100 @@ jobs:
           path: .cache/lighthouse/
           retention-days: 7
 
+  # fmt, validate (without the backend, so no AWS access), tflint and checkov. The tools
+  # are pinned; the versions match the devcontainer.
+  terraform:
+    needs: [changes]
+    if: needs.changes.outputs.infra == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.16.5
+          terraform_wrapper: false
+      - uses: terraform-linters/setup-tflint@v6
+        with:
+          tflint_version: v0.64.0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Format
+        run: terraform -chdir=infra fmt -check -recursive -diff
+      - name: Validate
+        run: |
+          terraform -chdir=infra init -backend=false -input=false
+          terraform -chdir=infra validate
+      - name: tflint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # to download the AWS ruleset without a rate limit
+        run: |
+          tflint --chdir=infra --init
+          tflint --chdir=infra
+      - name: checkov
+        run: |
+          pip install checkov==3.3.28
+          checkov -d infra --quiet --compact
+
+  # Screenshots of the pages the pull request's content and data changes affect, from the
+  # same build, as an artifact of PNGs at desktop and phone width. Not part of `validate`.
+  # A fork's token cannot comment, so there the images are only in the artifact.
+  preview:
+    if: github.event_name == 'pull_request'
+    needs: [build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write   # to comment the link
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0   # the diff against the merge base
+      - uses: actions/download-artifact@v8
+        with:
+          name: public
+          path: public/
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install Hugo and Selenium
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "$RUNNER_TEMP/hugo.deb"
+          pip install selenium==4.49.0
+      - name: Screenshot the changed pages
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 scripts/preview/preview.py --base "$BASE" --out preview
+      - id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: preview
+          path: preview/*.png
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: |
+          {
+            echo "### Preview of the changed pages"
+            echo
+            if [ -n "$ARTIFACT_URL" ]; then
+              echo "**[Download the screenshots]($ARTIFACT_URL)**: full-page PNGs at desktop and phone width, kept 14 days."
+              echo
+            fi
+            cat preview/summary.md
+          } > comment.md
+          cat comment.md >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/github/pr_comment.py --marker preview --body-file comment.md
+
   # The one name branch protection requires. A skipped job (the design-only ones) counts
   # as passing; a failed or cancelled one does not.
   validate:
-    needs: [content, build, html-links, a11y, lighthouse]
+    needs: [content, build, html-links, a11y, lighthouse, terraform]
     if: always()
     runs-on: ubuntu-latest
     steps:

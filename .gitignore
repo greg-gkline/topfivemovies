@@ -8,3 +8,8 @@ __pycache__/
 # Quality-gate tools and reports (scripts/quality)
 /.cache/
 /.lighthouseci/
+
+# Terraform (infra/)
+.terraform/
+*.tfstate*
+crash.log

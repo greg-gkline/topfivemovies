@@ -25,6 +25,7 @@ Move `www.topfivemovies.com` from a PHP 5 / MySQL site to a static site: content
 | Domain        | `www.topfivemovies.com`, plus the bare `topfivemovies.com` redirecting to it.                                                                                                         |
 | DNS           | Delegate the zone to Route 53 (option A). The domain registrar remains unchanged.                                                                                                     |
 | Checks        | Spelling and grammar are separate, advisory checks that post PR reviews. Spelling is deterministic (`typos`); grammar uses LanguageTool and Harper.                                                                                           |
+| Environments  | One. There is no staging site: the PR build publishes screenshots of the changed pages, and a codespace is for trying a change. Before the cutover the site is checked on its `*.cloudfront.net` address. |
 | Search        | Dropped. The response search page is not carried over.                                                                                                                                |
 | Content       | Migrated as-is. No editorial changes or removals.                                                                                                                                     |
 
@@ -45,7 +46,7 @@ content/*.yaml, data/*.yaml
    hugo build  ---->  public/  ---->  S3 (private)  <--OAC--  CloudFront  <--  Route 53  <--  domain registrar
         ^
    PR: validate, spelling and grammar reviews, preview
-   main: build, sync, invalidate (GitHub Actions + OIDC)
+   main: build, sync, invalidate (GitHub Actions + IAM access keys)
 ```
 
 ## Proposed repo layout
@@ -209,22 +210,25 @@ Each item is its own workflow and its own status check.
   - The rules (`scripts/prose/rules.json`) leave out style, punctuation and tone, since the voice is intentionally informal and irreverent.
   - Both prose checks post a comment-only PR review with inline comments and, where the fix is a plain replacement, a suggestion block (`scripts/prose/review.py`). Comments already posted are not repeated on a push. On a fork, where the token is read-only, they fall back to warning annotations.
   - Not a required check until the grammar review has proven useful.
-- [ ] **preview** (needs the Phase 5 staging bucket and deploy role): build and publish under a per-PR prefix in staging, comment the link on the PR, and clean up when the PR closes.
-- [ ] **terraform-plan** (needs the Phase 5 state backend and role): runs on `infra/**` changes and posts the plan as a PR comment.
-- [ ] Turn on branch protection requiring `validate` and the Terraform checks. `scripts/github/branch-protection.sh` does it for `validate`; run it by hand, and add the Terraform checks to it in Phase 5.
+- [x] **preview**: changed from the plan. There is no staging site, so the PR build publishes screenshots instead: full-page PNGs, at desktop and phone width, of every page the content changes affect, as an artifact of the `validate` workflow, with a link commented on the PR. `scripts/preview/`, documented in its README.
+- [x] **terraform-plan**: `terraform-plan.yml` runs on `infra/**` changes and comments the plan. It signs in as a read-only IAM user with an access key from repository secrets (the account does not support OIDC), and does nothing until those secrets exist after the first apply. The formatting, validation, tflint and checkov checks are the `terraform` job of `validate.yml`, so the one required check, `validate`, covers them.
+- [ ] Turn on branch protection requiring `validate`, which includes the Terraform checks. `scripts/github/branch-protection.sh` does it; run it by hand once `validate` has reported.
 
 ## Phase 5: Infrastructure (Terraform)
 
-- [ ] Bootstrap stack: remote state in S3 with lockfile locking, pinned providers.
-- [ ] S3 bucket: private, Block Public Access, versioning, lifecycle rules.
-- [ ] CloudFront: Origin Access Control, HTTPS only, HTTP/3, a response-headers policy (HSTS, CSP, `X-Content-Type-Options`, `Referrer-Policy`), a CloudFront Function for `index.html` handling, and a custom 404.
-- [ ] Redirect from `topfivemovies.com` to `https://www.topfivemovies.com` (a CloudFront Function, with the apex also on the distribution).
-- [ ] ACM certificate in `us-east-1` covering `www.topfivemovies.com` and `topfivemovies.com`, validated by DNS records Terraform creates in Route 53.
-- [ ] Route 53 hosted zone for `topfivemovies.com`, with alias records for `www` and the apex pointing to CloudFront (A and AAAA).
-- [ ] GitHub OIDC provider and a least-privilege deploy role limited to the bucket sync and CloudFront invalidations. No long-lived AWS keys.
-- [ ] Separate `staging` and `prod` environments.
-- [ ] Terraform checks in CI: `fmt`, `validate`, `tflint`, `checkov`.
-- [ ] Optional: a budget alert and CloudFront error-rate alarm.
+Written, and passing `terraform validate`, `tflint` and `checkov`, but **not applied yet**: see the first item. It is in `infra/`, documented in `infra/README.md`. There is one environment: to test a change, use a codespace.
+
+- [ ] Set up AWS for Terraform, then the first apply, by hand (`infra/README.md`): an IAM identity with the permissions in `infra/terraform-operator-policy.json`, then `terraform init`, `plan`, `apply`. Then create access keys for the two CI users (Terraform does not, so the secrets stay out of the state), put them in the repository secrets, and delete the `import` block.
+- [x] State: the bucket `infrastructure-832474135782-us-east-2-an` was made by hand, so there is no bootstrap stack. The state is `topfivemovies/terraform/terraform.tfstate` in it, with lockfile locking and the AWS provider pinned by `.terraform.lock.hcl`.
+- [x] S3 bucket: the hand-made `topfivemovies` bucket is imported, then made private (Block Public Access, bucket-owner-enforced), versioned and encrypted, with a lifecycle rule that expires old versions.
+- [x] CloudFront: Origin Access Control, HTTPS only, HTTP/3, a response-headers policy (HSTS, a strict CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`), a CloudFront Function for `index.html` handling, and the custom 404.
+- [x] Redirect from `topfivemovies.com` to `https://www.topfivemovies.com`: the same CloudFront Function, with the apex also on the distribution.
+- [x] ACM certificate in `us-east-1` covering `www.topfivemovies.com` and `topfivemovies.com`, validated by DNS records Terraform creates in Route 53. It is created at the cutover, not before: ACM can only validate once the domain is served from Route 53, so the custom domain, certificate and alias records are behind `enable_custom_domain`, which is `false` until Phase 7.
+- [x] Route 53 hosted zone for `topfivemovies.com`, with alias records for `www` and the apex pointing to CloudFront (A and AAAA, created with the custom domain).
+- [x] Two IAM users for CI, in groups that hold the permissions, since the account does not support OIDC: `deploy`, limited to the bucket sync and CloudFront invalidations, and `plan`, read-only and unable to read object data. Their access keys are created by hand and kept in repository secrets, not in Terraform.
+- [x] ~~Separate `staging` and `prod` environments.~~ Dropped: one environment. Before the cutover the site is reachable at the distribution's `*.cloudfront.net` address.
+- [x] Terraform checks in CI: `fmt`, `validate`, `tflint`, `checkov`. Each `checkov` skip is explained beside the resource.
+- [x] Optional: a budget alert and a CloudFront error-rate alarm, off unless `alert_email` is set.
 
 ## Phase 6: Deploy on merge to `main`
 
@@ -236,7 +240,7 @@ Each item is its own workflow and its own status check.
 
 ## Phase 7: DNS migration and cutover
 
-DNS delegation is the riskiest step. Do it only after the site is verified on a staging hostname.
+DNS delegation is the riskiest step. Do it only after the site is verified on the distribution's `*.cloudfront.net` address.
 
 The current zone has no records beyond the registrar's domain parking, so there is no mail or verification setup to preserve. The parking records are replaced by the new site and are not recreated.
 
@@ -247,11 +251,12 @@ The current zone has no records beyond the registrar's domain parking, so there 
 
 **Verify**
 - [ ] Query the new Route 53 nameservers directly and confirm `www` and the apex resolve to CloudFront: `dig @<aws-ns> www.topfivemovies.com`.
-- [ ] Verify the site on the staging hostname: parity diff, screenshots, link check.
+- [ ] Verify the site on the `*.cloudfront.net` address (`terraform output distribution_domain`): parity diff, screenshots, link check.
 - [ ] Lower TTLs at the registrar a day or two before the switch, if the registrar allows it.
 
 **Switch**
-- [ ] At the registrar, replace the nameservers with the four Route 53 nameservers.
+- [ ] At the registrar, replace the nameservers with the four Route 53 nameservers (`terraform output name_servers`).
+- [ ] When the Route 53 servers answer for the domain, set `enable_custom_domain = true` in `infra/terraform.tfvars` and apply: Terraform requests the certificate, validates it through the zone, and attaches the domain to CloudFront.
 - [ ] Monitor the site and 404s. Propagation can take up to about 48 hours. Visitors on the old nameservers briefly see the parking page.
 - [ ] **Rollback:** switch the nameservers back to the registrar's.
 
