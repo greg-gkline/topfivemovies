@@ -1,0 +1,36 @@
+// CloudFront Function, viewer request. Generated from viewer-request.js.tftpl.
+//  1. The bare domain redirects to www, keeping the path and query string.
+//  2. A path ending in "/" is served from that directory's index.html. Pages themselves
+//     are published as <name>.html, so this is only the home page and any directory URL.
+function handler(event) {
+  var request = event.request;
+  var host = request.headers.host ? request.headers.host.value : "";
+
+  if (host === "${apex}") {
+    var query = [];
+    for (var key in request.querystring) {
+      var entry = request.querystring[key];
+      if (entry.multiValue) {
+        entry.multiValue.forEach(function (item) {
+          query.push(key + "=" + item.value);
+        });
+      } else {
+        query.push(key + (entry.value === "" ? "" : "=" + entry.value));
+      }
+    }
+    return {
+      statusCode: 301,
+      statusDescription: "Moved Permanently",
+      headers: {
+        location: {
+          value: "https://${www}" + request.uri + (query.length ? "?" + query.join("&") : ""),
+        },
+      },
+    };
+  }
+
+  if (request.uri.charAt(request.uri.length - 1) === "/") {
+    request.uri += "index.html";
+  }
+  return request;
+}

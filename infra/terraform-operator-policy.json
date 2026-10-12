@@ -1,0 +1,76 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "StateRead",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::infrastructure-832474135782-us-east-2-an",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": [
+            "topfivemovies/terraform/*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "StateReadWrite",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": "arn:aws:s3:::infrastructure-832474135782-us-east-2-an/topfivemovies/terraform/*"
+    },
+    {
+      "Sid": "SiteBucket",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::topfivemovies",
+        "arn:aws:s3:::topfivemovies/*"
+      ]
+    },
+    {
+      "Sid": "CloudFrontRoute53Certificates",
+      "Effect": "Allow",
+      "Action": [
+        "cloudfront:*",
+        "route53:*",
+        "acm:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CiUsers",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateUser",
+        "iam:DeleteUser",
+        "iam:GetUser",
+        "iam:TagUser",
+        "iam:UntagUser",
+        "iam:ListUserTags",
+        "iam:ListAccessKeys",
+        "iam:PutUserPolicy",
+        "iam:DeleteUserPolicy",
+        "iam:GetUserPolicy",
+        "iam:ListUserPolicies",
+        "iam:ListAttachedUserPolicies"
+      ],
+      "Resource": [
+        "arn:aws:iam::832474135782:user/topfivemovies-*"
+      ]
+    },
+    {
+      "Sid": "OptionalBudget",
+      "Effect": "Allow",
+      "Action": [
+        "budgets:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
