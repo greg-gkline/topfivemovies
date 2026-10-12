@@ -2,8 +2,11 @@
 # A CloudFront error-rate alarm is left out: it would need an SNS topic, which this account's
 # organization policy denies.
 locals {
+  # A secret pasted into a form often carries a trailing newline or space, which would read as
+  # a different address from the one applied, so it is trimmed.
+  alert_email = trimspace(var.alert_email)
   # Only whether there is an address, not the address itself, so it is safe to use in count.
-  alerts_enabled = nonsensitive(var.alert_email != "")
+  alerts_enabled = nonsensitive(local.alert_email != "")
 }
 
 resource "aws_budgets_budget" "monthly" {
@@ -25,7 +28,7 @@ resource "aws_budgets_budget" "monthly" {
     threshold                  = 80
     threshold_type             = "PERCENTAGE"
     notification_type          = "FORECASTED"
-    subscriber_email_addresses = [var.alert_email]
+    subscriber_email_addresses = [local.alert_email]
   }
 
   notification {
@@ -33,6 +36,6 @@ resource "aws_budgets_budget" "monthly" {
     threshold                  = 100
     threshold_type             = "PERCENTAGE"
     notification_type          = "ACTUAL"
-    subscriber_email_addresses = [var.alert_email]
+    subscriber_email_addresses = [local.alert_email]
   }
 }

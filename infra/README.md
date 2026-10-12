@@ -117,7 +117,10 @@ sensitive, so a plan (including the one the workflow comments on a pull request)
 - **Devcontainer:** `export TF_VAR_alert_email=you@example.com` in your shell, not in a file
   that is committed.
 - **The plan workflow:** `gh secret set ALERT_EMAIL` (a repository secret, since the plan job
-  reads it). Set it the same as above, or the plan
+  reads it). To be sure it is exactly the
+  address you applied with, copy it from your own environment instead of typing it again:
+  `printf %s "$TF_VAR_alert_email" | gh secret set ALERT_EMAIL`. If the plan shows the budget's
+  notifications changing, the two values differ. Set it the same as above, or the plan
   will show the alerts as removed.
 
 Use the same address everywhere. It does end up in the Terraform state (in the private state
