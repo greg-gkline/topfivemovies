@@ -218,7 +218,8 @@ Each item is its own workflow and its own status check.
 
 Written, and passing `terraform validate`, `tflint` and `checkov`, but **not applied yet**: see the first item. It is in `infra/`, documented in `infra/README.md`. There is one environment: to test a change, use a codespace.
 
-- [ ] Set up AWS for Terraform, then the first apply, by hand (`infra/README.md`): an IAM identity with the permissions in `infra/terraform-operator-policy.json`, then `terraform init`, `plan`, `apply`. Then create access keys for the two CI users (Terraform does not, so the secrets stay out of the state), put them in the repository secrets, and delete the `import` block.
+- [x] Set up AWS for Terraform and apply, by hand (`infra/README.md`). Applied, and the site works at the distribution's `*.cloudfront.net` address after a manual build and `aws s3 sync`. The `import` block is removed.
+- [ ] Create the access keys for the two CI users (Terraform does not, so the secrets stay out of the state) and put them in the repository secrets `AWS_PLAN_*` and `AWS_DEPLOY_*`, plus `ALERT_EMAIL` if the budget is on.
 - [x] State: the bucket `infrastructure-832474135782-us-east-2-an` was made by hand, so there is no bootstrap stack. The state is `topfivemovies/terraform/terraform.tfstate` in it, with lockfile locking and the AWS provider pinned by `.terraform.lock.hcl`.
 - [x] S3 bucket: the hand-made `topfivemovies` bucket is imported, then made private (Block Public Access, bucket-owner-enforced) and encrypted. No versioning and no lifecycle rules, on purpose: the site is rebuilt from git, and a rollback is a redeploy of an earlier commit.
 - [x] CloudFront: Origin Access Control, HTTPS only, HTTP/3, a response-headers policy (HSTS, a strict CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`), a CloudFront Function for `index.html` handling, and the custom 404.

@@ -1,10 +1,5 @@
-# The site bucket was made by hand. This import adopts it on the first apply; once that has
-# run, the block can be deleted.
-import {
-  to = aws_s3_bucket.site
-  id = var.site_bucket
-}
-
+# The bucket was made by hand and adopted into the state with an import block on the first
+# apply, so it is not created here.
 resource "aws_s3_bucket" "site" {
   #checkov:skip=CKV_AWS_21:Versioning is off on purpose; the site is rebuilt from git, and a rollback is a redeploy of an earlier commit
   #checkov:skip=CKV2_AWS_61:There is no versioning, so no old versions to expire, and the bucket holds only the current site

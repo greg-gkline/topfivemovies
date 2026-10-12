@@ -67,12 +67,12 @@ you need in AWS to apply:
 
 ## Applying
 
-The site bucket was made by hand: the `import` block in `s3.tf` adopts it on the first apply.
-It assumes both buckets are in `us-east-2` (the `region` variable).
+The site bucket was made by hand, and the first apply adopted it into the state with an `import`
+block, since removed. Both buckets are in `us-east-2` (the `region` variable).
 
     cd infra
     terraform init
-    terraform plan                 # read it: the bucket is imported, the rest is created
+    terraform plan                 # read it before applying
     terraform apply
 
 Terraform creates the CI users but not their access keys, because a key created by Terraform
@@ -99,7 +99,7 @@ secret, then `aws iam delete-access-key` for the old one.
 
 After that, a change to `infra/` goes through a pull request: the `terraform` job in
 `validate.yml` runs fmt, validate, tflint and checkov, `terraform-plan` comments the plan, and
-you apply it after the merge. Delete the `import` block once the first apply has run.
+you apply it after the merge.
 
 ## The alert email
 
