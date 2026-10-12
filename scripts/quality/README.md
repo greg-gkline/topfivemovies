@@ -102,6 +102,8 @@ Reports are written to `.cache/lighthouse/`, and the workflow uploads them as an
 
 The `site` workflow builds once and passes `public/` to two jobs: `quality` runs `check.sh html a11y links` on the runner's Java and Chrome (Selenium Manager fetches the matching driver), and `lighthouse` runs Lighthouse CI.
 
+Both jobs run only when a pull request or push changes the design or the checks: `assets/`, `layouts/`, `static/`, `hugo.yaml`, `scripts/quality/` or the workflow itself (`DESIGN_PATHS` in `site.yml`). A change to content or data alone builds the site but skips them, since Hugo's build already fails on a broken `relref` or a missing image. They are skipped jobs, not a path filter on the workflow, so a branch protection rule that requires them is still satisfied when they do not run.
+
 ## Notes for Phase 5
 
 The response-headers policy's CSP must allow `img-src 'self' data:`, for the arrow bullet in the stylesheet. The pages use no inline scripts or style attributes: the home page's quotes are a `<script type="application/json">` data block, which is never executed, and the scripts and the stylesheet carry `integrity` attributes.
