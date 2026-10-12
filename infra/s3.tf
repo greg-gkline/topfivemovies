@@ -6,6 +6,8 @@ import {
 }
 
 resource "aws_s3_bucket" "site" {
+  #checkov:skip=CKV_AWS_21:Versioning is off on purpose; the site is rebuilt from git, and a rollback is a redeploy of an earlier commit
+  #checkov:skip=CKV2_AWS_61:There is no versioning, so no old versions to expire, and the bucket holds only the current site
   #checkov:skip=CKV_AWS_18:Access logging needs a second bucket; CloudFront is the only reader
   #checkov:skip=CKV_AWS_144:A static site rebuilt from git does not need cross-region replication
   #checkov:skip=CKV_AWS_145:AES256 is enough for public content; KMS would add a key to pay for and manage
@@ -34,14 +36,6 @@ resource "aws_s3_bucket_ownership_controls" "site" {
   }
 }
 
-resource "aws_s3_bucket_versioning" "site" {
-  bucket = aws_s3_bucket.site.id
-
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
 resource "aws_s3_bucket_server_side_encryption_configuration" "site" {
   bucket = aws_s3_bucket.site.id
 
@@ -52,29 +46,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "site" {
       sse_algorithm = "AES256"
     }
   }
-}
-
-resource "aws_s3_bucket_lifecycle_configuration" "site" {
-  bucket = aws_s3_bucket.site.id
-
-  # Versioning keeps the previous deploy for a rollback; old versions do not pile up.
-  rule {
-    id     = "expire-old-versions"
-    status = "Enabled"
-
-    filter {}
-
-    noncurrent_version_expiration {
-      noncurrent_days           = 30
-      newer_noncurrent_versions = 3
-    }
-
-    abort_incomplete_multipart_upload {
-      days_after_initiation = 7
-    }
-  }
-
-  depends_on = [aws_s3_bucket_versioning.site]
 }
 
 data "aws_iam_policy_document" "site_bucket" {

@@ -14,7 +14,7 @@ codespace and plan or apply from there.
 | File | What |
 |---|---|
 | `versions.tf` | Terraform and provider versions, and the S3 backend |
-| `s3.tf` | The site bucket (imported), public access block, versioning, encryption, lifecycle, bucket policy |
+| `s3.tf` | The site bucket (imported), public access block, encryption, bucket policy (no versioning or lifecycle rules, on purpose) |
 | `cloudfront.tf` | The distribution, origin access control, security headers, the viewer-request function |
 | `functions/viewer-request.js.tftpl` | The CloudFront Function: apex redirect and `index.html` |
 | `route53.tf`, `acm.tf` | The zone, alias records, and the certificate with its DNS validation |
