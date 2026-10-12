@@ -212,14 +212,14 @@ Each item is its own workflow and its own status check.
   - Not a required check until the grammar review has proven useful.
 - [x] **preview**: changed from the plan. There is no staging site, so the PR build publishes screenshots instead: full-page PNGs, at desktop and phone width, of every page the content changes affect, as an artifact of the `validate` workflow, with a link commented on the PR. `scripts/preview/`, documented in its README.
 - [x] **terraform-plan**: `terraform-plan.yml` runs on `infra/**` changes and comments the plan. It signs in as a read-only IAM user with an access key from repository secrets (the account does not support OIDC), and does nothing until those secrets exist after the first apply. The formatting, validation, tflint and checkov checks are the `terraform` job of `validate.yml`, so the one required check, `validate`, covers them.
-- [ ] Turn on branch protection requiring `validate`, which includes the Terraform checks. `scripts/github/branch-protection.sh` does it; run it by hand once `validate` has reported.
+- [x] Turn on branch protection requiring `validate`, which includes the Terraform checks. `scripts/github/branch-protection.sh` does it; run it by hand once `validate` has reported.
 
 ## Phase 5: Infrastructure (Terraform)
 
 Written, and passing `terraform validate`, `tflint` and `checkov`, but **not applied yet**: see the first item. It is in `infra/`, documented in `infra/README.md`. There is one environment: to test a change, use a codespace.
 
 - [x] Set up AWS for Terraform and apply, by hand (`infra/README.md`). Applied, and the site works at the distribution's `*.cloudfront.net` address after a manual build and `aws s3 sync`. The `import` block is removed.
-- [ ] Create the access keys for the two CI users (Terraform does not, so the secrets stay out of the state) and put them in GitHub: `AWS_PLAN_*` (and `ALERT_EMAIL`, if the budget is on) as repository secrets, and `AWS_DEPLOY_*` in the `AWS 832474135782` environment, which is limited to `main`.
+- [x] Create the access keys for the two CI users (Terraform does not, so the secrets stay out of the state) and put them in GitHub: `AWS_PLAN_*` (and `ALERT_EMAIL`, if the budget is on) as repository secrets, and `AWS_DEPLOY_*` in the `AWS 832474135782` environment, which is limited to `main`.
 - [x] State: the bucket `infrastructure-832474135782-us-east-2-an` was made by hand, so there is no bootstrap stack. The state is `topfivemovies/terraform/terraform.tfstate` in it, with lockfile locking and the AWS provider pinned by `.terraform.lock.hcl`.
 - [x] S3 bucket: the hand-made `topfivemovies` bucket is imported, then made private (Block Public Access, bucket-owner-enforced) and encrypted. No versioning and no lifecycle rules, on purpose: the site is rebuilt from git, and a rollback is a redeploy of an earlier commit.
 - [x] CloudFront: Origin Access Control, HTTPS only, HTTP/3, a response-headers policy (HSTS, a strict CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`), a CloudFront Function for `index.html` handling, and the custom 404.
