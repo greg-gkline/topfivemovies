@@ -1,0 +1,20 @@
+{{- /*
+  Pages in chronological order: by date, then by filename. Every list, the previous
+  and next links, "recent additions" and the featured story use this order.
+  Takes a page collection, or dict "pages" <collection> "desc" true for newest first.
+*/ -}}
+{{- $pages := . -}}
+{{- $order := "asc" -}}
+{{- if reflect.IsMap . -}}
+  {{- $pages = .pages -}}
+  {{- if .desc }}{{ $order = "desc" }}{{ end -}}
+{{- end -}}
+{{- $keyed := slice -}}
+{{- range $pages -}}
+  {{- $keyed = $keyed | append (dict "key" (printf "%s %s" (.Date.Format "2006-01-02") .File.ContentBaseName) "page" .) -}}
+{{- end -}}
+{{- $out := slice -}}
+{{- range sort $keyed "key" $order -}}
+  {{- $out = $out | append .page -}}
+{{- end -}}
+{{- return $out -}}

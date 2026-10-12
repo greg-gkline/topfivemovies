@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Check the references between content files, which JSON Schema cannot see.
 
-- Page filenames are lowercase slugs.
+- Page filenames are lowercase slugs (apart from each section's _index.md).
 - Every `author` (pages and data/responses.yaml) names a page in content/authors/.
 - Every response `item` names an existing page.
-- Every relref in a page body names an existing page.
+- Every relref in a page body names an existing page, section page (_index.md) or
+  top-level page (content/<name>.md).
 - Every image reference resolves to a file in content/images/, and every file in
   content/images/ is referenced. Names there are unique ignoring case.
 
@@ -30,23 +31,39 @@ def main():
     errors = []
     pages = {}   # "section/name" -> front matter
     bodies = {}
+    others = set()   # section pages ("section/_index") and top-level pages ("name")
+
+    def read(path, key):
+        try:
+            front, body = split(path)
+            front = yaml.safe_load(front) or {}
+        except ValueError as e:   # also an impossible date
+            errors.append(f"{path.relative_to(CONTENT)}: {e}")
+            return None
+        except yaml.YAMLError as e:
+            errors.append(f"{path.relative_to(CONTENT)}: invalid front matter: {e}")
+            return None
+        bodies[key] = body
+        return front
+
     for section in SECTIONS:
         for path in sorted((CONTENT / section).iterdir()):
             rel = path.relative_to(CONTENT)
+            if path.name == "_index.md":
+                if read(path, f"{section}/_index") is not None:
+                    others.add(f"{section}/_index")
+                continue
             if path.suffix != ".md" or not SLUG.match(path.stem):
                 errors.append(f"{rel}: page filenames must be lowercase-slug.md")
                 continue
-            try:
-                front, body = split(path)
-            except ValueError as e:
-                errors.append(str(e))
-                continue
-            try:
-                pages[f"{section}/{path.stem}"] = yaml.safe_load(front) or {}
-            except (ValueError, yaml.YAMLError) as e:   # ValueError: an impossible date
-                errors.append(f"{rel}: invalid front matter: {e}")
-                continue
-            bodies[f"{section}/{path.stem}"] = body
+            front = read(path, f"{section}/{path.stem}")
+            if front is not None:
+                pages[f"{section}/{path.stem}"] = front
+    for path in sorted(CONTENT.glob("*.md")):
+        if not SLUG.match(path.stem):
+            errors.append(f"{path.relative_to(CONTENT)}: page filenames must be lowercase-slug.md")
+        elif read(path, path.stem) is not None:
+            others.add(path.stem)
 
     authors = {p.split("/", 1)[1] for p in pages if p.startswith("authors/")}
     referenced = {}
@@ -56,8 +73,10 @@ def main():
         for field in IMAGE_FIELDS:
             if front.get(field):
                 referenced.setdefault(front[field], page)
-        for target in RELREF.findall(bodies[page]):
-            if target.removesuffix(".md").lstrip("/") not in pages:
+
+    for page, body in bodies.items():
+        for target in RELREF.findall(body):
+            if target.removesuffix(".md").lstrip("/") not in pages.keys() | others:
                 errors.append(f"{page}: relref to missing page {target!r}")
 
     responses = yaml.safe_load((ROOT / "data/responses.yaml").read_text(encoding="utf-8")) or []

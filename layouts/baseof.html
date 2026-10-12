@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "head.html" . }}
+</head>
+
+<body>
+<div id="body">
+
+	<div id="banner">
+		<h1 class="access"><a href="{{ site.Home.RelPermalink }}">Top Five Movies</a></h1>
+		{{- block "banner" . }}{{ end }}
+		<a href="{{ site.Home.RelPermalink }}"><span id="bannerimg"></span></a>
+	</div>
+
+	{{ partial "navbar.html" . }}
+
+	{{ block "main" . }}{{ end }}
+
+	{{ partial "footer.html" . }}
+
+</div>
+{{- block "scripts" . }}{{ end }}
+</body>
+</html>

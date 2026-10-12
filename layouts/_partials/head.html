@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+<title>{{ partial "page-title.html" . }}</title>
+{{- $keywords := slice -}}
+{{- $description := site.Params.description -}}
+{{- if .IsPage -}}
+  {{- if ne .Section "authors" -}}
+    {{- $keywords = partial "keywords.html" . -}}
+    {{- $description = partial "excerpt.html" (dict "page" . "length" 300) -}}
+  {{- end -}}
+{{- else -}}
+  {{- $newest := .RegularPages -}}
+  {{- if .IsHome }}{{ $newest = where site.RegularPages "Type" "movie" }}{{ end -}}
+  {{- range first 5 (partial "ordered.html" (dict "pages" $newest "desc" true)) -}}
+    {{- $keywords = $keywords | append (partial "keywords.html" .) -}}
+  {{- end -}}
+  {{- with .Description }}{{ $description = . }}{{ end -}}
+{{- end -}}
+{{- if eq .Type "chickflicks" }}{{ $keywords = slice "chick flicks" | append $keywords }}{{ end }}
+<meta name="description" content="{{ $description }}">
+<meta name="keywords" content="{{ delimit (slice site.Params.keywords | append $keywords) ", " }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- with partial "neighbors.html" . }}
+{{- with .prev }}
+<link rel="prev" href="{{ .Permalink }}">
+{{- end }}
+{{- with .next }}
+<link rel="next" href="{{ .Permalink }}">
+{{- end }}
+{{- end }}
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" type="image/x-icon">
+{{- with site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{{ .RelPermalink }}">
+{{- end }}
+{{- $css := cond .IsHome "css/elegant.css" "css/elegant_inner.css" }}
+{{- with resources.Get $css | resources.ExecuteAsTemplate $css . | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{- end }}

@@ -1,0 +1,17 @@
+{{- /*
+  Plain-text preview of a page: the text up to the first full stop at or after
+  `length` - 10 characters, then "...". Same rule as the legacy generatePreview().
+  Takes dict "page" <page> "length" <int>.
+*/ -}}
+{{- $text := .page.Plain | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
+{{- $length := .length -}}
+{{- if gt (strings.RuneCount $text) $length -}}
+  {{- $head := substr $text 0 (sub $length 10) -}}
+  {{- $sentence := findRE `^[^.]*\.` (substr $text (sub $length 10)) 1 -}}
+  {{- if $sentence -}}
+    {{- $text = printf "%s%s" $head (index $sentence 0) -}}
+  {{- else -}}
+    {{- $text = substr $text 0 $length -}}
+  {{- end -}}
+{{- end -}}
+{{- return printf "%s..." $text -}}

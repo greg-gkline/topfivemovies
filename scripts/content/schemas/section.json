@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Section page",
+  "description": "Front matter of content/<section>/_index.md. The markdown body is the introduction above the section's index.",
+  "type": "object",
+  "required": [
+    "title"
+  ],
+  "properties": {
+    "title": {
+      "$ref": "defs.json#/$defs/text"
+    },
+    "heading": {
+      "$ref": "defs.json#/$defs/text",
+      "description": "Heading above the introduction, where the page has one."
+    },
+    "description": {
+      "$ref": "defs.json#/$defs/text",
+      "description": "Meta description. Defaults to the site's."
+    }
+  },
+  "additionalProperties": false
+}

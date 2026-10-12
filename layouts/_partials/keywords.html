@@ -1,0 +1,12 @@
+{{- /*
+  The keywords of one item: its title and the people in it (a review's cast, a
+  top-five list's entries). Index pages join the keywords of their newest items.
+*/ -}}
+{{- $words := slice .Title -}}
+{{- with .Params.starring -}}
+  {{- $words = $words | append (replace . " and " " ") -}}
+{{- end -}}
+{{- range .Params.items -}}
+  {{- $words = $words | append (.title | $.RenderString | plainify | htmlUnescape) -}}
+{{- end -}}
+{{- return $words -}}

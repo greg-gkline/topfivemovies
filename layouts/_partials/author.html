@@ -1,0 +1,6 @@
+{{- /* The author page named by a page's `author` field (a filename in content/authors/). */ -}}
+{{- $author := site.GetPage (printf "/authors/%s" .) -}}
+{{- if not $author -}}
+  {{- errorf "unknown author %q" . -}}
+{{- end -}}
+{{- return $author -}}

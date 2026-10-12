@@ -1,0 +1,3 @@
+{{- $author := partial "author.html" .Params.author }}
+<div class="author">by {{ $author.Params.name }}</div>
+<div class="date">({{ .Date.Format "January 02, 2006" }})</div>

@@ -1,0 +1,13 @@
+{{- /* Legacy staff responses to an item, from data/responses.yaml. Read-only. */ -}}
+{{- $item := printf "%s/%s" .Section .File.ContentBaseName -}}
+{{- with where site.Data.responses "item" $item }}
+<h2 id="staff_responses">Staff Responses</h2>
+{{- range . }}
+{{- $author := partial "author.html" .author }}
+{{- $says := printf "%s says:" $author.Params.name }}
+<div class="response">
+	<div class="response_img">{{ with $author.Params.image }}{{ $img := resources.Get (printf "content/images/%s" .) }}<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $says }}" title="{{ $says }}">{{ end }}</div>
+	<div class="response_bubble_container"><div class="response_bubble"><div class="response_text">{{ $.RenderString .text }}</div></div></div>
+</div>
+{{- end }}
+{{- end }}

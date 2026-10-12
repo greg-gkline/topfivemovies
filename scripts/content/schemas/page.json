@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Standalone page",
+  "description": "Front matter of the pages directly in content/ (content/<name>.md).",
+  "type": "object",
+  "required": [
+    "title",
+    "layout"
+  ],
+  "properties": {
+    "title": {
+      "$ref": "defs.json#/$defs/text"
+    },
+    "heading": {
+      "$ref": "defs.json#/$defs/text",
+      "description": "Heading on the page, when it differs from the title."
+    },
+    "description": {
+      "$ref": "defs.json#/$defs/text",
+      "description": "Meta description. Defaults to the site's."
+    },
+    "layout": {
+      "enum": [
+        "groupbio",
+        "polls"
+      ],
+      "description": "Template in layouts/ that renders the page."
+    }
+  },
+  "additionalProperties": false
+}

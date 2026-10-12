@@ -1,0 +1,26 @@
+<div id="footer">
+	<div id="footernav">
+		<a href="{{ site.Home.RelPermalink }}">Home</a> |
+		<a href="{{ (site.GetPage "/top5").RelPermalink }}">Top 5 Lists</a> |
+		<a href="{{ (site.GetPage "/reviews").RelPermalink }}">Reviews</a> |
+		<a href="{{ (site.GetPage "/chickflicks").RelPermalink }}">Chick Flicks</a> |
+		<a href="{{ (site.GetPage "/other").RelPermalink }}">Other Features</a> |
+		<a href="{{ (site.GetPage "/authors").RelPermalink }}">About Us</a>
+	</div>
+
+	<div id="copyright">
+		<div id="cclogo">
+			<a href="https://creativecommons.org/licenses/by-nc-sa/2.5/" title="learn more about Creative Commons licensing" rel="license">{{ with resources.Get "images/somerights20.png" }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Creative Commons">{{ end }}</a>
+		</div>
+		<div id="cctext">
+			This site design and all articles by Greg are free for non-commercial use with attribution.<br>
+			All other articles contained herein are the copyright of their respective authors, unless otherwise noted.
+		</div>
+	</div>
+
+	<div id="tech">
+		{{- with site.Home.OutputFormats.Get "rss" }}
+		<a type="application/rss+xml" href="{{ .RelPermalink }}" title="Syndicate TopFiveMovies with an RSS feed">rss 2.0</a>
+		{{- end }}
+	</div>
+</div>

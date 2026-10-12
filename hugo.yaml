@@ -1,0 +1,63 @@
+# Hugo site configuration. Build with the Hugo version pinned in
+# .github/workflows/site.yml and .devcontainer/devcontainer.json.
+baseURL: https://www.topfivemovies.com/
+languageCode: en-us
+title: Top Five Movies
+
+# Every page is published as <section>/<filename>.html, sections as <section>.html.
+uglyURLs: true
+
+disableKinds: [taxonomy, term]
+enableRobotsTXT: true
+timeZone: UTC
+
+outputs:
+  home: [html, rss]
+  section: [html]
+  page: [html]
+
+services:
+  rss:
+    limit: 20
+
+sitemap:
+  changeFreq: ""
+  priority: -1
+
+markup:
+  goldmark:
+    extensions:
+      # The legacy pages show straight quotes and "--"; keep them as written.
+      typographer:
+        disable: true
+      # ++text++ renders <ins>, for the two underlined spans in the legacy content.
+      extras:
+        insert:
+          enable: true
+    renderer:
+      unsafe: false   # the content holds no raw HTML
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.147.9
+  # Content images live in content/images/ next to the pages that use them, but Hugo
+  # only publishes non-markdown content files that belong to a page bundle. Mount them
+  # into the asset pipeline instead, where templates load them with resources.Get
+  # "content/images/<name>". Declaring a mount replaces the default for its target,
+  # so content and assets are mounted again explicitly.
+  mounts:
+    - source: content
+      target: content
+      excludeFiles: [images/**]
+    - source: content/images
+      target: assets/content/images
+    - source: assets
+      target: assets
+
+params:
+  description: >-
+    The latest movie reviews and top-five lists from topfivemovies.com. Top Five Movies
+    is written and maintained by a bunch of regular guys, not snobby movie critics.
+  keywords: top 5, top five, top 5 movies, top five movies
+  copyrightStart: 2001

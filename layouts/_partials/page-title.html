@@ -1,0 +1,12 @@
+{{- /* The <title> of a page, worded as on the legacy site. */ -}}
+{{- $title := site.Title -}}
+{{- if not .IsHome -}}
+  {{- $name := .Title | default .Params.name -}}
+  {{- $label := "" -}}
+  {{- if .IsPage -}}
+    {{- $label = index (dict "movie" "Review: " "dvd" "Review: " "chickflicks" "Chick Flick Review: " "top5" "Top Five List: ") .Type | default "" -}}
+    {{- if eq .Section "authors" }}{{ $name = "About Us" }}{{ end -}}
+  {{- end -}}
+  {{- $title = printf "%s -- %s%s" site.Title $label $name -}}
+{{- end -}}
+{{- return $title -}}

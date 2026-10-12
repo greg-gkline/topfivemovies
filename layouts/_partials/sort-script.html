@@ -1,0 +1,3 @@
+{{- with resources.Get "js/sort-table.js" | fingerprint }}
+<script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+{{- end }}

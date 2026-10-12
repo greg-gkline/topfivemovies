@@ -159,24 +159,26 @@ So the rotator already works without the database. The work is to put the quotes
 
 - [x] Merge both sources into `data/quotes.yaml`, de-duplicated, with fields `text` and `source` (movie). Review the differences once in a PR. The merge decides what the live set is. The table turned out to be a subset of `quotes.js`. The six rows worded differently are listed in `scripts/export/README.md`, and `quotes.js` wins in each case.
 - [x] Quotes with inline HTML (such as `<i>`) become markdown or plain text. They are plain text, since the rotator inserts them with `textContent`.
-- [ ] At build time, Hugo emits the list as JSON (`quotes.json`, or inlined in the page, which is about 10 KB).
-- [ ] Rewrite the rotator as a small ES module with the same behavior: random order with no repeats until all are shown, a new quote every 20 seconds, text inserted with `textContent`. Fix the old issues while doing so: the inline `setTimeout` string, the global variables, and the repeat-check bug in `getRandom`. Pause rotation when the tab is hidden and when the user prefers reduced motion.
-- [ ] No-JavaScript fallback: the page is built with one quote already in `#quote`, so it is never empty. Hugo picks it deterministically per build.
+- [x] At build time, Hugo emits the list as JSON (`quotes.json`, or inlined in the page, which is about 10 KB). Inlined in the home page.
+- [x] Rewrite the rotator as a small ES module with the same behavior: random order with no repeats until all are shown, a new quote every 20 seconds, text inserted with `textContent`. Fix the old issues while doing so: the inline `setTimeout` string, the global variables, and the repeat-check bug in `getRandom`. Pause rotation when the tab is hidden and when the user prefers reduced motion.
+- [x] No-JavaScript fallback: the page is built with one quote already in `#quote`, so it is never empty. Hugo picks it deterministically per build.
 - [ ] Remove `quote.php`, `quotes.js` and the `Quote` table with the PHP code in cleanup.
 
 ## Phase 2: Hugo site and templates
 
-- [ ] Scaffold Hugo and the layouts for `review`, `dvd`, `top5`, `other`, `chickflick`, `author` and `about`. Goldmark settings the content depends on are listed under "Notes for Phase 2" in `scripts/export/README.md`.
-- [ ] Build the index pages: reviews, top fives, others, chickflicks, author bios, quickstart and group bio. Add the "recent additions" partial.
-- [ ] Build the home page as its own layout. The featured story is chosen deterministically at build time, replacing the old "older than 2 weeks, so pick random" logic.
-- [ ] Generate prev/next links, excerpts, keywords and meta descriptions at build time.
-- [ ] Output filename-based `.html` addresses, an RSS feed, a sitemap, `robots.txt` and canonical URLs.
-- [ ] Replace the request-time features:
+Done. The templates, the behaviour decided while building them and the parity diff are documented in `scripts/parity/README.md`.
+
+- [x] Scaffold Hugo and the layouts for `review`, `dvd`, `top5`, `other`, `chickflick`, `author` and `about`. Goldmark settings the content depends on are listed under "Notes for Phase 2" in `scripts/export/README.md`.
+- [x] Build the index pages: reviews, top fives, others, chickflicks, author bios, quickstart and group bio. Add the "recent additions" partial. Quickstart is not carried over: it is the web host's "coming soon" placeholder, not site content.
+- [x] Build the home page as its own layout. The featured story is chosen deterministically at build time, replacing the old "older than 2 weeks, so pick random" logic. It is the newest movie review.
+- [x] Generate prev/next links, excerpts, keywords and meta descriptions at build time.
+- [x] Output filename-based `.html` addresses, an RSS feed, a sitemap, `robots.txt` and canonical URLs.
+- [x] Replace the request-time features:
   - Quote rotator: see Quotes below.
-  - Search: dropped. Remove `response_search.php3` and any links to it.
+  - Search: dropped. Remove `response_search.php3` and any links to it. Nothing links to it; the file goes with `web/` in Phase 7.
   - Comments: rendered statically from `data/responses.yaml` under each item.
   - Poll: archive page rendered from `data/polls.yaml`, showing final results.
-- [ ] Build the parity diff against the Phase 0 snapshot. Every legacy page's text should be present in the new output.
+- [x] Build the parity diff against the Phase 0 snapshot. Every legacy page's text should be present in the new output. `scripts/parity/parity.py` checks 12,549 lines on 169 pages. It is a cutover tool, run by hand (see Phase 7), not a PR check, since the site will diverge from the legacy one as content is added. The `site` workflow builds the site, with Hugo pinned to 0.147.9 there and in the devcontainer.
 
 ## Phase 3: Design: faithful look, modern foundation
 

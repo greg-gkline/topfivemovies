@@ -1,0 +1,39 @@
+{{- /* RSS 2.0: the 20 newest reviews, features and top-five lists. */ -}}
+{{- $items := first site.Config.Services.RSS.Limit (partial "ordered.html" (dict "pages" (partial "items.html" .) "desc" true)) -}}
+{{- $newest := (index $items 0).Date -}}
+{{- $rfc := "Mon, 02 Jan 2006 15:04:05 -0700" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>{{ site.Title }}</title>
+		<link>{{ site.Home.Permalink }}</link>
+		<description>{{ site.Params.description }}</description>
+		<language>{{ site.LanguageCode }}</language>
+		<copyright>Copyright (c) {{ site.Params.copyrightStart }}-{{ $newest.Year }} topfivemovies.com, and each article's respective author.</copyright>
+		<docs>https://www.rssboard.org/rss-specification</docs>
+		{{- with resources.Get "images/top5gray_small.jpg" }}
+		<image>
+			<url>{{ .Permalink }}</url>
+			<title>{{ site.Title }}</title>
+			<link>{{ site.Home.Permalink }}</link>
+			<width>{{ .Width }}</width>
+			<height>{{ .Height }}</height>
+		</image>
+		{{- end }}
+		<pubDate>{{ $newest.Format $rfc | safeHTML }}</pubDate>
+		<lastBuildDate>{{ $newest.Format $rfc | safeHTML }}</lastBuildDate>
+		{{- with .OutputFormats.Get "rss" }}
+		<atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml"/>
+		{{- end }}
+		{{- range $items }}
+		<item>
+			<title>{{ .Title }}</title>
+			<link>{{ .Permalink }}</link>
+			<guid isPermaLink="true">{{ .Permalink }}</guid>
+			<description>{{ partial "excerpt.html" (dict "page" . "length" 350) }}</description>
+			<dc:creator>{{ (partial "author.html" .Params.author).Params.name }}</dc:creator>
+			<pubDate>{{ .Date.Format $rfc | safeHTML }}</pubDate>
+		</item>
+		{{- end }}
+	</channel>
+</rss>

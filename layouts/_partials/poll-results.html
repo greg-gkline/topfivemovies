@@ -1,0 +1,18 @@
+{{- /*
+  The final results of one poll. Takes dict "poll" <entry of data/polls.yaml>
+  "page" <page, to render markdown> "barwidth" <pixels of a 100% bar>.
+*/ -}}
+{{- $total := 0 -}}
+{{- range .poll.options }}{{ $total = add $total .votes }}{{ end -}}
+<div class="polldescription">{{ .page.RenderString .poll.question }}</div>
+{{- if eq $total 0 }}
+<div class="results">No one voted in this poll</div>
+{{- else }}
+{{- $bar := resources.Get "images/maroon_dot.jpg" }}
+{{- range .poll.options }}
+{{- $pct := int (div (mul 100.0 .votes) $total) }}
+<p>{{ $.page.RenderString .text }} ({{ $pct }}%)<br>
+<img src="{{ $bar.RelPermalink }}" height="3" width="{{ int (div (mul $.barwidth $pct) 100) }}" alt="{{ .votes }} {{ cond (eq .votes 1) "vote" "votes" }}"></p>
+{{- end }}
+<div class="bodyText">Based on {{ $total }} total votes</div>
+{{- end }}
