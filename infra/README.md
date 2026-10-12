@@ -92,6 +92,13 @@ environment, which is limited to `main`, so only a run on `main` can read them:
           gh secret set AWS_DEPLOY_ACCESS_KEY_ID --env "AWS 832474135782" --body "$id"; \
           gh secret set AWS_DEPLOY_SECRET_ACCESS_KEY --env "AWS 832474135782" --body "$secret"; }
 
+The deploy workflow also needs the distribution id, and the address to smoke-test, as
+repository variables (not secrets). Before the cutover the address is the
+`*.cloudfront.net` one; afterwards leave `SITE_URL` unset to use `https://www.topfivemovies.com`:
+
+    gh variable set DISTRIBUTION_ID --body "$(terraform -chdir=infra output -raw distribution_id)"
+    gh variable set SITE_URL --body "https://$(terraform -chdir=infra output -raw distribution_domain)"
+
 Until the `AWS_PLAN_*` secrets exist, the `terraform-plan` workflow does nothing. The deploy
 secrets are for the deploy workflow (Phase 6), which declares `environment: "AWS 832474135782"`: a job
 can read an environment's secrets only if it declares the environment. The plan keys can be read by any workflow run in the repository, including a pull request's, so
