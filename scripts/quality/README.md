@@ -90,7 +90,7 @@ WCAG 2.2 applies only at phone width. Its target-spacing rule (2.5.8) wants link
 
 Best practices scores 0.96 rather than 1, because the 2001 pictures exist only at their original size and Lighthouse wants 2× images for phone screens. At the end of Phase 3 every page scores 1.0 for performance, accessibility and SEO, and weighs 11–27 KB.
 
-Lighthouse CI needs Node, so it runs in the `site` workflow (`lighthouse` job), not in `check.sh`. To run it locally with Node installed:
+Lighthouse CI needs Node, so it runs in the `validate` workflow (`lighthouse` job), not in `check.sh`. To run it locally with Node installed:
 
 ```sh
 CHROME_PATH=/usr/bin/chromium npx @lhci/cli@0.15.1 autorun --config=scripts/quality/lighthouserc.json
@@ -100,9 +100,9 @@ Reports are written to `.cache/lighthouse/`, and the workflow uploads them as an
 
 ### In CI
 
-The `site` workflow builds once and passes `public/` to two jobs: `quality` runs `check.sh html a11y links` on the runner's Java and Chrome (Selenium Manager fetches the matching driver), and `lighthouse` runs Lighthouse CI.
+The `validate` workflow builds once and passes `public/` to three jobs: `html-links` runs `check.sh html links` on the runner's Java, `a11y` runs `check.sh a11y` in the runner's Chrome (Selenium Manager fetches the matching driver), and `lighthouse` runs Lighthouse CI. The `validate` job at the end of the workflow collects them, along with the content checks, into the one required status.
 
-Both jobs run only when a pull request or push changes the design or the checks: `assets/`, `layouts/`, `static/`, `hugo.yaml`, `scripts/quality/` or the workflow itself (`DESIGN_PATHS` in `site.yml`). A change to content or data alone builds the site but skips them, since Hugo's build already fails on a broken `relref` or a missing image. They are skipped jobs, not a path filter on the workflow, so a branch protection rule that requires them is still satisfied when they do not run.
+`html-links` runs on every change, since content can break links and markup. `a11y` and `lighthouse` run only when a pull request or push changes the design or the checks: `assets/`, `layouts/`, `static/`, `hugo.yaml`, `scripts/quality/` or the workflow itself (`DESIGN_PATHS` in `validate.yml`). A change to content or data alone skips them, since Hugo's build already fails on a broken `relref` or a missing image. They are skipped jobs, not a path filter on the workflow, so the `validate` check is still satisfied when they do not run.
 
 ## Notes for Phase 5
 

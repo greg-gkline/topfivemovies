@@ -1,5 +1,5 @@
 # Hugo site configuration. Build with the Hugo version pinned in
-# .github/workflows/site.yml and .devcontainer/devcontainer.json.
+# .github/workflows/validate.yml and .devcontainer/devcontainer.json.
 baseURL: https://www.topfivemovies.com/
 languageCode: en-us
 title: Top Five Movies

@@ -1,0 +1,20 @@
+# Project dictionary for the spelling check (typos). See scripts/prose/spelling.py.
+# typos flags known misspellings rather than unknown words, so film titles and slang
+# are rarely a problem. List only what it gets wrong: real names and deliberate slang.
+
+[files]
+extend-exclude = ["content/images/", "baseline/", "legacy/", "web/", "intra/"]
+
+[default.extend-words]
+# People (typos reads these as misspellings of ordinary words)
+Gere = "Gere"        # Richard Gere
+Leary = "Leary"      # Denis Leary
+Voight = "Voight"    # Jon Voight
+Damon = "Damon"      # Matt Damon
+Ned = "Ned"          # Ned Beatty
+Vai = "Vai"          # Steve Vai
+Claus = "Claus"      # Santa Claus
+LSAT = "LSAT"
+youre = "youre"      # in a filename, where an apostrophe cannot go
+# Slang the writers use on purpose
+gettin = "gettin"
