@@ -1,5 +1,5 @@
 ---
-title: {{TITLE}}
+title: CHANGEME
 author: CHANGEME        # your first name in lowercase, as in content/authors (greg, jesse, ...)
 date: {{DATE}}
 image: CHANGEME.jpg     # name of the picture you upload to content/images
@@ -21,4 +21,9 @@ items:                  # exactly five, number one first
 #     text: CHANGEME
 ---
 
-Write the introduction here in markdown.
+Write the introduction here in markdown. Italicise film titles with *asterisks*. 
+
+Separate paragraphs with a blank line. 
+
+See other tips at https://www.markdownguide.org/cheat-sheet/
+

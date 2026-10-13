@@ -261,13 +261,13 @@ The current zone has no records beyond the registrar's domain parking, so there 
 **Switch**
 - [x] At the registrar, replace the nameservers with the four Route 53 nameservers (`terraform output name_servers`).
 - [x] When the Route 53 servers answer for the domain, set `enable_custom_domain = true` in `infra/terraform.tfvars` and apply: Terraform requests the certificate, validates it through the zone, and attaches the domain to CloudFront.
-- [ ] Monitor the site and 404s. Propagation can take up to about 48 hours. Visitors on the old nameservers briefly see the parking page.
+- [x] Monitor the site and 404s. Propagation can take up to about 48 hours. Visitors on the old nameservers briefly see the parking page.
 - [ ] **Rollback:** switch the nameservers back to the registrar's.
 
 **Cleanup**
-- [ ] Raise TTLs again once stable.
+- [x] Raise TTLs again once stable.
 - [x] Archive the SQL dumps: they are at the `0.0.2` tag.
-- [ ] Retire the PHP host and MySQL.
+- [x] Retire the PHP host and MySQL.
 - [x] Delete `web/` (which held `intra/` and the PHP includes) and the devcontainer's PHP/MySQL stack from `main`, keeping them reachable through the `0.0.2` tag. The devcontainer itself stays, reduced to the Hugo and checking tools, since the codespace is where changes are tried. `baseline/`, `legacy/sql/` and the migration scripts were removed later, in the cleanup PR, and are also at the tag.
 - [x] Write the contributor docs: `CONTRIBUTING.md`, a click-by-click guide that works entirely in the GitHub UI. Creating a branch named `review/<title>`, `dvd/`, `chickflick/`, `top5/`, `other/` or `author/` runs `new-content.yml`, which commits the starting file from `scripts/new-content/templates/`. The contributor edits it in the UI and opens the PR, so the usual checks run (a workflow cannot open the PR itself without a bot token, since PRs made with `GITHUB_TOKEN` do not trigger other workflows).
 
