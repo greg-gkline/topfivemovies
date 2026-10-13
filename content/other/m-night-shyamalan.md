@@ -13,7 +13,7 @@ On August 29, the user "Skoffin" posted a story on [kuro5hin.org](http://www.kur
 called [The Problem with M. Night Shyamalan](http://www.kuro5hin.org/story/2004/8/26/131133/514). **Both that article and the following essay are full of
 "spoilers", so if there are one or more movies by Night that you haven't seen, don't read either of these yet.** Skoffin's thesis is that
 although Night is well-educated in the art of filmmaking, his stories contain flaws in the form of events that seem contrived
-or poorly chosed dialogue.
+or poorly chosen dialogue.
 
 In short, Skoffin is far off base. The validity of his thesis may be debatable but the support he offers for the idea is
 laughably poor and implies his utter lack of ability to even partially comprehend the deeper meaning of any of Night's films.
@@ -26,7 +26,7 @@ dismissing his work after watching it once does a great disservice to both the d
 Skoffin first attacks *Unbreakable* and its ending, especially Elijah's final statement, "They called me Mr. Glass."
 This he pulls out of context not only of the scene, but the entire movie. The entire statement is, "I should have known
 because of the kids: They called me Mr. Glass." Skoffin derides the quote as absurd, as if Elijah literally means that
-being called names by kids is what drove him to supervillainy. That's not at all true. Elijah is referring to the whole
+being called names by kids is what drove him to super-villainy. That's not at all true. Elijah is referring to the whole
 collection of comic-book style indicators underlying the lives of himself and David Dunn. He is saying that his destiny
 should have been obvious to himself much earlier; that he, like the audience, did not pick up on all the classic comic
 book indications.
@@ -37,7 +37,7 @@ throughout the movie. Elijah and David are exact opposites, but tied by a thread
 heroes and their opponents. Elijah is always represented with the color purple; David with Green. Note the symbolism of
 David's job as a security guard and the imagery of his poncho as a cape. Elijah's first scene
 as an adult, where he is explaining the illustration in his gallery to the customer, is extremely interesting. His
-description of typical villain characteristics fits himself exactly, and Night subtlely reinforces this by subsequently
+description of typical villain characteristics fits himself exactly, and Night subtly reinforces this by subsequently
 focusing on Elijah's reflection in the glass (which, on yet another layer, is a great symbolic introduction to "Mr. Glass",
 and we saw the same thing earlier when he was reflected in the tv screen as a boy).
 
@@ -47,7 +47,7 @@ Sense* where Cole finally admits his visions of dead people. He's staring at Mal
 affliction in a way that practically hits the audience with a sledgehammer to indicate that he's talking about Malcolm.
 But the genius of Night is that he's able to hide all this in plain sight. We'll see this same technique later in
 *Signs*, as the little girl Bo says, "There's a monster outside my room, can I have a glass of water?" The audience
-assumes the line is a throwaway, written for humor and cuteness. But ironically, Bo's apparent non-sequiter is exactly
+assumes the line is a throwaway, written for humor and cuteness. But ironically, Bo's apparent non-sequitur is exactly
 the remedy needed for this particular monster.
 
 And *Unbreakable* has far more to offer than just its comic-book style. Night tempers his moments of secret
