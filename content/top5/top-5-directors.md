@@ -14,7 +14,7 @@ item_4:
   title: Francis Ford Coppola
 item_5:
   title: Martin Scorsese
-honorable_mentions: 
+honorable_mentions:
   - text: David Lynch, John Landis, Oliver Stone, and M. Night Shyamalan
 ---
 

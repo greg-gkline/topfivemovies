@@ -19,9 +19,8 @@ item_4:
 item_5:
   title: The Shawshank Redemption
   text: -- Brooks was here, the scene when Red finally gets out and finds the box hidden by Andy
-honorable_mentions:   
+honorable_mentions:
   - title: My Girl
-    subtitle: CHANGEME
     text: -- death of Thomas J.
 ---
 
