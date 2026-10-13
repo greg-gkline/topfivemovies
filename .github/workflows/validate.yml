@@ -14,8 +14,6 @@ name: validate
 # reports a status that a required check can rely on.
 # `preview` is not part of `validate`: on a pull request it screenshots the pages the
 # content changes affect and publishes the images as an artifact (scripts/preview/).
-# The parity diff (scripts/parity/) is not run here: it compares with the legacy
-# site, so it is run by hand during the cutover, not on every change.
 on:
   pull_request:
   push:

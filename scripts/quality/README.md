@@ -5,8 +5,6 @@ Phase 3 rebuilt the markup as semantic HTML and replaced the two legacy styleshe
 ```sh
 scripts/quality/check.sh                    # clean build, then HTML, accessibility and link checks
 scripts/quality/check.sh external           # links to other sites (advisory)
-python3 scripts/visual/compare.py           # screenshots against baseline/screenshots/
-python3 scripts/visual/compare.py --mobile  # also 390 px wide screenshots
 ```
 
 ## Stylesheets
@@ -61,7 +59,9 @@ Below 740 px everything is one column: the frame goes, the navigation wraps, the
 
 ## Screenshot comparison
 
-`scripts/visual/compare.py` serves `public/`, screenshots each page type of `scripts/baseline/screenshots.py` with the same browser settings, and writes, per page, the new screenshot, a diff (changed pixels in red over the faded baseline) and a side-by-side image. It prints the share of pixels that differ. It is a review tool, not a gate: content differences move whole rows, so a percentage alone cannot tell good from bad. `--max-diff` makes it a gate if wanted.
+> **Historical.** The comparison tool (`scripts/visual/compare.py`) and the Phase 0 captures it used were removed from `main` after the cutover. They are kept at the `0.0.2` tag. Pull request screenshots are now made by `scripts/preview/`.
+
+The tool served `public/`, screenshotted each page type with the same browser settings as the Phase 0 captures, and wrote a diff and a side-by-side image per page, with the share of pixels that differ. It was a review tool, not a gate: content differences move whole rows, so a percentage alone cannot tell good from bad.
 
 At the end of Phase 3, against the Phase 0 captures: About Us 0.05%, group bio 0.03%, Other feature 1.0%, and 1.4–6.5% elsewhere. Those differences are the held-back content, the previous/next links, the poll results, the filled contributions table and the removed XHTML and intranet links. Against the Phase 2 build, which had the same content, the DVD review, the Other feature and the group bio are pixel-identical, and the other item pages differ by 0.2–4%: the arrow bullets, the bubbles, and the previous/next links (new in Phase 2, now a flex row), whose height moves what follows by a few pixels. The index pages, About Us and the author pages differ more from Phase 2 than from the legacy pages, because Phase 3 corrected where Phase 2 had drifted (table column widths, line heights, spacing).
 

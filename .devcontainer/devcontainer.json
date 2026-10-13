@@ -9,9 +9,9 @@
 		"ghcr.io/devcontainers/features/aws-cli:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
-	// Screenshot tooling (scripts/visual, scripts/preview): headless Chromium and the site's
+	// Screenshot tooling (scripts/preview): headless Chromium and the site's
 	// first-choice font.
-	// Export and content checks (scripts/export, scripts/content): PyYAML, Pillow, html5lib,
+	// Content checks (scripts/content): PyYAML, Pillow, html5lib,
 	// yamllint and check-jsonschema.
 	// Hugo extended, pinned to HUGO_VERSION in .github/workflows/validate.yml (Debian's is too old).
 	// Quality gates (scripts/quality): Java for the HTML checker; tools.sh fetches the rest.
