@@ -7,10 +7,10 @@ image: shyamalan.jpg
 image_alt: ''
 ---
 
-### Introduction
+## Introduction
 
-On August 29, the user "Skoffin" posted a story on [kuro5hin.org](http://www.kuro5hin.org)
-called [The Problem with M. Night Shyamalan](http://www.kuro5hin.org/story/2004/8/26/131133/514). **Both that article and the following essay are full of
+On August 29, the user "Skoffin" posted a story on kuro5hin.org
+called [The Problem with M. Night Shyamalan](https://web.archive.org/web/20041209183818/http://www.kuro5hin.org/story/2004/8/26/131133/514). **Both that article and the following essay are full of
 "spoilers", so if there are one or more movies by Night that you haven't seen, don't read either of these yet.** Skoffin's thesis is that
 although Night is well-educated in the art of filmmaking, his stories contain flaws in the form of events that seem contrived
 or poorly chosen dialogue.
@@ -21,7 +21,7 @@ The author mentions that he's only seen some of the films once. It's very diffic
 *any* movie on only one viewing, and because of the many layers of style and thematic content of Night's films,
 dismissing his work after watching it once does a great disservice to both the director and the audience.
 
-### Unbreakable
+## Unbreakable
 
 Skoffin first attacks *Unbreakable* and its ending, especially Elijah's final statement, "They called me Mr. Glass."
 This he pulls out of context not only of the scene, but the entire movie. The entire statement is, "I should have known
@@ -62,7 +62,7 @@ there's great relief when he learns to make use of those true talents again. His
 and his resentment for Audrey dissipates. He's happy, hopeful, and ready to repair his personal life. This is the true
 triumph of David Dunn in *Unbreakable*.
 
-### Signs
+## Signs
 
 Skoffin's next target in the article is *Signs*, where he admits seeing the movie only once, and it shows. He
 is dead wrong about several basic facts of the movie: first, he claims Graham's wife was trapped between cars (it was
@@ -143,7 +143,7 @@ And any one of these explanations is just as plausible as any other, because we'
 about which we know virtually nothing. So please, drop the anthropomorphism and accept that whatever motive these things had
 for acting as they did is irrelevant to the story of Graham's realization of the power and miracles of God.
 
-### The Village
+## The Village
 
 Okay, back to Skoffin and his next target, this year's *The Village* (In the interest of full disclosure, I myself have
 only seen the film once, so my defense may not be complete. But I intend to see it again soon and may amend this essay if
