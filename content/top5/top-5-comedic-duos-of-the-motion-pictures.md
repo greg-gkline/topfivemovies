@@ -12,7 +12,7 @@ item_3:
   title: Richard Pryor and Gene Wilder
 item_4:
   title: Jason Mewes and Kevin Smith
-  text: ( Jay & Silent Bob )
+  subtitle: ( Jay & Silent Bob )
 item_5:
   title: Matt Stone and Trey Parker
 ---
