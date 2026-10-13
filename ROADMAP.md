@@ -60,14 +60,15 @@ layouts/          # Hugo templates, one per content type, plus home
 assets/           # theme only: CSS (elegant_inner port, elegant port), decorative images, quote script
 static/
 infra/            # Terraform
-scripts/          # exporter, parity and screenshot tooling
-legacy/sql/       # original SQL dumps, loaded by the devcontainer; archived at cutover
+scripts/          # content checks, preview, deploy and quality tooling
 .github/workflows/
 ```
 
 ---
 
 ## Phase 0: Baseline and preparation
+
+> **Migration artifacts.** After the cutover, `baseline/`, `legacy/sql/` (the SQL dumps) and the migration tooling (`scripts/baseline`, `scripts/export`, `scripts/parity`, `scripts/visual`) were removed from `main`. Phases 0 to 3 below refer to them as they were; all of it is at the `0.0.2` tag.
 
 - [x] Crawl the devcontainer site and save the rendered HTML and extracted text of every page as the parity baseline. Output is in `baseline/` (see `baseline/README.md`), and the tooling is in `scripts/baseline/`.
 - [x] Take full-page screenshots of every page type for the later visual comparison.
@@ -265,8 +266,9 @@ The current zone has no records beyond the registrar's domain parking, so there 
 
 **Cleanup**
 - [ ] Raise TTLs again once stable.
-- [ ] Retire the PHP host and MySQL, and archive the SQL dumps.
-- [x] Delete `web/` (which held `intra/` and the PHP includes) and the devcontainer's PHP/MySQL stack from `main`, keeping them reachable through the `0.0.2` tag. The devcontainer itself stays, reduced to the Hugo and checking tools, since the codespace is where changes are tried. `scripts/export` and `scripts/baseline` need the tag now (see their READMEs).
+- [x] Archive the SQL dumps: they are at the `0.0.2` tag.
+- [ ] Retire the PHP host and MySQL.
+- [x] Delete `web/` (which held `intra/` and the PHP includes) and the devcontainer's PHP/MySQL stack from `main`, keeping them reachable through the `0.0.2` tag. The devcontainer itself stays, reduced to the Hugo and checking tools, since the codespace is where changes are tried. `baseline/`, `legacy/sql/` and the migration scripts were removed later, in the cleanup PR, and are also at the tag.
 - [x] Write the contributor docs: `CONTRIBUTING.md`, a click-by-click guide that works entirely in the GitHub UI. Creating a branch named `review/<title>`, `dvd/`, `chickflick/`, `top5/`, `other/` or `author/` runs `new-content.yml`, which commits the starting file from `scripts/new-content/templates/`. The contributor edits it in the UI and opens the PR, so the usual checks run (a workflow cannot open the PR itself without a bot token, since PRs made with `GITHUB_TOKEN` do not trigger other workflows).
 
 ---
