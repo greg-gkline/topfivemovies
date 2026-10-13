@@ -6,19 +6,19 @@ image: caddyshack.jpg
 image_alt: ''
 item_1:
   title: Caddyshack
-  text: ( 1980 )
+  subtitle: ( 1980 )
 item_2:
   title: The Great White Hype
-  text: ( 1996 )
+  subtitle: ( 1996 )
 item_3:
   title: Baseketball
-  text: ( 1998 )
+  subtitle: ( 1998 )
 item_4:
   title: Major League
-  text: ( 1989 )
+  subtitle: ( 1989 )
 item_5:
   title: Happy Gilmore
-  text: ( 1996 )
+  subtitle: ( 1996 )
 ---
 
 Buster Keaton played shortstop for his high school baseball team. One
