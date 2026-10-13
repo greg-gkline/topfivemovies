@@ -4,17 +4,21 @@ author: bruce
 date: 2001-08-26
 image: superman4.jpg
 image_alt: ''
-items:
-  - title: Superman IV
-    text: (1987)
-  - title: Caddy Shack 2
-    text: (1988)
-  - title: Meatballs 2
-    text: (1984)
-  - title: Problem Child 3
-    text: (1995)
-  - title: 'Police Academy: Mission to Moscow'
-    text: (1994)
+item_1:
+  title: Superman IV
+  subtitle: (1987)
+item_2:
+  title: Caddy Shack 2
+  subtitle: (1988)
+item_3:
+  title: Meatballs 2
+  subtitle: (1984)
+item_4:
+  title: Problem Child 3
+  subtitle: (1995)
+item_5:
+  title: 'Police Academy: Mission to Moscow'
+  subtitle: (1994)
 ---
 
 I've been less than quiet in my opinion about sequels, particularly this

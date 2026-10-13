@@ -4,12 +4,16 @@ author: bruce
 date: 2001-11-15
 image: santa_muscles.jpg
 image_alt: ''
-items:
-  - title: Santa With Muscles
-  - title: The Santa Clause
-  - title: The Grinch Who Stole Christmas
-  - title: I'll Be Home for Christmas
-  - title: The Nightmare Before Christmas
+item_1:
+  title: Santa With Muscles
+item_2:
+  title: The Santa Clause
+item_3:
+  title: The Grinch Who Stole Christmas
+item_4:
+  title: I'll Be Home for Christmas
+item_5:
+  title: The Nightmare Before Christmas
 ---
 
 Some of the worst films ever deal with Christmas. I think the evil

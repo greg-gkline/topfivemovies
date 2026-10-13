@@ -4,12 +4,16 @@ author: bruce
 date: 2001-11-15
 image: ernest_saves_christmas.jpg
 image_alt: ''
-items:
-  - title: Ernest Saves Christmas
-  - title: It's A Wonderful Life
-  - title: National Lampoon's Christmas Vacation
-  - title: Trapped in Paradise
-  - title: Home Alone
+item_1:
+  title: Ernest Saves Christmas
+item_2:
+  title: It's A Wonderful Life
+item_3:
+  title: National Lampoon's Christmas Vacation
+item_4:
+  title: Trapped in Paradise
+item_5:
+  title: Home Alone
 ---
 
 Christmas time is a special time for movies. These five are the greatest

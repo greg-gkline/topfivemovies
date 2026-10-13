@@ -4,12 +4,16 @@ author: matt
 date: 2001-07-20
 image: id4.jpg
 image_alt: ''
-items:
-  - title: Independence Day
-  - title: Jurassic Park
-  - title: 'Star Wars Episode I: The Phantom Menace'
-  - title: X-Men
-  - title: Batman
+item_1:
+  title: Independence Day
+item_2:
+  title: Jurassic Park
+item_3:
+  title: 'Star Wars Episode I: The Phantom Menace'
+item_4:
+  title: X-Men
+item_5:
+  title: Batman
 ---
 
 I'm really dating myself with this one. I'm sure there have been

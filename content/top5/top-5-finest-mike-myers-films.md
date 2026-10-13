@@ -4,17 +4,21 @@ author: bruce
 date: 2001-09-16
 image: waynes_world.jpg
 image_alt: ''
-items:
-  - title: Waynes World
-    text: ( 1992 )
-  - title: 'Austin Powers: International Man of Mystery'
-    text: ( 1997 )
-  - title: So I Married an Axe Murderer
-    text: ( 1993 )
-  - title: '54'
-    text: ( 1998 )
-  - title: Shrek
-    text: ( 2001 )
+item_1:
+  title: Waynes World
+  subtitle: ( 1992 )
+item_2:
+  title: 'Austin Powers: International Man of Mystery'
+  subtitle: ( 1997 )
+item_3:
+  title: So I Married an Axe Murderer
+  subtitle: ( 1993 )
+item_4:
+  title: '54'
+  subtitle: ( 1998 )
+item_5:
+  title: Shrek
+  subtitle: ( 2001 )
 ---
 
 I've been a fan of Mike Myers since his days on Saturday Night Live. No

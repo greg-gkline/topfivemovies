@@ -4,12 +4,16 @@ author: jesse
 date: 2001-08-09
 image: headshot.gif
 image_alt: ''
-items:
-  - title: The Postman
-  - title: Field of Dreams
-  - title: 3000 Miles to Graceland
-  - title: JFK
-  - title: Waterworld
+item_1:
+  title: The Postman
+item_2:
+  title: Field of Dreams
+item_3:
+  title: 3000 Miles to Graceland
+item_4:
+  title: JFK
+item_5:
+  title: Waterworld
 ---
 
 He's good.

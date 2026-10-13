@@ -4,12 +4,16 @@ author: greg
 date: 2004-07-06
 image: unbreakable.jpg
 image_alt: ''
-items:
-  - title: Unbreakable
-  - title: Pulp Fiction
-  - title: Twelve Monkeys
-  - title: Die Hard
-  - title: The Sixth Sense
+item_1:
+  title: Unbreakable
+item_2:
+  title: Pulp Fiction
+item_3:
+  title: Twelve Monkeys
+item_4:
+  title: Die Hard
+item_5:
+  title: The Sixth Sense
 ---
 
 Bruce Willis is one of those actors whose agent seems to frequently go off on extended crack binges. Bruce has done eight or ten great films, but maybe twice as many crappy ones. Here are the ones to watch:

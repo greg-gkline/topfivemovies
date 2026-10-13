@@ -4,13 +4,17 @@ author: bruce
 date: 2001-07-04
 image: dog_day.jpg
 image_alt: ''
-items:
-  - title: Dog Day Afternoon
-  - title: 'Godfather: Part II'
-  - title: Scent of a Woman
-  - title: Donnie Brasco
-    text: -- I almost put this one at number one for the same reason *Dog Day Afternoon* is number one.
-  - title: Godfather
+item_1:
+  title: Dog Day Afternoon
+item_2:
+  title: 'Godfather: Part II'
+item_3:
+  title: Scent of a Woman
+item_4:
+  title: Donnie Brasco
+  text: -- I almost put this one at number one for the same reason *Dog Day Afternoon* is number one.
+item_5:
+  title: Godfather
 ---
 
 Now before I start this, I know I'll suffer the slings and arrows of not

@@ -4,17 +4,21 @@ author: bruce
 date: 2001-12-27
 image: whataboutbob.jpg
 image_alt: ''
-items:
-  - title: What About Bob
-    text: ( 1991 )
-  - title: Where the Buffalo Roam
-    text: ( 1980 )
-  - title: Ghostbusters
-    text: ( 1984 )
-  - title: Caddyshack
-    text: ( 1980 )
-  - title: Kingpin
-    text: ( 1996 )
+item_1:
+  title: What About Bob
+  subtitle: ( 1991 )
+item_2:
+  title: Where the Buffalo Roam
+  subtitle: ( 1980 )
+item_3:
+  title: Ghostbusters
+  subtitle: ( 1984 )
+item_4:
+  title: Caddyshack
+  subtitle: ( 1980 )
+item_5:
+  title: Kingpin
+  subtitle: ( 1996 )
 ---
 
 Bill Murray is as versatile an actor as one can imagine. He has played

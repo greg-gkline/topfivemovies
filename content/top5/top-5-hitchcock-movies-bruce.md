@@ -4,17 +4,21 @@ author: bruce
 date: 2001-12-19
 image: hitchcock2.jpg
 image_alt: ''
-items:
-  - title: Psycho
-    text: ( 1960 )
-  - title: Strangers on a Train
-    text: ( 1955 )
-  - title: Rear Window
-    text: ( 1954 )
-  - title: The Man Who Knew Too Much
-    text: ( 1956 )
-  - title: North by Northwest
-    text: ( 1959 )
+item_1:
+  title: Psycho
+  text: ( 1960 )
+item_2:
+  title: Strangers on a Train
+  text: ( 1955 )
+item_3:
+  title: Rear Window
+  text: ( 1954 )
+item_4:
+  title: The Man Who Knew Too Much
+  text: ( 1956 )
+item_5:
+  title: North by Northwest
+  text: ( 1959 )
 ---
 
 This top five was as difficult as the one I did on Samuel L. Jackson.

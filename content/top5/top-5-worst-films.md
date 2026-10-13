@@ -5,12 +5,16 @@ date: 2001-06-29
 caption: A thin line between loathe and hate
 image: thinredline.jpg
 image_alt: ''
-items:
-  - title: The Thin Red Line
-  - title: Boxing Helena
-  - title: Lost Highway
-  - title: Titanic
-  - title: Congo
+item_1:
+  title: The Thin Red Line
+item_2:
+  title: Boxing Helena
+item_3:
+  title: Lost Highway
+item_4:
+  title: Titanic
+item_5:
+  title: Congo
 ---
 
 Here it is, folks... the worst films of all time. Of course this is

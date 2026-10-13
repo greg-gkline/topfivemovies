@@ -4,13 +4,17 @@ author: greg
 date: 2001-07-07
 image: death_salesman.jpg
 image_alt: ''
-items:
-  - title: Death of a Salesman
-    text: -- The 1985 version, w/ Dustin Hoffman and John Malkovich. This is the only one that actually broke me, for personal reasons I won't get into here.
-  - title: The Green Mile
-  - title: Awakenings
-  - title: Life is Beautiful
-  - title: The Straight Story
+item_1:
+  title: Death of a Salesman
+  text: -- The 1985 version, w/ Dustin Hoffman and John Malkovich. This is the only one that actually broke me, for personal reasons I won't get into here.
+item_2:
+  title: The Green Mile
+item_3:
+  title: Awakenings
+item_4:
+  title: Life is Beautiful
+item_5:
+  title: The Straight Story
 ---
 
 "Do my tears surprise you? Strong men also cry... *strong* men also cry."

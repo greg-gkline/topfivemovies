@@ -4,12 +4,16 @@ author: bruce
 date: 2001-09-03
 image: peter_sellers.jpg
 image_alt: ''
-items:
-  - title: Peter Sellers
-  - title: Marlon Brando
-  - title: Burt Reynolds
-  - title: Tom Selleck
-  - title: Raul Julia
+item_1:
+  title: Peter Sellers
+item_2:
+  title: Marlon Brando
+item_3:
+  title: Burt Reynolds
+item_4:
+  title: Tom Selleck
+item_5:
+  title: Raul Julia
 ---
 
 Francis Ford Coppola once discussed his theory of choosing actors to play

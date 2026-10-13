@@ -4,17 +4,21 @@ author: bruce
 date: 2001-09-02
 image: michael_collins.jpg
 image_alt: ''
-items:
-  - title: Michael Collins
-    text: (1996)
-  - title: Thirteen Days
-    text: (2000)
-  - title: Gettysburg
-    text: (1994)
-  - title: Gandhi
-    text: (1982)
-  - title: Schindler's List
-    text: (1993)
+item_1:
+  title: Michael Collins
+  subtitle: (1996)
+item_2:
+  title: Thirteen Days
+  subtitle: (2000)
+item_3:
+  title: Gettysburg
+  subtitle: (1994)
+item_4:
+  title: Gandhi
+  subtitle: (1982)
+item_5:
+  title: Schindler's List
+  subtitle: (1993)
 ---
 
 Being a historian I take the accuracy of historical films seriously. To this day I can hardly watch Braveheart without shouting at the screen "The

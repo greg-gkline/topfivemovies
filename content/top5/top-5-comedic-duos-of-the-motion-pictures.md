@@ -4,13 +4,17 @@ author: bruce
 date: 2001-10-04
 image: Societyb.jpg
 image_alt: ''
-items:
-  - title: Abbott & Costello
-  - title: Laurel & Hardy
-  - title: Richard Pryor and Gene Wilder
-  - title: Jason Mewes and Kevin Smith
-    text: ( Jay & Silent Bob )
-  - title: Matt Stone and Trey Parker
+item_1:
+  title: Abbott & Costello
+item_2:
+  title: Laurel & Hardy
+item_3:
+  title: Richard Pryor and Gene Wilder
+item_4:
+  title: Jason Mewes and Kevin Smith
+  subtitle: ( Jay & Silent Bob )
+item_5:
+  title: Matt Stone and Trey Parker
 ---
 
 Getting an actor to do a movie is easy, making a comedy is more difficult.

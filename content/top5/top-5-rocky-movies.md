@@ -4,12 +4,16 @@ author: ryan
 date: 2001-06-27
 image: rocky.jpg
 image_alt: ''
-items:
-  - title: Rocky IV
-  - title: Rocky III
-  - title: Rocky
-  - title: Rocky II
-  - title: Rocky V
+item_1:
+  title: Rocky IV
+item_2:
+  title: Rocky III
+item_3:
+  title: Rocky
+item_4:
+  title: Rocky II
+item_5:
+  title: Rocky V
 ---
 
 Since there are only 5 Rocky movies, each one must make this list by

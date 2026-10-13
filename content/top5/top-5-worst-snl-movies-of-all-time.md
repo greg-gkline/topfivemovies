@@ -4,17 +4,21 @@ author: bruce
 date: 2001-09-17
 image: stuart_saves.jpg
 image_alt: ''
-items:
-  - title: Stuart Saves His Family
-    text: (1995)
-  - title: It's Pat
-    text: (1994)
-  - title: Coneheads
-    text: (1993)
-  - title: Superstar
-    text: (1999)
-  - title: Night at the Roxbury
-    text: (1998)
+item_1:
+  title: Stuart Saves His Family
+  subtitle: (1995)
+item_2:
+  title: It's Pat
+  subtitle: (1994)
+item_3:
+  title: Coneheads
+  subtitle: (1993)
+item_4:
+  title: Superstar
+  subtitle: (1999)
+item_5:
+  title: Night at the Roxbury
+  subtitle: (1998)
 ---
 
 Saturday Night Live has given us some memorable characters who've been
