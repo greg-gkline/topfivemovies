@@ -4,7 +4,7 @@ title: Batman Begins
 author: bruce        # one of: brian, bruce, greg, jesse, matt, nick, ryan, the-topfivemovies-staff
 date: 2005-06-27
 rating: 8               # 0 to 10, in steps of 0.5
-release_year: 2025  # for example 2001
+release_year: 2005  # for example 2001
 starring: Christian Bale, Katie Holmes, Sir Michael Caine      # for example Billy Crudup, Kate Hudson
 image: batmanbegins.jpg     # name of the picture you upload to content/images
 image_alt: ''           # one line describing the picture; delete the quotes only if you write one
