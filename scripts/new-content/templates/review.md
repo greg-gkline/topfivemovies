@@ -1,7 +1,7 @@
 ---
 type: {{TYPE}}
 title: CHANGEME
-author: CHANGEME        # your first name in lowercase, as in content/authors (greg, jesse, ...)
+author: CHANGEME        # one of: brian, bruce, greg, jesse, matt, nick, ryan, the-topfivemovies-staff
 date: {{DATE}}
 rating: 5               # 0 to 10, in steps of 0.5
 release_year: CHANGEME  # for example 2001

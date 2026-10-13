@@ -1,0 +1,71 @@
+name: author-list
+
+# When a pull request adds a file to content/authors/, the comment on the `author` line of
+# the starting-file templates is rewritten to list every valid author
+# (scripts/new-content/update_authors.py), and the change is committed to the pull request's
+# branch. templates/author.md has no `author` field and is left alone.
+#
+# The commit is made with the default token, so GitHub does not start the other workflows
+# for it (the same reason new-content does not open pull requests). If `validate` is
+# required and shows as missing on the new commit, push any commit to the branch, or close
+# and reopen the pull request, to run it. The workflow says so in a comment on the pull
+# request (scripts/github/pr_comment.py), which it edits rather than repeats.
+#
+# Pull requests from forks are skipped: their token is read-only, and the branch is not ours
+# to push to.
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - "content/authors/**"
+
+permissions:
+  contents: write        # to commit the updated templates to the pull request's branch
+  pull-requests: write   # to comment on the pull request
+
+jobs:
+  update-templates:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0   # the diff against the merge base
+      - name: Look for a new author
+        id: added
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          added=$(git diff --name-only --diff-filter=A "$BASE...HEAD" -- content/authors/ | grep -v '/_index\.md$' || true)
+          echo "$added"
+          if [ -n "$added" ]; then echo "new=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Update the templates
+        if: steps.added.outputs.new == 'true'
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}   # untrusted: only used through the environment
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 -I scripts/new-content/update_authors.py
+          if git diff --quiet; then
+            echo "The templates already list every author."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/new-content/templates
+          git commit -m "List the authors in the new-content templates"
+          git push origin "HEAD:refs/heads/$BRANCH"
+          cat > "$RUNNER_TEMP/comment.md" <<'MSG'
+          The `author` comment in the new-content templates now lists the new author, in a commit
+          added to this branch by the `author-list` workflow.
+
+          GitHub does not start other workflows for a commit the workflow makes, so the
+          required `validate` check may show as missing, or as waiting, on that commit. To run it,
+          do either of these:
+
+          - Close the pull request and reopen it.
+          - Push another commit to the branch, for example a small edit in the GitHub web editor.
+          MSG
+          python3 -I scripts/github/pr_comment.py --marker author-list --body-file "$RUNNER_TEMP/comment.md" \
+            || echo "::warning::could not comment on the pull request"

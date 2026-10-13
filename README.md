@@ -50,8 +50,8 @@ For the detail on the build, hosting, each workflow, credentials and rollback, r
 | `static/` | Files copied to the site unchanged (the favicon) |
 | `hugo.yaml` | Site configuration |
 | `infra/` | Terraform for S3, CloudFront, DNS, certificates and the CI users |
-| `scripts/` | Tooling used by CI and contributors: `content/` (front matter and reference checks), `new-content/` (starter files for new branches), `preview/`, `prose/` (spelling and grammar), `quality/` (accessibility and Lighthouse), `deploy/`, `github/` |
-| `.github/` | Workflows (`validate`, `deploy`, `terraform-plan`, `new-content`, `spelling`, `grammar-review`) and `CODEOWNERS` |
+| `scripts/` | Tooling used by CI and contributors: `content/` (front matter and reference checks), `new-content/` (starter files for new branches, and the author list in their templates), `preview/`, `prose/` (spelling and grammar), `quality/` (accessibility and Lighthouse), `deploy/`, `github/` |
+| `.github/` | Workflows (`validate`, `deploy`, `terraform-plan`, `new-content`, `author-list`, `spelling`, `grammar-review`) and `CODEOWNERS` |
 | `.devcontainer/` | Codespace and devcontainer setup, with the pinned Hugo version |
 | `CONTRIBUTING.md` | How to add content |
 | `ROADMAP.md` | Goals and decisions behind the modernization |

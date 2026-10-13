@@ -35,7 +35,7 @@ If nothing appears, open the **Issues** tab. If the name can't be used (it has c
 1. Make sure the branch button still shows your branch name, then open the **content** folder, then the folder for your kind of item (for example **reviews**) and click your file.
 2. Click the pencil icon at the top right of the file.
 3. The top of the file, between the two `---` lines, holds the details. Change every `CHANGEME`. The grey notes after `#` say what each one wants. Delete those notes if you like.
-   - **author**: your first name in lowercase, as in the **content/authors** folder (for example `greg` or `jesse`).
+   - **author**: your first name in lowercase, as in the **content/authors** folder (for example `greg` or `jesse`). The grey note in the starting file lists the valid names.
    - **rating**: a number from 0 to 10, in steps of half a point.
    - **starring**: the main actors, separated by commas.
    - **image**: the file name of your picture (see step 3).
@@ -75,7 +75,7 @@ To hide something without deleting it, add a line `draft: true` between the `---
 
 ## For the site administrator
 
-- How the starting file is made: [.github/workflows/new-content.yml](.github/workflows/new-content.yml), [scripts/new-content/](scripts/new-content/). The templates are plain files in `scripts/new-content/templates/`.
+- How the starting file is made: [.github/workflows/new-content.yml](.github/workflows/new-content.yml), [scripts/new-content/](scripts/new-content/). The templates are plain files in `scripts/new-content/templates/`. When a pull request adds an author, [.github/workflows/author-list.yml](.github/workflows/author-list.yml) updates the `author` comment in every template except `author.md` to list the valid authors (see ARCHITECTURE.md).
 - Everything the PR checks run, and the rules for each field: [scripts/content/](scripts/content/) and [scripts/prose/README.md](scripts/prose/README.md).
 - Infrastructure: [infra/README.md](infra/README.md).
 - The old PHP site and its devcontainer are at the git tag `0.0.2`.

@@ -131,12 +131,13 @@ pages it changes, and a codespace is for trying a change.
 
 ## Automation
 
-Six GitHub Actions workflows live in `.github/workflows/`. The scripts they call are in
+Seven GitHub Actions workflows live in `.github/workflows/`. The scripts they call are in
 `scripts/` so the same checks run locally.
 
 | Workflow | Runs on | Purpose | Blocks merge? |
 |---|---|---|---|
 | `new-content` | A branch is created with a known prefix | Adds the starting file | No |
+| `author-list` | Pull requests that add a file to `content/authors/` | Lists the valid authors in the templates | No |
 | `validate` | Pull requests and pushes to `main` | Validates, builds and checks the site | **Yes**: the `validate` job |
 | `spelling` | Pull requests touching `content/` or `data/` | Spelling review | No |
 | `grammar-review` | Pull requests touching `content/` or `data/` | Grammar review | No |
@@ -156,6 +157,21 @@ The workflow does not open the pull request, because a commit or pull request ma
 default token does not trigger other workflows, so `validate` would never run. GitHub also
 runs `create` workflows from the default branch, so a change to this workflow takes effect
 only after it is merged.
+
+### author-list
+
+When a pull request adds a file to `content/authors/` (not `_index.md`), this runs
+`scripts/new-content/update_authors.py`. It rewrites the comment on the `author` line of every
+template in `scripts/new-content/templates/` except `author.md` (which has no such field) to
+`# one of: ` followed by the file names in `content/authors/`, and commits the change to the
+pull request's branch. A template that is already current is left alone, so the workflow
+can run again safely.
+
+Two limits follow from the default token. Its commit does not start other workflows, so
+`validate` does not run on it; push another commit or close and reopen the pull request to
+get a `validate` result on the new head. The workflow says so in a comment on the pull
+request, which it edits rather than repeats. And pull requests from forks are skipped, because
+that token is read-only there.
 
 ### validate
 
