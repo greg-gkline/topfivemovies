@@ -4,12 +4,16 @@ author: bruce
 date: 2001-10-25
 image: jackie_brown.jpg
 image_alt: ''
-items:
-  - title: Jackie Brown
-  - title: Shaft
-  - title: Pulp Fiction
-  - title: The Negotiator
-  - title: The Long Kiss Goodnight
+item_1:
+  title: Jackie Brown
+item_2:
+  title: Shaft
+item_3:
+  title: Pulp Fiction
+item_4:
+  title: The Negotiator
+item_5:
+  title: The Long Kiss Goodnight
 ---
 
 Samuel L. Jackson is arguably the greatest African American actor of all

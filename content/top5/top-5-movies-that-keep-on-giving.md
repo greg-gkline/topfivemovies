@@ -4,12 +4,16 @@ author: greg
 date: 2001-06-19
 image: blues_bros.jpg
 image_alt: ''
-items:
-  - title: the Blues Brothers
-  - title: the Big Lebowski
-  - title: Wayne's World
-  - title: Animal House
-  - title: 'South Park: Bigger, Longer, and Uncut'
+item_1:
+  title: the Blues Brothers
+item_2:
+  title: the Big Lebowski
+item_3:
+  title: Wayne's World
+item_4:
+  title: Animal House
+item_5:
+  title: 'South Park: Bigger, Longer, and Uncut'
 ---
 
 There are many movies you can watch a few times, and then they lose their charm.

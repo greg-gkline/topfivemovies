@@ -4,17 +4,21 @@ author: brian
 date: 2001-07-13
 image: texas_chainsaw.jpg
 image_alt: ''
-items:
-  - title: Leatherface
-    text: '--only cannibal of the bunch, very low IQ, maintains strong familial ties, non-athlete, main weapon: chainsaw'
-  - title: Jason Vorhees
-    text: '-- most resilient, most persistent, most menacing, main weapon: machete'
-  - title: Michael Myers
-    text: '-- prefers to strike on Halloween only, slickest dresser, best mask, main weapon: butcher knife'
-  - title: Freddy Krueger
-    text: '-- most witty, nastiest looking, best origin story, raised in single-mom household, main weapon: brown glove w/ shears'
-  - title: Pinhead
-    text: '-- most enigmatic, most cerebral, only one with significant other, main weapon: doesn''t seem to prefer hand held tools and such'
+item_1:
+  title: Leatherface
+  text: '--only cannibal of the bunch, very low IQ, maintains strong familial ties, non-athlete, main weapon: chainsaw'
+item_2:
+  title: Jason Vorhees
+  text: '-- most resilient, most persistent, most menacing, main weapon: machete'
+item_3:
+  title: Michael Myers
+  text: '-- prefers to strike on Halloween only, slickest dresser, best mask, main weapon: butcher knife'
+item_4:
+  title: Freddy Krueger
+  text: '-- most witty, nastiest looking, best origin story, raised in single-mom household, main weapon: brown glove w/ shears'
+item_5:
+  title: Pinhead
+  text: '-- most enigmatic, most cerebral, only one with significant other, main weapon: doesn''t seem to prefer hand held tools and such'
 ---
 
 There is nothing quite like a horror movie killer debate. Who's the strongest? Most vicious? Shows the most mercy? Can Michael Myers beat up Jason? Does Pinhead seem a shade snobby?

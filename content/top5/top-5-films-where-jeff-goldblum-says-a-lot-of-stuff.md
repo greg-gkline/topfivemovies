@@ -4,12 +4,16 @@ author: bruce
 date: 2001-10-12
 image: fly.jpg
 image_alt: ''
-items:
-  - title: The Fly
-  - title: Jurassic Park
-  - title: Powder
-  - title: Independence Day
-  - title: Holy Man
+item_1:
+  title: The Fly
+item_2:
+  title: Jurassic Park
+item_3:
+  title: Powder
+item_4:
+  title: Independence Day
+item_5:
+  title: Holy Man
 ---
 
 Simply put into laymans terms, Jeff Goldblum has the divine ability to

@@ -4,12 +4,16 @@ author: matt
 date: 2001-06-29
 image: schindlerslist.jpg
 image_alt: ''
-items:
-  - title: Schindler's List
-  - title: Saving Private Ryan
-  - title: Ben-Hur
-  - title: Amistad
-  - title: The 10 Commandments
+item_1:
+  title: Schindler's List
+item_2:
+  title: Saving Private Ryan
+item_3:
+  title: Ben-Hur
+item_4:
+  title: Amistad
+item_5:
+  title: The 10 Commandments
 ---
 
 First off, is there any doubt that Steven Spielberg is the greatest

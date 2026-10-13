@@ -4,12 +4,16 @@ author: ryan
 date: 2001-07-02
 image: hoosiers.jpg
 image_alt: ''
-items:
-  - title: Hoosiers
-  - title: Field of Dreams
-  - title: Remember the Titans
-  - title: Rudy
-  - title: Rocky IV
+item_1:
+  title: Hoosiers
+item_2:
+  title: Field of Dreams
+item_3:
+  title: Remember the Titans
+item_4:
+  title: Rudy
+item_5:
+  title: Rocky IV
 ---
 
 For those of us who have been less than successful in the world of real

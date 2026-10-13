@@ -4,17 +4,21 @@ author: bruce
 date: 2001-12-27
 image: big_lebowski.jpg
 image_alt: ''
-items:
-  - title: The Big Lebowski
-    text: ( 1998 )
-  - title: O Brother, Where Art Thou
-    text: ( 2000 )
-  - title: Arachnophobia
-    text: ( 1990 )
-  - title: One Night at McCool's
-    text: ( 2001 )
-  - title: Fallen
-    text: ( 1998 )
+item_1:
+  title: The Big Lebowski
+  text: ( 1998 )
+item_2:
+  title: O Brother, Where Art Thou
+  text: ( 2000 )
+item_3:
+  title: Arachnophobia
+  text: ( 1990 )
+item_4:
+  title: One Night at McCool's
+  text: ( 2001 )
+item_5:
+  title: Fallen
+  text: ( 1998 )
 ---
 
 John Goodman is not a leading man, but he's probably one of the greatest

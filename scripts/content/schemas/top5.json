@@ -7,7 +7,11 @@
     "title",
     "author",
     "date",
-    "items"
+    "item_1",
+    "item_2",
+    "item_3",
+    "item_4",
+    "item_5"
   ],
   "properties": {
     "title": {
@@ -45,46 +49,46 @@
       "const": true,
       "description": "Not published. Omit the field for published items."
     },
-    "items": {
-      "type": "array",
-      "minItems": 5,
-      "maxItems": 5,
-      "description": "Number one first.",
-      "items": {
-        "type": "object",
-        "required": [
-          "title"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "title": {
-            "$ref": "defs.json#/$defs/markdown"
-          },
-          "film": {
-            "$ref": "defs.json#/$defs/markdown",
-            "description": "The film a person or scene is from."
-          },
-          "text": {
-            "$ref": "defs.json#/$defs/markdown"
-          }
-        }
-      }
+    "item_1": {
+      "$ref": "#/$defs/slot",
+      "required": [
+        "title"
+      ],
+      "description": "Number 1."
+    },
+    "item_2": {
+      "$ref": "#/$defs/slot",
+      "required": [
+        "title"
+      ],
+      "description": "Number 2."
+    },
+    "item_3": {
+      "$ref": "#/$defs/slot",
+      "required": [
+        "title"
+      ],
+      "description": "Number 3."
+    },
+    "item_4": {
+      "$ref": "#/$defs/slot",
+      "required": [
+        "title"
+      ],
+      "description": "Number 4."
+    },
+    "item_5": {
+      "$ref": "#/$defs/slot",
+      "required": [
+        "title"
+      ],
+      "description": "Number 5."
     },
     "honorable_mentions": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "object",
-        "minProperties": 1,
-        "additionalProperties": false,
-        "properties": {
-          "title": {
-            "$ref": "defs.json#/$defs/markdown"
-          },
-          "text": {
-            "$ref": "defs.json#/$defs/markdown"
-          }
-        }
+        "$ref": "#/$defs/slot"
       }
     }
   },
@@ -107,5 +111,25 @@
     "image_full": [
       "image"
     ]
+  },
+  "$defs": {
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "defs.json#/$defs/markdown"
+        },
+        "subtitle": {
+          "$ref": "defs.json#/$defs/markdown",
+          "description": "more context about the movie, person, or scene"
+        },
+        "text": {
+          "$ref": "defs.json#/$defs/markdown"
+        }
+      },
+      "description": "One of the five entries.",
+      "minProperties": 1
+    }
   }
 }

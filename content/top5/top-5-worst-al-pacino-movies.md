@@ -4,12 +4,16 @@ author: bruce
 date: 2001-07-04
 image: dick.jpg
 image_alt: ''
-items:
-  - title: Dick Tracy
-  - title: Heat
-  - title: Frankie and Johnny
-  - title: City Hall
-  - title: Devil's Advocate
+item_1:
+  title: Dick Tracy
+item_2:
+  title: Heat
+item_3:
+  title: Frankie and Johnny
+item_4:
+  title: City Hall
+item_5:
+  title: Devil's Advocate
 ---
 
 For as good an actor as the man is, he's still come up with quite a few

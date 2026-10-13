@@ -5,12 +5,16 @@ date: 2001-06-29
 caption: Mandarin Chinese never tasted so good.
 image: crouchingtiger.jpg
 image_alt: ''
-items:
-  - title: Crouching Tiger, Hidden Dragon
-  - title: Godzilla
-  - title: El Mariachi
-  - title: Zui Quan
-  - title: Fei Lung Maang Jeung
+item_1:
+  title: Crouching Tiger, Hidden Dragon
+item_2:
+  title: Godzilla
+item_3:
+  title: El Mariachi
+item_4:
+  title: Zui Quan
+item_5:
+  title: Fei Lung Maang Jeung
 ---
 
 All of these are good films, even if they happen to be foreign, well,

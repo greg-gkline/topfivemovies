@@ -4,12 +4,16 @@ author: bruce
 date: 2001-11-28
 image: back_to_future.jpg
 image_alt: ''
-items:
-  - title: Back to the Future
-  - title: Things To Do In Denver When You're Dead
-  - title: The Addams Family
-  - title: Dream Team
-  - title: The Legend of the Lone Ranger
+item_1:
+  title: Back to the Future
+item_2:
+  title: Things To Do In Denver When You're Dead
+item_3:
+  title: The Addams Family
+item_4:
+  title: Dream Team
+item_5:
+  title: The Legend of the Lone Ranger
 ---
 
 Christopher Lloyd is a mainstay in American cinema. He's accomplished a

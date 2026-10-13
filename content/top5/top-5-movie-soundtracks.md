@@ -4,12 +4,16 @@ author: jesse
 date: 2001-06-22
 image: superfly.jpg
 image_alt: ''
-items:
-  - title: Superfly
-  - title: The Blues Brothers
-  - title: Reservoir Dogs
-  - title: Wayne's World
-  - title: She's the One
+item_1:
+  title: Superfly
+item_2:
+  title: The Blues Brothers
+item_3:
+  title: Reservoir Dogs
+item_4:
+  title: Wayne's World
+item_5:
+  title: She's the One
 ---
 
 We all know the elements that make up a truly great movie: character

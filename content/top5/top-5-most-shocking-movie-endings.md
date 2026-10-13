@@ -4,12 +4,16 @@ author: greg
 date: 2001-07-24
 image: arlington_rd.jpg
 image_alt: ''
-items:
-  - title: Arlington Road
-  - title: Unbreakable
-  - title: The Sixth Sense
-  - title: Se7en
-  - title: The Usual Suspects
+item_1:
+  title: Arlington Road
+item_2:
+  title: Unbreakable
+item_3:
+  title: The Sixth Sense
+item_4:
+  title: Se7en
+item_5:
+  title: The Usual Suspects
 ---
 
 Undoubtedly there are many classic movies that probably deserve to be in this list. I'm sure films like *Psycho*,

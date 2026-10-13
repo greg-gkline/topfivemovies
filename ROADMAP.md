@@ -82,9 +82,9 @@ Done. The tooling and every decision made during the export are documented in `s
 - [x] Write a re-runnable exporter that reads the devcontainer DB or the SQL dumps and writes one YAML file per article, top-five list and author. It runs in the devcontainer (Python or PHP, no Node). `scripts/export/export.py` parses the SQL dumps directly, and its output is byte-identical between runs.
 - [x] Per-type fields:
   - Review and DVD: `type, title, author, date, rating, release_year, starring, caption, image, image_alt`, with the review text as the markdown body.
-  - Top five: `title, author, date, image, image_alt, items[5]`, with the intro as the markdown body.
+  - Top five: `title, author, date, image, image_alt, item_1` to `item_5`, with the intro as the markdown body.
   - Author: `name, jobtitle, image, bio` (markdown or structured fields).
-  - As built: the author's bio is the markdown body. Items keep `subtitle` and `caption` where the legacy data has them, plus `image_full`, and `image_width/height` for the 3 pictures that displayed scaled. Top-five items are `{title, film, text}`, with `honorable_mentions` after them.
+  - As built: the author's bio is the markdown body. Items keep `subtitle` and `caption` where the legacy data has them, plus `image_full`, and `image_width/height` for the 3 pictures that displayed scaled. Top-five slots (`item_1` to `item_5`, number one first) are each `{title, subtitle, text}`, with `honorable_mentions` (a list of the same objects) after them.
 - [x] Clean data in the exporter:
   - latin1 to UTF-8, with a check for mojibake.
   - `<P>` and raw HTML to markdown.

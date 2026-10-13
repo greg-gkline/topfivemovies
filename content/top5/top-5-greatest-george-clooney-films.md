@@ -4,17 +4,21 @@ author: bruce
 date: 2001-12-19
 image: obrother.jpg
 image_alt: ''
-items:
-  - title: O Brother, Where Art Thou
-    text: (2000)
-  - title: Out of Sight
-    text: (1998)
-  - title: Perfect Storm
-    text: (1998)
-  - title: From Dusk Till Dawn
-    text: (1996)
-  - title: Three Kings
-    text: (1999)
+item_1:
+  title: O Brother, Where Art Thou
+  text: (2000)
+item_2:
+  title: Out of Sight
+  text: (1998)
+item_3:
+  title: Perfect Storm
+  text: (1998)
+item_4:
+  title: From Dusk Till Dawn
+  text: (1996)
+item_5:
+  title: Three Kings
+  text: (1999)
 ---
 
 This week saw the opening of *Oceans' Eleven*, a remake of a Rat Pack film.

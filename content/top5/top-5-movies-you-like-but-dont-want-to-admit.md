@@ -4,17 +4,21 @@ author: ryan
 date: 2001-07-19
 image: little_women.jpg
 image_alt: ''
-items:
-  - title: Little Women
-    text: \- a sweeping romantic epic, irresistable.
-  - title: Miss Congeniality
-    text: \- A must-see starring America's Sweetheart and my favorite actress, Sandra Bullock.
-  - title: Wedding Planner
-    text: \- J. Lo. Enough said.
-  - title: Trial and Error
-    text: \- A standard romantic comedy livened up by the antics of Michael Richards.
-  - title: Romy & Michele's High School Reunion
-    text: \- I honestly have no real justification for liking this movie, but I do.
+item_1:
+  title: Little Women
+  text: \- a sweeping romantic epic, irresistable.
+item_2:
+  title: Miss Congeniality
+  text: \- A must-see starring America's Sweetheart and my favorite actress, Sandra Bullock.
+item_3:
+  title: Wedding Planner
+  text: \- J. Lo. Enough said.
+item_4:
+  title: Trial and Error
+  text: \- A standard romantic comedy livened up by the antics of Michael Richards.
+item_5:
+  title: Romy & Michele's High School Reunion
+  text: \- I honestly have no real justification for liking this movie, but I do.
 honorable_mentions:
   - title: Meet Joe Black
     text: \- It was a long strange night at TopFive. We wandered into the movie store looking for an action flick. It was Saturday night and the store was picked over pretty good. We panicked, lost our heads, and came out with this.

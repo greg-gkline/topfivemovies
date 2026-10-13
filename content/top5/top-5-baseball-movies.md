@@ -4,13 +4,17 @@ author: jesse
 date: 2001-07-19
 image: field_of_dreams.jpg
 image_alt: ''
-items:
-  - title: Field of Dreams
-  - title: Brewster's Millions
-  - title: BASEketball
-    text: (okay, this is a stretch for this category... but a truly hilarious movie)
-  - title: Major League
-  - title: Bull Durham
+item_1:
+  title: Field of Dreams
+item_2:
+  title: Brewster's Millions
+item_3:
+  title: BASEketball
+  text: (okay, this is a stretch for this category... but a truly hilarious movie)
+item_4:
+  title: Major League
+item_5:
+  title: Bull Durham
 ---
 
 In honor of my upcoming baseball road trip (The Bruce/Jesse BaseBrawl

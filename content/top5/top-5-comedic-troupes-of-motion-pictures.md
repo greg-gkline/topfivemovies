@@ -4,12 +4,16 @@ author: bruce
 date: 2001-10-04
 image: marx.jpg
 image_alt: ''
-items:
-  - title: The Marx Brothers
-  - title: The Three Stooges
-  - title: Monty Python's Flying Circus
-  - title: The Kids in the Hall
-  - title: The Keystone Kops
+item_1:
+  title: The Marx Brothers
+item_2:
+  title: The Three Stooges
+item_3:
+  title: Monty Python's Flying Circus
+item_4:
+  title: The Kids in the Hall
+item_5:
+  title: The Keystone Kops
 ---
 
 If getting two actors together in more than one funny movie is damn near

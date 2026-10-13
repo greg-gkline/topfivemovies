@@ -6,7 +6,9 @@
 {{- with .Params.starring -}}
   {{- $words = $words | append (replace . " and " " ") -}}
 {{- end -}}
-{{- range .Params.items -}}
-  {{- $words = $words | append (.title | $.RenderString | plainify | htmlUnescape) -}}
+{{- range slice "item_1" "item_2" "item_3" "item_4" "item_5" -}}
+  {{- with index $.Params . -}}
+    {{- $words = $words | append (.title | $.RenderString | plainify | htmlUnescape) -}}
+  {{- end -}}
 {{- end -}}
 {{- return $words -}}

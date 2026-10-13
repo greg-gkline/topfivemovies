@@ -4,17 +4,21 @@ author: bruce
 date: 2001-10-02
 image: startrek2.jpg
 image_alt: ''
-items:
-  - title: 'Star Trek II: Wrath of Khan'
-    text: ( 1982 )
-  - title: 'Star Trek: Generations'
-    text: ( 1994 )
-  - title: 'Star Trek V: The Final Frontier'
-    text: ( 1989 )
-  - title: 'Star Trek VI: The Undiscovered Country'
-    text: ( 1991 )
-  - title: 'Star Trek: First Contact'
-    text: ( 1996 )
+item_1:
+  title: 'Star Trek II: Wrath of Khan'
+  text: ( 1982 )
+item_2:
+  title: 'Star Trek: Generations'
+  text: ( 1994 )
+item_3:
+  title: 'Star Trek V: The Final Frontier'
+  text: ( 1989 )
+item_4:
+  title: 'Star Trek VI: The Undiscovered Country'
+  text: ( 1991 )
+item_5:
+  title: 'Star Trek: First Contact'
+  text: ( 1996 )
 ---
 
 Should these be called anything else? It's not like they are motionless

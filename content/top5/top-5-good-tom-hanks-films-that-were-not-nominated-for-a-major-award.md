@@ -4,17 +4,21 @@ author: bruce
 date: 2001-09-16
 image: joe.jpg
 image_alt: ''
-items:
-  - title: Joe vs The Volcano
-    text: (1990)
-  - title: A League of Their Own
-    text: (1992)
-  - title: Punchline
-    text: (1988)
-  - title: That Thing You Do
-    text: (1996)
-  - title: Splash
-    text: (1984)
+item_1:
+  title: Joe vs The Volcano
+  text: (1990)
+item_2:
+  title: A League of Their Own
+  text: (1992)
+item_3:
+  title: Punchline
+  text: (1988)
+item_4:
+  title: That Thing You Do
+  text: (1996)
+item_5:
+  title: Splash
+  text: (1984)
 ---
 
 Tom Hanks is arguably the finest actor of our generation. This doesn't

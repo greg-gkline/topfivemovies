@@ -4,12 +4,16 @@ author: greg
 date: 2001-06-20
 image: goodfellas.jpg
 image_alt: ''
-items:
-  - title: GoodFellas
-  - title: the Shawshank Redemption
-  - title: Fight Club
-  - title: A Bronx Tale
-  - title: American Beauty
+item_1:
+  title: GoodFellas
+item_2:
+  title: the Shawshank Redemption
+item_3:
+  title: Fight Club
+item_4:
+  title: A Bronx Tale
+item_5:
+  title: American Beauty
 ---
 
 It may seem a bit juvenile, but sometimes there's just no better way
