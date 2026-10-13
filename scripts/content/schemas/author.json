@@ -20,7 +20,11 @@
       "type": "string",
       "description": "Alt text. Empty marks the picture as decorative."
     },
-    "facts": {
+    "username": {
+      "$ref": "defs.json#/$defs/text",
+      "description": "The user's github username, if they have one."
+    },
+  "facts": {
       "type": "array",
       "minItems": 1,
       "description": "Key/value bio facts, optionally under headings.",

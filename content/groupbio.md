@@ -55,7 +55,7 @@ beyond question that Greg is a giant of his era, and any theory must go
 through his crucible in order to gain legitimacy.
 {{< /member >}}
 
-{{< member "matt" >}}
+{{< member "matt" "left" >}}
 [Matt]({{< relref "authors/matt.md" >}})'s story can only be told with a tinge of
 sadness, for he left us too early. He was in the prime of his life, like so
 many young victims of our school's re-education camp. However, he continues

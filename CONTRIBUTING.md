@@ -1,4 +1,4 @@
-# Adding something to Top Five Movies
+# Contributing to Top Five Movies
 
 You can do everything here in your web browser on GitHub. You don't need to install anything. When you finish, automatic checks look over your work and tell you if something needs fixing, and someone reviews it before it goes live.
 
@@ -13,7 +13,8 @@ You can do everything here in your web browser on GitHub. You don't need to inst
 | An "other" feature | `other/` and the feature's title |
 | A new writer's page | `author/` and the writer's first name |
 
-Write the title after the slash in lowercase, with hyphens instead of spaces and no punctuation. For example, *The Hurricane* is `review/the-hurricane`, and a list called "Top 5 Actors to Avoid" is `top5/top-5-actors-to-avoid`.
+> [!WARNING]
+> Write the title after the slash in lowercase, with hyphens instead of spaces and no punctuation. For example, *The Hurricane* is `review/the-hurricane`, and a list called "Top 5 Actors to Avoid" is `top5/top-5-actors-to-avoid`.
 
 ## Step by step
 
@@ -22,8 +23,8 @@ Write the title after the slash in lowercase, with hyphens instead of spaces and
 A branch is your own copy of the site to work on, so nothing you do affects the live site until it's approved.
 
 1. Open the repository's main page and click the branch button at the top left. It says **main**.
-2. Type your branch name, for example `review/popeye`.
-3. Click **Create branch review/popeye from main**.
+2. Type your branch name, for example `review/popeyes-revenge`.
+3. Click **Create branch review/popeyes-revenge from main**.
 
 Wait about a minute. GitHub then adds a starting file for you, in the right folder, with your title and today's date filled in.
 
@@ -34,11 +35,11 @@ If nothing appears, open the **Issues** tab. If the name can't be used (it has c
 1. Make sure the branch button still shows your branch name, then open the **content** folder, then the folder for your kind of item (for example **reviews**) and click your file.
 2. Click the pencil icon at the top right of the file.
 3. The top of the file, between the two `---` lines, holds the details. Change every `CHANGEME`. The grey notes after `#` say what each one wants. Delete those notes if you like.
-   - **author**: your first name in lowercase, as in the **content/authors** folder (for example `greg` or `jesse`).
+   - **author**: your first name in lowercase, as in the **content/authors** folder (for example `greg` or `jesse`). The grey note in the starting file lists the valid names.
    - **rating**: a number from 0 to 10, in steps of half a point.
    - **starring**: the main actors, separated by commas.
    - **image**: the file name of your picture (see step 3).
-4. Under the second `---` line, write your review or article. Put an asterisk on each side of a movie title to make it italic, like `*Almost Famous*`. Leave a blank line between paragraphs.
+4. Under the second `---` line, write your review or article. Put an asterisk on each side of a movie title to make it italic, like `*Almost Famous*`. Leave a blank line between paragraphs. Other formatting tips are available at [Markdown Guide](https://www.markdownguide.org/cheat-sheet/)
 5. Click **Commit changes...**, then **Commit changes** again. Leave "Commit directly to the ... branch" selected.
 
 You can come back to the file and edit it as often as you like.
@@ -49,12 +50,12 @@ You can come back to the file and edit it as often as you like.
 2. Click **Add file**, then **Upload files**, and drop in your picture.
 3. Click **Commit changes**.
 
-Use a simple lowercase file name such as `popeye.jpg`. It must not match a picture that's already there. Type that same name after `image:` in your file. Next to `image_alt:`, write a short description of the picture inside the quotes, for example `'Robin Williams as Popeye'`.
+Use a simple lowercase file name such as `popeyes-revenge.jpg`. It must not match a picture that's already there. Type that same name after `image:` in your file. Next to `image_alt:`, write a short description of the picture inside the quotes, for example `'Robin Williams as Popeye'`.
 
 ### 4. Ask for it to be published
 
 1. Go to the repository's main page. A yellow bar shows your branch with a **Compare & pull request** button. Click it. (If the bar has gone, open the **Pull requests** tab and click **New pull request**, then pick your branch.)
-2. Give it a short title, like "Review of Popeye", and click **Create pull request**.
+2. Give it a short title, like "Review of Popeye's Revenge", and click **Create pull request**.
 
 ### 5. Read the feedback
 
@@ -72,9 +73,9 @@ You don't need a special branch. Open the file in the **content** folder, click 
 
 To hide something without deleting it, add a line `draft: true` between the `---` lines of its file. Remove the line to publish it again.
 
-## For the person looking after the site
+## For the site administrator
 
-- How the starting file is made: [.github/workflows/new-content.yml](.github/workflows/new-content.yml), [scripts/new-content/](scripts/new-content/). The templates are plain files in `scripts/new-content/templates/`.
+- How the starting file is made: [.github/workflows/new-content.yml](.github/workflows/new-content.yml), [scripts/new-content/](scripts/new-content/). The templates are plain files in `scripts/new-content/templates/`. When a pull request adds an author, [.github/workflows/author-list.yml](.github/workflows/author-list.yml) updates the `author` comment in every template except `author.md` to list the valid authors (see ARCHITECTURE.md).
 - Everything the PR checks run, and the rules for each field: [scripts/content/](scripts/content/) and [scripts/prose/README.md](scripts/prose/README.md).
 - Infrastructure: [infra/README.md](infra/README.md).
 - The old PHP site and its devcontainer are at the git tag `0.0.2`.
