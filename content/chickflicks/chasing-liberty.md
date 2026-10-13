@@ -9,7 +9,7 @@ image: liberty.jpg
 image_alt: ''
 ---
 
-In *Chasing Liberty*, Mandy Moore plays the teenage daughter of the President. She's tired of having her every move shadowed by the Secret Service, who of course just want to protect her but end up ruining her date with some tool. So in the middle of a concert in Prague, she runs away from the agents and hitches a ride with some guy on his scooter. She convinces him to accompany her to some "Love Parade" in Berlin, but unbeknowst to her, he's also actually a Secret Service agent tasked with protecting her.
+In *Chasing Liberty*, Mandy Moore plays the teenage daughter of the President. She's tired of having her every move shadowed by the Secret Service, who of course just want to protect her but end up ruining her date with some tool. So in the middle of a concert in Prague, she runs away from the agents and hitches a ride with some guy on his scooter. She convinces him to accompany her to some "Love Parade" in Berlin, but unbeknownst to her, he's also actually a Secret Service agent tasked with protecting her.
 
 If you can't see all the angles in this one, you're not too bright. Of course he falls in love with her and can't decide between lust and duty. Of course she finds out that he's really an agent planted by her father. Of course fate tears them apart and puts them back together again.
 
