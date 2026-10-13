@@ -36,6 +36,9 @@ spelling and grammar checks. The infrastructure (S3, CloudFront, Route 53, ACM, 
 Terraform in `infra/`; see [infra/README.md](infra/README.md). The reasoning behind the
 design is in [ROADMAP.md](ROADMAP.md).
 
+For the detail on the build, hosting, each workflow, credentials and rollback, read
+[ARCHITECTURE.md](ARCHITECTURE.md).
+
 ## Repository layout
 
 | Path | What |
