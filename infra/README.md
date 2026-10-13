@@ -1,14 +1,20 @@
-# Infrastructure (Phase 5)
+# Infrastructure
 
 Terraform for the static site: a private S3 bucket behind CloudFront, DNS in Route 53, and
 the IAM users GitHub Actions uses to plan and deploy. One environment. To try a change, use a
 codespace and plan or apply from there.
 
-```
-                     CloudFront ── Origin Access Control ──> S3 bucket "topfivemovies" (private)
- www.topfivemovies.com ──┘  │
- topfivemovies.com ─────────┘  a function redirects the bare domain to www and serves index.html
- Route 53 zone, ACM certificate in us-east-1, security headers (HSTS, CSP, ...), custom 404
+```mermaid
+flowchart LR
+    www["www.topfivemovies.com"] --> CF
+    apex["topfivemovies.com"] --> CF
+    subgraph CF["CloudFront"]
+        fn["Viewer-request function<br/>redirects bare domain to www,<br/>serves index.html"]
+        hdr["Security headers (HSTS, CSP, ...)<br/>custom 404"]
+    end
+    CF -- "Origin Access Control" --> S3[("S3 bucket 'topfivemovies'<br/>(private)")]
+    R53["Route 53 zone"] -. "alias records" .-> CF
+    ACM["ACM certificate<br/>(us-east-1)"] -. "TLS" .-> CF
 ```
 
 | File | What |
@@ -142,26 +148,6 @@ sensitive, so a plan (including the one the workflow comments on a pull request)
 
 Use the same address everywhere. It does end up in the Terraform state (in the private state
 bucket) and in AWS, where the budget stores it.
-
-## Before the cutover
-
-`enable_custom_domain` is `false`. The distribution uses CloudFront's own certificate and is
-reachable at `https://<distribution_domain>/` (see `terraform output distribution_domain`),
-which is where the site is checked before the domain moves. The Route 53 zone exists but
-answers for nothing until the registrar delegates to it. The certificate and the alias
-records are not created yet, because ACM can only validate a certificate once the domain's DNS
-is served from Route 53.
-
-## The cutover (Phase 7)
-
-1. Check the site on the `*.cloudfront.net` address.
-2. At the registrar, set the domain's name servers to `terraform output name_servers`. The
-   site is down from here until step 4, which is acceptable: it has been offline for years.
-3. Wait until `dig NS topfivemovies.com` answers with the Route 53 servers.
-4. Set `enable_custom_domain = true` in `terraform.tfvars` and apply. Terraform requests the
-   certificate, creates its validation records, waits for ACM, and then attaches the domain to
-   the distribution. Expect 10 to 20 minutes.
-5. To roll back, set the registrar's name servers back.
 
 ## The security headers
 
